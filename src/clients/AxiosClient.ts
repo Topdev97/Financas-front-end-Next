@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import axios, { AxiosInstance } from "axios"
 import { interceptors } from "./Interceptors"
 

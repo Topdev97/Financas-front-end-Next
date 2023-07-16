@@ -1,11 +1,12 @@
 /* eslint-disable new-cap */
-import "./globals.css"
+"use client"
+
+import "../globals.css"
 import React from "react"
-import AcessProvider from "@/context/AuthProvider"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-	title: "Finanças - Login",
+	title: "Finanças - Home",
 }
 
 export default function RootLayout({
@@ -15,9 +16,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body>
-				<AcessProvider>{children}</AcessProvider>
-			</body>
+			<body>{children}</body>
 		</html>
 	)
 }
