@@ -16,8 +16,8 @@ const AcessArea = (config: ILogin) => {
 	const { openRegisterArea, login } = useAuth()
 
 	return (
-		<Container typeContainers="loginContainer">
-			<Container typeContainers="userInputContainer">
+		<Container typecontainers="loginContainer">
+			<Container typecontainers="userInputContainer">
 				<div className="text-center">
 					<H1 className="!text-dark_green"> Entrar </H1>
 
@@ -26,9 +26,9 @@ const AcessArea = (config: ILogin) => {
 					</Paragraph>
 				</div>
 
-				<Container typeContainers="inputContainer">
+				<Container typecontainers="inputContainer">
 					<Input
-						typeInput="loginInput"
+						typeinput="loginInput"
 						type="email"
 						size="xl"
 						value={config.email}
@@ -44,7 +44,7 @@ const AcessArea = (config: ILogin) => {
 					/>
 
 					<Input
-						typeInput="loginInput"
+						typeinput="loginInput"
 						type={config.type}
 						id="pass"
 						size="xl"

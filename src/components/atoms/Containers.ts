@@ -2,7 +2,7 @@ import { w, W } from "windstitch"
 
 export const Container = w.div(``, {
 	variants: {
-		typeContainers: {
+		typecontainers: {
 			Container: `
                 h-screen
                 flex

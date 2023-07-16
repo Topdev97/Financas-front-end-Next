@@ -10,7 +10,7 @@ export const Input = w.input(
      input`,
 	{
 		variants: {
-			typeInput: {
+			typeinput: {
 				loginInput: `px-14 inputLogin`,
 				input: ` px-4 inputLogin`,
 			},

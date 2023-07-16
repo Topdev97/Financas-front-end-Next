@@ -5,7 +5,7 @@ import { mdiCash } from "@mdi/js"
 
 const LogoArea = () => {
 	return (
-		<Container typeContainers="logoContainer">
+		<Container typecontainers="logoContainer">
 			<Icon path={mdiCash} size={18} className="-mt-36 logo" />
 
 			<H1 className="-mt-24">SaveMoney</H1>

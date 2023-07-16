@@ -24,8 +24,8 @@ const Loading = () => {
 	}, [])
 
 	return (
-		<Container typeContainers="loadingContainer">
-			<Container typeContainers="modalContainer">
+		<Container typecontainers="loadingContainer">
+			<Container typecontainers="modalContainer">
 				<div className="flex flex-col items-center justify-around">
 					<PacmanLoader size="35" color="#fff" aria-label="OI" />
 					<h1 className="mt-3 text-[1.5rem] text-white">{message}</h1>

@@ -9,8 +9,8 @@ const RegisterArea = (config: IRegister) => {
 	const { closeRegisterArea } = useAuth()
 
 	return (
-		<Container typeContainers="loginContainer">
-			<Container typeContainers="userInputContainer">
+		<Container typecontainers="loginContainer">
+			<Container typecontainers="userInputContainer">
 				<div className="text-center">
 					<H1 className="!text-dark_green"> Cadastre-se </H1>
 
@@ -19,9 +19,9 @@ const RegisterArea = (config: IRegister) => {
 					</Paragraph>
 				</div>
 
-				<Container typeContainers="inputContainer">
+				<Container typecontainers="inputContainer">
 					<Input
-						typeInput="input"
+						typeinput="input"
 						type="text"
 						placeholder="Nome:"
 						size="xl"
@@ -32,7 +32,7 @@ const RegisterArea = (config: IRegister) => {
 					/>
 
 					<Input
-						typeInput="input"
+						typeinput="input"
 						type="email"
 						placeholder="Email:"
 						value={config.email}
@@ -43,7 +43,7 @@ const RegisterArea = (config: IRegister) => {
 					/>
 
 					<Input
-						typeInput="input"
+						typeinput="input"
 						type={config.type}
 						placeholder="Senha:"
 						id="password"

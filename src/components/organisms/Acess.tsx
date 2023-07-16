@@ -11,7 +11,7 @@ const Acess = () => {
 	const { showRegisterArea, showAcessArea } = useAuth()
 
 	return (
-		<Container typeContainers="Container">
+		<Container typecontainers="Container">
 			{showAcessArea && <AcessContainer />}
 
 			{showRegisterArea && <RegisterContainer />}
