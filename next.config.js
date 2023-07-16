@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-	trailingSlash: false,
+module.exports = {
 	async headers() {
 		return [
 			{
 				// matching all API routes
-				source: "/:path*",
+				source: "/api/:path*",
 				headers: [
 					{ key: "Access-Control-Allow-Credentials", value: "true" },
 					{ key: "Access-Control-Allow-Origin", value: "*" },
@@ -16,15 +15,10 @@ const nextConfig = {
 					{
 						key: "Access-Control-Allow-Headers",
 						value:
-							"X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
+							"X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
 					},
 				],
 			},
 		]
 	},
-	async redirects() {
-		return []
-	},
 }
-
-module.exports = nextConfig
