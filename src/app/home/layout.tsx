@@ -1,5 +1,4 @@
 /* eslint-disable new-cap */
-"use client"
 
 import "../globals.css"
 import React from "react"
