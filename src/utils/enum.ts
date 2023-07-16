@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 
 export enum Routes {
-	LOGIN = "/login",
-	PAYLOAD = "/payload",
-	SAVE_USER = "/user/save",
+	LOGIN = "/api/login",
+	PAYLOAD = "/api/payload",
+	SAVE_USER = "/api/user/save",
 }
 
 export enum Messages {
