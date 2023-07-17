@@ -1,7 +1,8 @@
 import React from "react"
 import { Button, Container, H1, Input, Paragraph } from "../atoms"
+import { IRedefinePassword } from "@/utils/interface"
 
-const RedefinePassword = () => {
+const RedefinePassword = (config: IRedefinePassword) => {
 	return (
 		<Container typecontainers="loginContainer">
 			<Container typecontainers="userInputContainer">
@@ -19,37 +20,57 @@ const RedefinePassword = () => {
 						type="email"
 						placeholder="Email:"
 						size="xl"
+						value={config.email}
+						onChange={(event: { target: { value: string } }) =>
+							config.handleEmail(event.target.value.trim())
+						}
 					/>
 
-					<Input typeinput="input" type="text" placeholder="Senha:" size="xl" />
+					<Input
+						typeinput="input"
+						type="text"
+						placeholder="Senha:"
+						size="xl"
+						value={config.password1}
+						onChange={(event: { target: { value: string } }) =>
+							config.handlePassword1(event.target.value.trim())
+						}
+					/>
 
-					<Input typeinput="input" type="text" placeholder="Senha:" size="xl" />
-					{/* 
+					<Input
+						typeinput="input"
+						type="text"
+						placeholder="Senha:"
+						size="xl"
+						value={config.password2}
+						onChange={(event: { target: { value: string } }) =>
+							config.handlePassword2(event.target.value.trim())
+						}
+					/>
+
 					{config.statusCode > 0 && (
 						<p
 							className={
-								config.statusCode == 201 ? "text-green-400" : "text-red"
+								config.statusCode == 200 ? "text-green-400" : "text-red"
 							}>
 							{config.apiResponse}
 						</p>
-					)} */}
+					)}
 
 					<Button
 						color="gray"
 						size="xl"
-						// onClick={() => config.createUsers()}
-						// disabled={!config.showButton}
-						// className={config.showButton ? "bg-light_green" : "bg-medium_gray"}
-					>
-						Cadastrar
+						disabled={!config.showButton}
+						className={config.showButton ? "bg-light_green" : "bg-medium_gray"}
+						onClick={() => config.redefinePassword()}>
+						Redefinir
 					</Button>
 				</Container>
 
 				<div className="-mt-8">
 					<button
 						className="font-bold text-light_green"
-						// onClick={() => config.closeRegisterArea()}
-					>
+						onClick={() => config.closeRedefinePasswordArea()}>
 						Voltar
 					</button>
 				</div>

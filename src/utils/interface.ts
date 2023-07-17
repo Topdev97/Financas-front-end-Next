@@ -53,3 +53,23 @@ export interface ILogin {
 	apiResponse: string
 	statusCode: number
 }
+
+export interface IRedefinePassword {
+	handleEmail: Function
+	handlePassword1: Function
+	handlePassword2: Function
+	closeRedefinePasswordArea: Function
+	redefinePassword: Function
+	showButton: boolean
+	email: string
+	password1: string
+	password2: string
+	apiResponse: string
+	statusCode: number
+}
+
+export interface ISettings {
+	activeEdit: boolean
+	handleEdit: Function
+	editSalary: Function
+}

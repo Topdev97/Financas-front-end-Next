@@ -4,31 +4,32 @@ export const Container = w.div(``, {
 	variants: {
 		typecontainers: {
 			Container: `
-                h-screen
-                flex
-                flex-row
-                justify-between
-                items-center
+					h-screen
+					flex
+					flex-row
+					justify-between
+					items-center
             `,
 			logoContainer: `
-                bg-gradient-to-r
-			    from-dark_green
-				to-light_green
-				flex flex-col
-				justify-center
-				items-center
-				w-[65%]
-				h-full
-				rounded-bl-[50rem]
-				pl-32
-                text-white
+					bg-gradient-to-r
+					from-dark_green
+					to-light_green
+					flex flex-col
+					justify-center
+					items-center
+					w-[65%]
+					h-full
+					rounded-bl-[50rem]
+					pl-32
+					text-white
             `,
 			loginContainer: `
-                bg-white_two
-				flex flex-col
-				justify-center
-				items-center
-				rounded-br-[10rem]
+					bg-white_two
+					flex 
+					flex-col
+					justify-center
+					items-center
+					rounded-br-[10rem]
             `,
 			userInputContainer: `
 					w-[35%]
@@ -75,6 +76,31 @@ export const Container = w.div(``, {
 					items-center 
 					justify-center
 					modalContainer
+			`,
+			menuContainer: `
+					bg-gradient-to-t 
+					from-dark_green 
+					to-light_green 
+					text-white 
+					flex 
+					flex-col 
+					justify-between 
+					w-16
+					shadow-[0_0.3rem_0.62rem_rgba(0,0,0,0.4)]
+			`,
+			menuIconContainer: `
+					flex 
+					flex-col 
+					space-y-5 
+					items-center 
+					h-[8rem] 
+					mt-5
+			`,
+			logoutContainer: `
+					h-28 
+					flex 
+					justify-center 
+					items-center
 			`,
 		},
 	},

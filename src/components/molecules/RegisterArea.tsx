@@ -24,7 +24,7 @@ const RegisterArea = (config: IRegister) => {
 						size="xl"
 						value={config.name}
 						onChange={(event: { target: { value: string } }) =>
-							config.handleName(event.target.value)
+							config.handleName(event.target.value.trim())
 						}
 					/>
 
@@ -32,10 +32,10 @@ const RegisterArea = (config: IRegister) => {
 						typeinput="input"
 						type="email"
 						placeholder="Email:"
-						value={config.email}
 						size="xl"
+						value={config.email}
 						onChange={(event: { target: { value: string } }) =>
-							config.handleEmail(event.target.value)
+							config.handleEmail(event.target.value.trim())
 						}
 					/>
 
@@ -47,7 +47,7 @@ const RegisterArea = (config: IRegister) => {
 						size="xl"
 						value={config.password}
 						onChange={(event: { target: { value: string } }) =>
-							config.handlePassword(event.target.value)
+							config.handlePassword(event.target.value.trim())
 						}
 					/>
 

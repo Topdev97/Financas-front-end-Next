@@ -19,11 +19,13 @@ export const H1 = w.h1(`font-[700]`, {
 export const Paragraph = w.p(`font-bold`, {
 	variants: {
 		color: {
-			white: "text-gray",
+			gray: "text-medium_gray",
 			yellow: "text-yellow",
+			black: "text-black",
 		},
 		size: {
 			base: "text-[1rem]",
+			lg: "text-[1.2rem]",
 		},
 	},
 	defaultVariants: {

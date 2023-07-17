@@ -4,6 +4,7 @@ import { createUser } from "../api/users"
 import Loading from "../components/molecules/Loading"
 import useAuth from "@/hooks/useAuth"
 import { Messages } from "@/utils/enum"
+import { validateEmail } from "@/utils/validateEmail"
 
 const RegisterContainer = () => {
 	const [showButton, setShowButton] = useState(false)
@@ -47,14 +48,6 @@ const RegisterContainer = () => {
 		}
 	}
 
-	const validateEmail = (email: string): boolean => {
-		let regex = false
-
-		if (email != "") regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
-
-		return regex
-	}
-
 	const handleApiResponse = (status: number) => {
 		setStatusCode(status)
 
@@ -63,6 +56,7 @@ const RegisterContainer = () => {
 			setName("")
 			setEmail("")
 			setPassword("")
+			setShowButton(false)
 		} else if (status == 409) {
 			setApiResponse(Messages.EXISTING_USER)
 		} else {

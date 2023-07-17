@@ -76,7 +76,10 @@ const AcessArea = (config: ILogin) => {
 						disabled={!config.showButton}
 						className={config.showButton ? "bg-light_green" : "bg-medium_gray"}
 						onClick={() =>
-							config.login({ email: config.email, password: config.password })
+							config.login({
+								email: config.email.trim(),
+								password: config.password.trim(),
+							})
 						}>
 						Entrar
 					</Button>

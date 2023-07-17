@@ -18,3 +18,18 @@ export const createUser = async (user: IUsers) => {
 		return error
 	}
 }
+
+export const changePassword = async (email: string, password: string) => {
+	try {
+		const data = {
+			email,
+			password,
+		}
+
+		const res = await useClient().put(Routes.REDEFINE_PASSWORD, data)
+
+		return res
+	} catch (error) {
+		return error
+	}
+}

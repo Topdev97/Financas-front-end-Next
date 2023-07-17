@@ -5,6 +5,7 @@ import { Messages } from "@/utils/enum"
 import { signin } from "@/api/signin"
 import { useRouter } from "next/navigation"
 import useAuth from "@/hooks/useAuth"
+import { validateEmail } from "@/utils/validateEmail"
 
 const AcessContainer = () => {
 	const [showLoading, setShowLoading] = useState(false)
@@ -53,19 +54,11 @@ const AcessContainer = () => {
 		}
 	}
 
-	const validateEmail = (email: string): boolean => {
-		let regex = false
-
-		if (email != "") regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
-
-		return regex
-	}
-
 	const handleApiResponse = (status: number) => {
 		setStatusCode(status)
 
 		if (status == 200) {
-			router.push("/home")
+			router.push("/lancamentos")
 		} else if (status == 403) {
 			setApiResponse(Messages.INCORRECT_EMAIL_OR_PASSWORD)
 		} else {
