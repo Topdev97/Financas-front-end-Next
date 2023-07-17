@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import RegisterArea from "./RegisterArea"
-import { createUser } from "../../../api/users"
-import Loading from "../Loading"
+import RegisterArea from "../components/molecules/RegisterArea"
+import { createUser } from "../api/users"
+import Loading from "../components/molecules/Loading"
+import useAuth from "@/hooks/useAuth"
 import { Messages } from "@/utils/enum"
 
 const RegisterContainer = () => {
@@ -14,6 +15,7 @@ const RegisterContainer = () => {
 	const [password, setPassword] = useState("")
 	const [eyesIcon, setEyesIcon] = useState(false)
 	const [type, setType] = useState("password")
+	const { setAcessArea, setShowRegisterArea } = useAuth()
 
 	const handleName = (value: string) => {
 		setName(value)
@@ -89,24 +91,31 @@ const RegisterContainer = () => {
 		}
 	}
 
+	const closeRegisterArea = () => {
+		setAcessArea(true)
+		setShowRegisterArea(false)
+		setShowButton(false)
+	}
+
 	return (
 		<>
 			{showLoading && <Loading />}
 
 			<RegisterArea
-				handleName={handleName}
-				handleEmail={handleEmail}
-				handlePassword={handlePassword}
-				createUsers={createUsers}
 				showButton={showButton}
 				name={name}
 				email={email}
 				password={password}
 				apiResponse={apiResponse}
 				statusCode={statusCode}
-				showPassword={showPassword}
 				eyesIcon={eyesIcon}
 				type={type}
+				showPassword={showPassword}
+				handleName={handleName}
+				handleEmail={handleEmail}
+				handlePassword={handlePassword}
+				createUsers={createUsers}
+				closeRegisterArea={closeRegisterArea}
 			/>
 		</>
 	)

@@ -1,13 +1,10 @@
 import React from "react"
-import { Container, H1, Paragraph, Input, Button } from "../../atoms"
-import useAuth from "../../../hooks/useAuth"
-import { IRegister } from "../../../utils/interface"
+import { Container, H1, Paragraph, Input, Button } from "../atoms"
+import { IRegister } from "../../utils/interface"
 import Icon from "@mdi/react"
 import { mdiEyeOffOutline, mdiEyeOutline } from "@mdi/js"
 
 const RegisterArea = (config: IRegister) => {
-	const { closeRegisterArea } = useAuth()
-
 	return (
 		<Container typecontainers="loginContainer">
 			<Container typecontainers="userInputContainer">
@@ -48,13 +45,18 @@ const RegisterArea = (config: IRegister) => {
 						placeholder="Senha:"
 						id="password"
 						size="xl"
+						value={config.password}
 						onChange={(event: { target: { value: string } }) =>
 							config.handlePassword(event.target.value)
 						}
 					/>
 
 					<button
-						className="absolute top-[11.8rem] left-[21rem] text-gray3 transform"
+						className={
+							config.statusCode == 0
+								? "absolute top-[11.8rem] left-[21rem] text-gray3 transform"
+								: "absolute top-[10.5rem] left-[21rem] text-gray3 transform"
+						}
 						onClick={() => config.showPassword()}>
 						<Icon
 							path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
@@ -84,7 +86,7 @@ const RegisterArea = (config: IRegister) => {
 				<div className="-mt-8">
 					<button
 						className="font-bold text-light_green"
-						onClick={() => closeRegisterArea()}>
+						onClick={() => config.closeRegisterArea()}>
 						Voltar
 					</button>
 				</div>

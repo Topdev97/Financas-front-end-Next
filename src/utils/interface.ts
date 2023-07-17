@@ -7,12 +7,14 @@ export interface IUsers {
 }
 
 export interface IAuth {
-	openRegisterArea: Function
-	closeRegisterArea: Function
-	login: Function
+	setUserId: Function
+	setShowRegisterArea: Function
+	setAcessArea: Function
+	setShowRedefinePasswordArea: Function
+	showRedefinePasswordArea: boolean
 	showRegisterArea: boolean
-	showButton: boolean
 	showAcessArea: boolean
+	userId: string
 }
 
 export interface IProps {
@@ -21,6 +23,7 @@ export interface IProps {
 
 export interface IRegister {
 	createUsers: Function
+	closeRegisterArea: Function
 	handleName: Function
 	handleEmail: Function
 	handlePassword: Function
@@ -39,9 +42,14 @@ export interface ILogin {
 	showPassword: Function
 	handleEmail: Function
 	handlePassword: Function
+	openRegisterArea: Function
+	openRedefinePasswordArea: Function
+	login: Function
 	eyesIcon: boolean
 	showButton: boolean
 	email: string
 	password: string
 	type: string
+	apiResponse: string
+	statusCode: number
 }

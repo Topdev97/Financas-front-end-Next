@@ -1,20 +1,17 @@
 "use client"
 
-import { Container, H1, Paragraph, Input, Button } from "../../atoms"
+import { Container, H1, Paragraph, Input, Button } from "../atoms"
 import React from "react"
 import Icon from "@mdi/react"
-import useAuth from "../../../hooks/useAuth"
 import {
 	mdiAccountOutline,
 	mdiLockOutline,
 	mdiEyeOffOutline,
 	mdiEyeOutline,
 } from "@mdi/js"
-import { ILogin } from "../../../utils/interface"
+import { ILogin } from "../../utils/interface"
 
 const AcessArea = (config: ILogin) => {
-	const { openRegisterArea, login } = useAuth()
-
 	return (
 		<Container typecontainers="loginContainer">
 			<Container typecontainers="userInputContainer">
@@ -69,14 +66,9 @@ const AcessArea = (config: ILogin) => {
 						/>
 					</button>
 
-					{/* {config.statusCode > 0 && (
-						<p
-							className={
-								config.statusCode == 201 ? "text-green-400" : "text-red"
-							}>
-							{config.apiResponse}
-						</p>
-					)} */}
+					{config.statusCode >= 403 && (
+						<p className="text-red absolute top-48">{config.apiResponse}</p>
+					)}
 
 					<Button
 						color="gray"
@@ -84,7 +76,7 @@ const AcessArea = (config: ILogin) => {
 						disabled={!config.showButton}
 						className={config.showButton ? "bg-light_green" : "bg-medium_gray"}
 						onClick={() =>
-							login({ email: config.email, password: config.password })
+							config.login({ email: config.email, password: config.password })
 						}>
 						Entrar
 					</Button>
@@ -93,11 +85,13 @@ const AcessArea = (config: ILogin) => {
 				<div className="flex flex-col -mt-8">
 					<button
 						className="font-bold text-light_green"
-						onClick={() => openRegisterArea()}>
+						onClick={() => config.openRegisterArea()}>
 						Criar conta gratis
 					</button>
 
-					<button className="font-bold text-medium_gray">
+					<button
+						className="font-bold text-medium_gray"
+						onClick={() => config.openRedefinePasswordArea()}>
 						Esqueceu a senha ?
 					</button>
 				</div>
