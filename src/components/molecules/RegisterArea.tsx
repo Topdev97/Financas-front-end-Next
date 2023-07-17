@@ -74,7 +74,6 @@ const RegisterArea = (config: IRegister) => {
 					)}
 
 					<Button
-						color="gray"
 						size="xl"
 						onClick={() => config.createUsers()}
 						disabled={!config.showButton}
