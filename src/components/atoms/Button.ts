@@ -14,6 +14,7 @@ export const Button = w.button(
 		variants: {
 			color: {
 				green: `bg-dark_green`,
+				white: "",
 			},
 			size: {
 				xs: "px-1.5 py-0.5 rounded text-xs",
@@ -21,11 +22,12 @@ export const Button = w.button(
 				base: "h-[2rem] w-[5rem]",
 				md: "px-4 py-3 rounded-md text-lg",
 				lg: "!h-[2.5rem] w-[5rem]",
-				xl: "text-xl w-[24rem]",
+				xl: "text-xl w-[24rem] h-[3.75rem]",
 			},
 		},
 		defaultVariants: {
 			size: "base",
+			color: "white",
 		},
 	},
 )

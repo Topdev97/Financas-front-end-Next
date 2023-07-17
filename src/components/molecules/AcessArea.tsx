@@ -71,7 +71,6 @@ const AcessArea = (config: ILogin) => {
 					)}
 
 					<Button
-						color="gray"
 						size="xl"
 						disabled={!config.showButton}
 						className={config.showButton ? "bg-light_green" : "bg-medium_gray"}
