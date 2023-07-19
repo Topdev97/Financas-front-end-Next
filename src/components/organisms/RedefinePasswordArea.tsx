@@ -1,8 +1,8 @@
 import React from "react"
 import { Button, Container, H1, Input, Paragraph } from "../atoms"
-import { IRedefinePassword } from "@/utils/interface"
+import { IRedefinePasswordConfig } from "@/utils/interface"
 
-const RedefinePassword = (config: IRedefinePassword) => {
+const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 	return (
 		<Container typecontainers="loginContainer">
 			<Container typecontainers="userInputContainer">

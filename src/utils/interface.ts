@@ -21,7 +21,7 @@ export interface IProps {
 	children: ReactNode
 }
 
-export interface IRegister {
+export interface IRegisterProps {
 	createUsers: Function
 	closeRegisterArea: Function
 	handleName: Function
@@ -38,7 +38,11 @@ export interface IRegister {
 	type: string
 }
 
-export interface ILogin {
+export interface IRegisterConfig {
+	config: IRegisterProps
+}
+
+export interface ILoginProps {
 	showPassword: Function
 	handleEmail: Function
 	handlePassword: Function
@@ -54,7 +58,11 @@ export interface ILogin {
 	statusCode: number
 }
 
-export interface IRedefinePassword {
+export interface ILoginConfig {
+	config: ILoginProps
+}
+
+export interface IRedefinePasswordProps {
 	handleEmail: Function
 	handlePassword1: Function
 	handlePassword2: Function
@@ -68,8 +76,37 @@ export interface IRedefinePassword {
 	statusCode: number
 }
 
-export interface ISettings {
+export interface IRedefinePasswordConfig {
+	config: IRedefinePasswordProps
+}
+
+export interface ISettingsProps {
 	activeEdit: boolean
+	showButton: boolean
+	showSaveSalaryButton: boolean
+	apiResponse: string
+	password1: string
+	password2: string
+	statusCode: number
+	salaryValue: string
+	salaryStatusCode: number
+	handleSalary: Function
 	handleEdit: Function
-	editSalary: Function
+	handlePassword1: Function
+	handlePassword2: Function
+	redefinePassword: Function
+	setSalaryValue: Function
+	saveSalary: Function
+}
+
+export interface ISettingsConfig {
+	config: ISettingsProps
+}
+
+export interface ICategoriesProps {
+	headers: Array<string>
+}
+
+export interface ICategoriesConfig {
+	config: ICategoriesProps
 }

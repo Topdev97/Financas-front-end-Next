@@ -1,7 +1,8 @@
 import React from "react"
+import CategoriesContainer from "@/containers/CategoriesContainer"
 
 const Categories = () => {
-	return <div className="h-screen px-8 py-6">Categorias</div>
+	return <CategoriesContainer />
 }
 
 export default Categories

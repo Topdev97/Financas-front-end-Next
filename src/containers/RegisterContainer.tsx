@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import RegisterArea from "../components/molecules/RegisterArea"
+import RegisterArea from "../components/organisms/RegisterArea"
 import { createUser } from "../api/users"
 import Loading from "../components/molecules/Loading"
 import useAuth from "@/hooks/useAuth"
@@ -91,26 +91,28 @@ const RegisterContainer = () => {
 		setShowButton(false)
 	}
 
+	const config = {
+		showButton,
+		name,
+		email,
+		password,
+		apiResponse,
+		statusCode,
+		eyesIcon,
+		type,
+		showPassword,
+		handleName,
+		handleEmail,
+		handlePassword,
+		createUsers,
+		closeRegisterArea,
+	}
+
 	return (
 		<>
 			{showLoading && <Loading />}
 
-			<RegisterArea
-				showButton={showButton}
-				name={name}
-				email={email}
-				password={password}
-				apiResponse={apiResponse}
-				statusCode={statusCode}
-				eyesIcon={eyesIcon}
-				type={type}
-				showPassword={showPassword}
-				handleName={handleName}
-				handleEmail={handleEmail}
-				handlePassword={handlePassword}
-				createUsers={createUsers}
-				closeRegisterArea={closeRegisterArea}
-			/>
+			<RegisterArea config={config} />
 		</>
 	)
 }

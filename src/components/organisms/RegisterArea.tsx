@@ -1,10 +1,10 @@
 import React from "react"
 import { Container, H1, Paragraph, Input, Button } from "../atoms"
-import { IRegister } from "../../utils/interface"
+import { IRegisterConfig } from "../../utils/interface"
 import Icon from "@mdi/react"
 import { mdiEyeOffOutline, mdiEyeOutline } from "@mdi/js"
 
-const RegisterArea = (config: IRegister) => {
+const RegisterArea = ({ config }: IRegisterConfig) => {
 	return (
 		<Container typecontainers="loginContainer">
 			<Container typecontainers="userInputContainer">

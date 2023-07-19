@@ -5,6 +5,10 @@ export enum Routes {
 	PAYLOAD = "/api/payload",
 	SAVE_USER = "/api/user/save",
 	REDEFINE_PASSWORD = "/api/redefine_password",
+	NEW_PASSWORD = "/api/new_password/",
+	SAVE_SALARY = "/api/salary/save/",
+	GET_SALARY = "/api/salary/",
+	REFRESH_TOKEN = "/api/refresh_token",
 }
 
 export enum Messages {
@@ -14,4 +18,9 @@ export enum Messages {
 	INCORRECT_EMAIL_OR_PASSWORD = "Email ou senha incorretos",
 	UPDATED_PASSWORD = "Senha atualizada com sucesso",
 	EMAIL_NOT_FOUND = "Esse email não existe em nosso banco",
+	SUCCESS_IN_SAVING_SALARY = "Salário salvo com sucesso",
+}
+
+export enum Permissions {
+	USER = "SAVEMONEY_USER",
 }

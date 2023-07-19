@@ -102,6 +102,30 @@ export const Container = w.div(``, {
 					justify-center 
 					items-center
 			`,
+			dataTableContainer: `
+					w-full
+					min-h-[30rem]
+					pt-12
+					mb-5
+					medium_gray
+					glass-effect
+					rounded-lg
+				`,
+
+			headersContainer: `
+					flex
+					bg-light_green
+					h-12
+					px-8
+					w-full
+					items-center
+					justify-between
+					rounded-tl-lg
+					rounded-tr-lg
+					fixed
+					z-10
+					top-0
+				`,
 		},
 	},
 })

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import AcessArea from "../components/molecules/AcessArea"
+import AcessArea from "../components/organisms/AcessArea"
 import Loading from "../components/molecules/Loading"
 import { Messages } from "@/utils/enum"
 import { signin } from "@/api/signin"
@@ -17,12 +17,8 @@ const AcessContainer = () => {
 	const [apiResponse, setApiResponse] = useState("")
 	const [statusCode, setStatusCode] = useState(0)
 	const router = useRouter()
-	const {
-		setUserId,
-		setShowRegisterArea,
-		setAcessArea,
-		setShowRedefinePasswordArea,
-	} = useAuth()
+	const { setShowRegisterArea, setAcessArea, setShowRedefinePasswordArea } =
+		useAuth()
 
 	const showPassword = () => {
 		setEyesIcon(!eyesIcon)
@@ -74,7 +70,6 @@ const AcessContainer = () => {
 
 		if (res.res?.status) {
 			handleApiResponse(res.res?.status)
-			setUserId(res?.userId)
 		} else {
 			handleApiResponse(res?.status)
 		}
@@ -94,25 +89,27 @@ const AcessContainer = () => {
 		setShowRedefinePasswordArea(true)
 	}
 
+	const config = {
+		eyesIcon,
+		type,
+		showButton,
+		email,
+		password,
+		apiResponse,
+		statusCode,
+		showPassword,
+		handleEmail,
+		handlePassword,
+		login,
+		openRegisterArea,
+		openRedefinePasswordArea,
+	}
+
 	return (
 		<>
 			{showLoading && <Loading />}
 
-			<AcessArea
-				eyesIcon={eyesIcon}
-				type={type}
-				showButton={showButton}
-				email={email}
-				password={password}
-				apiResponse={apiResponse}
-				statusCode={statusCode}
-				showPassword={showPassword}
-				handleEmail={handleEmail}
-				handlePassword={handlePassword}
-				login={login}
-				openRegisterArea={openRegisterArea}
-				openRedefinePasswordArea={openRedefinePasswordArea}
-			/>
+			<AcessArea config={config} />
 		</>
 	)
 }

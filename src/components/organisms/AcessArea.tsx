@@ -9,9 +9,9 @@ import {
 	mdiEyeOffOutline,
 	mdiEyeOutline,
 } from "@mdi/js"
-import { ILogin } from "../../utils/interface"
+import { ILoginConfig } from "../../utils/interface"
 
-const AcessArea = (config: ILogin) => {
+const AcessArea = ({ config }: ILoginConfig) => {
 	return (
 		<Container typecontainers="loginContainer">
 			<Container typecontainers="userInputContainer">

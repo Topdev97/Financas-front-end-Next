@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import RedefinePassword from "@/components/molecules/RedefinePasswordArea"
+import RedefinePassword from "@/components/organisms/RedefinePasswordArea"
 import { validateEmail } from "@/utils/validateEmail"
 import useAuth from "@/hooks/useAuth"
 import Loading from "@/components/molecules/Loading"
@@ -82,23 +82,24 @@ const RedefinePasswordContainer = () => {
 		setShowLoading(false)
 	}
 
+	const config = {
+		password1,
+		password2,
+		email,
+		showButton,
+		handleEmail,
+		handlePassword1,
+		handlePassword2,
+		closeRedefinePasswordArea,
+		redefinePassword,
+		apiResponse,
+		statusCode,
+	}
 	return (
 		<>
 			{showLoading && <Loading />}
 
-			<RedefinePassword
-				password1={password1}
-				password2={password2}
-				email={email}
-				showButton={showButton}
-				handleEmail={handleEmail}
-				handlePassword1={handlePassword1}
-				handlePassword2={handlePassword2}
-				closeRedefinePasswordArea={closeRedefinePasswordArea}
-				redefinePassword={redefinePassword}
-				apiResponse={apiResponse}
-				statusCode={statusCode}
-			/>
+			<RedefinePassword config={config} />
 		</>
 	)
 }
