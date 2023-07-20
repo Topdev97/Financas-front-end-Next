@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import type { MenuProps } from "antd"
 
 export interface IUsers {
 	name: string
@@ -103,10 +104,30 @@ export interface ISettingsConfig {
 	config: ISettingsProps
 }
 
+interface ICategoryContent {
+	category: string
+	destinedValue: number
+}
+
 export interface ICategoriesProps {
 	headers: Array<string>
+	content: Array<ICategoryContent>
+	actions: MenuProps["items"]
+	handleCategoryCreation: Function
 }
 
 export interface ICategoriesConfig {
 	config: ICategoriesProps
+}
+
+export interface ICreateCategoryProps {
+	typeAction: string
+	showButton: boolean
+	closeCreateCategoryModal: Function
+	handleCategory: Function
+	handleDestinedValue: Function
+}
+
+export interface ICreateCategoryConfig {
+	config: ICreateCategoryProps
 }

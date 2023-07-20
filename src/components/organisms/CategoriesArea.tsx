@@ -1,6 +1,10 @@
 import { ICategoriesConfig } from "@/utils/interface"
 import { Button, Container, Paragraph } from "../atoms"
 import { AutoComplete } from "antd"
+import { Dropdown } from "antd"
+import Icon from "@mdi/react"
+import { mdiPencilBoxOutline } from "@mdi/js"
+import { Pagination } from "antd"
 import React from "react"
 
 const CategoriesArea = ({ config }: ICategoriesConfig) => {
@@ -18,7 +22,10 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 					}}
 					placeholder="Buscar por categoria"
 				/>
-				<Button size="md" color="green">
+				<Button
+					size="md"
+					color="green"
+					onClick={() => config.handleCategoryCreation()}>
 					Criar categoria
 				</Button>
 			</div>
@@ -33,7 +40,42 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 
 					<Paragraph color="white">Ajustar</Paragraph>
 				</Container>
+
+				{config.content.map((c, index) => (
+					<Container
+						key={index}
+						typecontainers="categoryContent"
+						className={index % 2 == 0 ? "bg-white_one" : "bg-transparent"}>
+						<Paragraph color="gray">{c.category}</Paragraph>
+
+						<Paragraph color="gray">
+							{c.destinedValue.toLocaleString("pt-BR", {
+								style: "currency",
+								currency: "BRL",
+							})}
+						</Paragraph>
+
+						<Dropdown menu={{ items: config.actions }} placement="bottom" arrow>
+							<button>
+								<Icon path={mdiPencilBoxOutline} size={1} />
+							</button>
+						</Dropdown>
+					</Container>
+				))}
 			</Container>
+
+			<div className="float-right">
+				<Pagination
+					responsive
+					disabled={config.content.length == 0}
+					total={config.content.length}
+					showTotal={(total) => `Total ${total} items`}
+					defaultPageSize={10}
+					defaultCurrent={1}
+					onChange={(page) => console.log(page)}
+					onShowSizeChange={(current, size) => console.log(current, size)}
+				/>
+			</div>
 		</div>
 	)
 }

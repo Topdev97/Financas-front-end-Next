@@ -90,3 +90,10 @@ input {
 		opacity: 1;
 	}
 }
+
+.ant-pagination-item-active {
+	border-color: #019267 !important;
+}
+a {
+	color: #000 !important;
+}

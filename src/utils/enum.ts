@@ -24,3 +24,8 @@ export enum Messages {
 export enum Permissions {
 	USER = "SAVEMONEY_USER",
 }
+
+export enum Actions {
+	CREATE = "Criar",
+	UPDATE = "Atualizar",
+}

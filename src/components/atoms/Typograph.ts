@@ -7,6 +7,7 @@ export const H1 = w.h1(`font-[700]`, {
 			dark_gray: "text-dark_gray",
 		},
 		size: {
+			md: "text-[2rem]",
 			base: "text-[2.5rem]",
 		},
 	},

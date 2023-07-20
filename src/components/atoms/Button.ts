@@ -14,7 +14,11 @@ export const Button = w.button(
 		variants: {
 			color: {
 				green: `bg-dark_green`,
-				white: "",
+				transparent: "",
+			},
+			borderColor: {
+				gray: "border-dark_gray border-2",
+				transparent: "",
 			},
 			size: {
 				xs: "px-1.5 py-0.5 rounded text-xs",
@@ -22,12 +26,13 @@ export const Button = w.button(
 				base: "h-[2rem] w-[5rem]",
 				md: "h-[2.5rem] w-[10rem]",
 				lg: "h-[2.5rem] w-[5rem]",
-				xl: "text-xl w-[24rem] h-[3.75rem]",
+				xl: "w-[24rem] h-[3.75rem]",
 			},
 		},
 		defaultVariants: {
 			size: "base",
-			color: "white",
+			color: "transparent",
+			borderColor: "transparent",
 		},
 	},
 )

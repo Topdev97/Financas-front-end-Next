@@ -33,7 +33,7 @@ const MenuSideBar = () => {
 				{menu.map((m, index) => (
 					<Link href={m.path} className="active:scale-90 " key={index}>
 						<Tooltip title={m.name} placement="right">
-							<Icon path={m.icon} size={1} />
+							<Icon path={m.icon} size={1} className="!text-white" />
 						</Tooltip>
 					</Link>
 				))}
@@ -42,7 +42,7 @@ const MenuSideBar = () => {
 			<Container typecontainers="logoutContainer">
 				<Link href={"/"} className="active:scale-90">
 					<Tooltip title="Sair" placement="right">
-						<Icon path={mdiLogout} size={1} />
+						<Icon path={mdiLogout} size={1} className="!text-white" />
 					</Tooltip>
 				</Link>
 			</Container>

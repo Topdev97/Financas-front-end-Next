@@ -126,6 +126,39 @@ export const Container = w.div(``, {
 					z-10
 					top-0
 				`,
+			categoryContent: `
+					grid
+					grid-cols-[48%_49%_5%]
+					h-12
+					px-9
+					w-full
+					items-center
+					font-[700]
+					text-black
+			`,
+
+			backgroundContainer: `
+					w-full
+					h-full 
+					flex
+					justify-center
+					items-center 
+					z-10
+					fixed 
+					top-0 
+					left-0`,
+
+			actionsModalContainer: `
+					bg-white 
+					flex 
+					flex-col 
+					py-5
+					px-5
+					min-h-[15rem] 
+					w-[40rem] 
+					text-black 
+					rounded-md
+				`,
 		},
 	},
 })
