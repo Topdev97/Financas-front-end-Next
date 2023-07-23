@@ -1,6 +1,7 @@
 import React from "react"
 import { Button, Input, Paragraph } from "../atoms"
 import { ISettingsConfig } from "@/utils/interface"
+import ApiResponse from "@/containers/ApiResponseContainer"
 
 const ChangePasswordArea = ({ config }: ISettingsConfig) => {
 	return (
@@ -41,14 +42,9 @@ const ChangePasswordArea = ({ config }: ISettingsConfig) => {
 				</Button>
 			</div>
 
-			{config.statusCode > 0 && (
-				<p
-					className={
-						config.statusCode == 200 ? "text-green-400 mt-2" : "text-red mt-2"
-					}>
-					{config.apiResponse}
-				</p>
-			)}
+			<div className="mt-2">
+				<ApiResponse config={config.apiResponse} />
+			</div>
 		</div>
 	)
 }

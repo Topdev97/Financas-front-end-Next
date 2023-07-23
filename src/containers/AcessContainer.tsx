@@ -14,11 +14,16 @@ const AcessContainer = () => {
 	const [password, setPassword] = useState("")
 	const [eyesIcon, setEyesIcon] = useState(false)
 	const [type, setType] = useState("password")
-	const [apiResponse, setApiResponse] = useState("")
+	const [response, setResponse] = useState("")
 	const [statusCode, setStatusCode] = useState(0)
 	const router = useRouter()
 	const { setShowRegisterArea, setAcessArea, setShowRedefinePasswordArea } =
 		useAuth()
+
+	const apiResponse = {
+		statusCode: statusCode,
+		response: response,
+	}
 
 	const showPassword = () => {
 		setEyesIcon(!eyesIcon)
@@ -56,15 +61,15 @@ const AcessContainer = () => {
 		if (status == 200) {
 			router.push("/lancamentos")
 		} else if (status == 403) {
-			setApiResponse(Messages.INCORRECT_EMAIL_OR_PASSWORD)
+			setResponse(Messages.INCORRECT_EMAIL_OR_PASSWORD)
 		} else {
-			setApiResponse(Messages.SERVER_ERROR)
+			setResponse(Messages.SERVER_ERROR)
 		}
 	}
 
 	const login = async (user: any) => {
 		setShowLoading(true)
-		setApiResponse("")
+		setResponse("")
 
 		const res: any = await signin(user)
 
@@ -96,7 +101,6 @@ const AcessContainer = () => {
 		email,
 		password,
 		apiResponse,
-		statusCode,
 		showPassword,
 		handleEmail,
 		handlePassword,

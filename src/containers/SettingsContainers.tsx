@@ -16,16 +16,20 @@ const SettingsContainer = () => {
 	const [showLoading, setShowLoading] = useState(false)
 	const [password1, setPassword1] = useState("")
 	const [password2, setPassword2] = useState("")
-	const [apiResponse, setApiResponse] = useState("")
+	const [response, setResponse] = useState("")
 	const [statusCode, setStatusCode] = useState(0)
 	const [salaryStatusCode, setSalaryStatusCode] = useState(0)
 	const [salaryValue, setSalaryValue] = useState("")
-
 	const { userId } = useAuth()
 
 	useEffect(() => {
 		getSalary()
 	}, [])
+
+	const apiResponse = {
+		statusCode: statusCode,
+		response: response,
+	}
 
 	const handlePassword1 = (value: string) => {
 		setPassword1(value)
@@ -50,7 +54,7 @@ const SettingsContainer = () => {
 	const handleApiResponse = (status: number) => {
 		if (status == 200) {
 			setStatusCode(status)
-			setApiResponse(Messages.UPDATED_PASSWORD)
+			setResponse(Messages.UPDATED_PASSWORD)
 			setPassword1("")
 			setPassword2("")
 			setShowButton(false)
@@ -60,9 +64,9 @@ const SettingsContainer = () => {
 			setSalaryStatusCode(status)
 			setSalaryValue("")
 			setShowSaveSalaryButton(false)
-			setApiResponse(Messages.SUCCESS_IN_SAVING_SALARY)
+			setResponse(Messages.SUCCESS_IN_SAVING_SALARY)
 		} else {
-			setApiResponse(Messages.SERVER_ERROR)
+			setResponse(Messages.SERVER_ERROR)
 		}
 	}
 

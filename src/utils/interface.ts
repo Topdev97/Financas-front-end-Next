@@ -33,14 +33,23 @@ export interface IRegisterProps {
 	name: string
 	email: string
 	password: string
-	apiResponse: string
 	statusCode: number
 	eyesIcon: boolean
 	type: string
+	apiResponse: IApiResponse
 }
 
 export interface IRegisterConfig {
 	config: IRegisterProps
+}
+
+export interface IApiResponse {
+	statusCode: number
+	response: string
+}
+
+export interface IApiResponseConfig {
+	config: IApiResponse
 }
 
 export interface ILoginProps {
@@ -55,8 +64,7 @@ export interface ILoginProps {
 	email: string
 	password: string
 	type: string
-	apiResponse: string
-	statusCode: number
+	apiResponse: IApiResponse
 }
 
 export interface ILoginConfig {
@@ -73,7 +81,7 @@ export interface IRedefinePasswordProps {
 	email: string
 	password1: string
 	password2: string
-	apiResponse: string
+	apiResponse: IApiResponse
 	statusCode: number
 }
 
@@ -85,10 +93,9 @@ export interface ISettingsProps {
 	activeEdit: boolean
 	showButton: boolean
 	showSaveSalaryButton: boolean
-	apiResponse: string
+	apiResponse: IApiResponse
 	password1: string
 	password2: string
-	statusCode: number
 	salaryValue: string
 	salaryStatusCode: number
 	handleSalary: Function
@@ -105,15 +112,28 @@ export interface ISettingsConfig {
 }
 
 interface ICategoryContent {
+	id: string
 	category: string
 	destinedValue: number
 }
 
+export interface ICategoryName {
+	value: string
+}
+
 export interface ICategoriesProps {
+	totalPages: number
+	itemsPerPage: number
+	response: string
+	statusCode: number
+	categoryName: Array<ICategoryName>
 	headers: Array<string>
 	content: Array<ICategoryContent>
 	actions: MenuProps["items"]
 	handleCategoryCreation: Function
+	setPage: Function
+	setItemsPerPage: Function
+	onSelect: Function
 }
 
 export interface ICategoriesConfig {
@@ -121,13 +141,32 @@ export interface ICategoriesConfig {
 }
 
 export interface ICreateCategoryProps {
+	category: string
+	destinedValue: number
 	typeAction: string
 	showButton: boolean
+	apiResponse: IApiResponse
 	closeCreateCategoryModal: Function
 	handleCategory: Function
 	handleDestinedValue: Function
+	createCategory: Function
 }
 
 export interface ICreateCategoryConfig {
 	config: ICreateCategoryProps
+}
+
+export interface IAllCategories {
+	id: string
+	category: string
+	destinedValue: number
+}
+
+export interface ResponseMap {
+	[key: number]: JSX.Element
+}
+
+export interface ICategoriesInfo {
+	id: string
+	name: string
 }

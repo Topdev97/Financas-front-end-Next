@@ -34,7 +34,6 @@ export const handleResponse = async (
 	// 		})
 	// 	}
 	// }
-	console.log("inter", response)
 
 	return response
 }

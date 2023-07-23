@@ -3,6 +3,7 @@ import { Container, H1, Paragraph, Input, Button } from "../atoms"
 import { IRegisterConfig } from "../../utils/interface"
 import Icon from "@mdi/react"
 import { mdiEyeOffOutline, mdiEyeOutline } from "@mdi/js"
+import ApiResponse from "@/containers/ApiResponseContainer"
 
 const RegisterArea = ({ config }: IRegisterConfig) => {
 	return (
@@ -64,14 +65,7 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						/>
 					</button>
 
-					{config.statusCode > 0 && (
-						<p
-							className={
-								config.statusCode == 201 ? "text-green-400" : "text-red"
-							}>
-							{config.apiResponse}
-						</p>
-					)}
+					<ApiResponse config={config.apiResponse} />
 
 					<Button
 						size="xl"

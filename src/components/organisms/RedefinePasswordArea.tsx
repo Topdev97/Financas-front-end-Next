@@ -1,6 +1,7 @@
 import React from "react"
 import { Button, Container, H1, Input, Paragraph } from "../atoms"
 import { IRedefinePasswordConfig } from "@/utils/interface"
+import ApiResponse from "@/containers/ApiResponseContainer"
 
 const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 	return (
@@ -48,14 +49,7 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 						}
 					/>
 
-					{config.statusCode > 0 && (
-						<p
-							className={
-								config.statusCode == 200 ? "text-green-400" : "text-red"
-							}>
-							{config.apiResponse}
-						</p>
-					)}
+					<ApiResponse config={config.apiResponse} />
 
 					<Button
 						size="xl"

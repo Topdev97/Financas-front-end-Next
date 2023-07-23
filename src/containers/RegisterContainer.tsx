@@ -9,7 +9,7 @@ import { validateEmail } from "@/utils/validateEmail"
 const RegisterContainer = () => {
 	const [showButton, setShowButton] = useState(false)
 	const [showLoading, setShowLoading] = useState(false)
-	const [apiResponse, setApiResponse] = useState("")
+	const [response, setResponse] = useState("")
 	const [statusCode, setStatusCode] = useState(0)
 	const [name, setName] = useState("")
 	const [email, setEmail] = useState("")
@@ -17,6 +17,11 @@ const RegisterContainer = () => {
 	const [eyesIcon, setEyesIcon] = useState(false)
 	const [type, setType] = useState("password")
 	const { setAcessArea, setShowRegisterArea } = useAuth()
+
+	const apiResponse = {
+		statusCode: statusCode,
+		response: response,
+	}
 
 	const handleName = (value: string) => {
 		setName(value)
@@ -52,21 +57,21 @@ const RegisterContainer = () => {
 		setStatusCode(status)
 
 		if (status == 201) {
-			setApiResponse(Messages.SUCCESS_IN_CREATING_USER)
+			setResponse(Messages.SUCCESS_IN_CREATING_USER)
 			setName("")
 			setEmail("")
 			setPassword("")
 			setShowButton(false)
 		} else if (status == 409) {
-			setApiResponse(Messages.EXISTING_USER)
+			setResponse(Messages.EXISTING_USER)
 		} else {
-			setApiResponse(Messages.SERVER_ERROR)
+			setResponse(Messages.SERVER_ERROR)
 		}
 	}
 
 	const createUsers = async () => {
 		setShowLoading(true)
-		setApiResponse("")
+		setResponse("")
 
 		const res: any = await createUser({ name, email, password })
 

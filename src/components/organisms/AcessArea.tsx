@@ -10,8 +10,11 @@ import {
 	mdiEyeOutline,
 } from "@mdi/js"
 import { ILoginConfig } from "../../utils/interface"
+import ApiResponse from "@/containers/ApiResponseContainer"
 
 const AcessArea = ({ config }: ILoginConfig) => {
+	console.log("co", config.apiResponse)
+
 	return (
 		<Container typecontainers="loginContainer">
 			<Container typecontainers="userInputContainer">
@@ -66,9 +69,9 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						/>
 					</button>
 
-					{config.statusCode >= 403 && (
-						<p className="text-red absolute top-48">{config.apiResponse}</p>
-					)}
+					<div className="absolute top-[12.5rem]">
+						<ApiResponse config={config.apiResponse} />
+					</div>
 
 					<Button
 						size="xl"

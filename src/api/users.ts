@@ -19,7 +19,7 @@ export const createUser = async (user: IUsers) => {
 	}
 }
 
-export const changePassword = async (password: string, email: string) => {
+export const changePassword = async (email: string, password: string) => {
 	try {
 		const data: any = {
 			email,

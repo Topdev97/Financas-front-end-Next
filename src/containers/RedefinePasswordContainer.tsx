@@ -13,10 +13,15 @@ const RedefinePasswordContainer = () => {
 	const [password1, setPassword1] = useState("")
 	const [password2, setPassword2] = useState("")
 	const [email, setEmail] = useState("")
-	const [apiResponse, setApiResponse] = useState("")
+	const [response, setResponse] = useState("")
 	const [statusCode, setStatusCode] = useState(0)
 	const { setAcessArea, setShowRegisterArea, setShowRedefinePasswordArea } =
 		useAuth()
+
+	const apiResponse = {
+		statusCode: statusCode,
+		response: response,
+	}
 
 	const handleEmail = (value: string) => {
 		setEmail(value)
@@ -59,16 +64,16 @@ const RedefinePasswordContainer = () => {
 		setStatusCode(status)
 
 		if (status == 200) {
-			setApiResponse(Messages.UPDATED_PASSWORD)
+			setResponse(Messages.UPDATED_PASSWORD)
 
 			setEmail("")
 			setPassword1("")
 			setPassword2("")
 			setShowButton(false)
 		} else if (status == 404) {
-			setApiResponse(Messages.EMAIL_NOT_FOUND)
+			setResponse(Messages.EMAIL_NOT_FOUND)
 		} else {
-			setApiResponse(Messages.SERVER_ERROR)
+			setResponse(Messages.SERVER_ERROR)
 		}
 	}
 

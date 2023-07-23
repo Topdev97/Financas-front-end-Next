@@ -13,6 +13,11 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 			<div className="flex justify-between items-center w-full mb-5">
 				<AutoComplete
 					bordered={false}
+					filterOption={(inputValue, option) =>
+						option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+					}
+					onSelect={(data) => config.onSelect(data)}
+					options={config.categoryName}
 					style={{
 						width: 200,
 						height: "2.5rem",
@@ -41,39 +46,50 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 					<Paragraph color="white">Ajustar</Paragraph>
 				</Container>
 
-				{config.content.map((c, index) => (
-					<Container
-						key={index}
-						typecontainers="categoryContent"
-						className={index % 2 == 0 ? "bg-white_one" : "bg-transparent"}>
-						<Paragraph color="gray">{c.category}</Paragraph>
+				{config.statusCode == 404 ? (
+					<p className="text-center mt-44 text-medium_gray">
+						{config.response}
+					</p>
+				) : (
+					<div>
+						{config.content.map((c, index) => (
+							<Container
+								key={index}
+								typecontainers="categoryContent"
+								className={index % 2 == 0 ? "bg-white_one" : "bg-transparent"}>
+								<Paragraph color="gray">{c.category}</Paragraph>
 
-						<Paragraph color="gray">
-							{c.destinedValue.toLocaleString("pt-BR", {
-								style: "currency",
-								currency: "BRL",
-							})}
-						</Paragraph>
+								<Paragraph color="gray">
+									{c.destinedValue.toLocaleString("pt-BR", {
+										style: "currency",
+										currency: "BRL",
+									})}
+								</Paragraph>
 
-						<Dropdown menu={{ items: config.actions }} placement="bottom" arrow>
-							<button>
-								<Icon path={mdiPencilBoxOutline} size={1} />
-							</button>
-						</Dropdown>
-					</Container>
-				))}
+								<Dropdown
+									menu={{ items: config.actions }}
+									placement="bottom"
+									arrow>
+									<button>
+										<Icon path={mdiPencilBoxOutline} size={1} />
+									</button>
+								</Dropdown>
+							</Container>
+						))}
+					</div>
+				)}
 			</Container>
 
 			<div className="float-right">
 				<Pagination
 					responsive
 					disabled={config.content.length == 0}
-					total={config.content.length}
+					total={config.totalPages * config.itemsPerPage}
 					showTotal={(total) => `Total ${total} items`}
 					defaultPageSize={10}
 					defaultCurrent={1}
-					onChange={(page) => console.log(page)}
-					onShowSizeChange={(current, size) => console.log(current, size)}
+					onChange={(page) => config.setPage(page)}
+					onShowSizeChange={(size) => config.setItemsPerPage(size)}
 				/>
 			</div>
 		</div>

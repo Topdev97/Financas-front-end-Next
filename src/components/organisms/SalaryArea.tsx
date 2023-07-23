@@ -1,6 +1,7 @@
 import { ISettingsConfig } from "@/utils/interface"
 import React from "react"
 import { Button, Input, Paragraph } from "../atoms"
+import ApiResponse from "@/containers/ApiResponseContainer"
 
 const SalaryArea = ({ config }: ISettingsConfig) => {
 	return (
@@ -53,16 +54,14 @@ const SalaryArea = ({ config }: ISettingsConfig) => {
 				</div>
 			)}
 
-			{config.salaryStatusCode > 0 && (
-				<p
-					className={
-						config.salaryStatusCode == 201
-							? "text-green-400 mt-2"
-							: "text-red mt-2"
-					}>
-					{config.apiResponse}
-				</p>
-			)}
+			<div className="mt-2">
+				<ApiResponse
+					config={{
+						statusCode: config.salaryStatusCode,
+						response: config.apiResponse.response,
+					}}
+				/>
+			</div>
 		</>
 	)
 }
