@@ -13,11 +13,13 @@ export enum Routes {
 	GET_CATEGORIES = "/api/categories/",
 	GET_CATEGORY_NAME = "/api/categories_names/",
 	GET_CATEGORY_BY_ID = "/api/categorY_by_id/",
+	UPDATE_CATEGORY = "/api/update_category/",
 }
 
 export enum Messages {
 	SUCCESS_IN_CREATING_USER = "Usuário cadastrado com sucesso",
 	SUCCESS_IN_CREATING_CATEGORY = "Categoria cadastrada com sucesso",
+	SUCESS_IN_UPDATE_CATEGORY = "Categoria atualizada com sucesso",
 	EXISTING_USER = "Um usuário com esse email já existe em nosso banco",
 	EXISTING_CATEGORY = "Essa categoria já existe em nosso banco",
 	SERVER_ERROR = "Houve um erro de servidor, tente novamente!",

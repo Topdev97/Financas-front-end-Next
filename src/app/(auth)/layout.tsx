@@ -4,6 +4,7 @@ import React from "react"
 import type { Metadata } from "next"
 import MenuSideBar from "@/components/molecules/MenuSideBar"
 import AcessProvider from "@/context/AuthProvider"
+import CategoryProvider from "@/context/CategoryProvider"
 
 export const metadata: Metadata = {
 	title: "Finanças - Home",
@@ -18,7 +19,9 @@ export default function RootLayout({
 		<html lang="en">
 			<body className="flex  h-screen">
 				<MenuSideBar />
-				<AcessProvider>{children}</AcessProvider>
+				<AcessProvider>
+					<CategoryProvider>{children}</CategoryProvider>
+				</AcessProvider>
 			</body>
 		</html>
 	)

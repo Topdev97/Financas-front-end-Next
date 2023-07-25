@@ -6,7 +6,7 @@ import AcessContainer from "../../containers/AcessContainer"
 import RedefinePasswordContainer from "@/containers/RedefinePasswordContainer"
 import LogoArea from "../../components/molecules/LogoArea"
 import RegisterContainer from "../../containers/RegisterContainer"
-import useAuth from "@/hooks/useAuth"
+import { useAuth } from "@/hooks"
 import { setupClient } from "@/clients/AxiosClient"
 
 export default function Home() {

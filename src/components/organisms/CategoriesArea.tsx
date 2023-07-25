@@ -6,27 +6,38 @@ import Icon from "@mdi/react"
 import { mdiPencilBoxOutline } from "@mdi/js"
 import { Pagination } from "antd"
 import React from "react"
+import { useCategory } from "@/hooks"
 
 const CategoriesArea = ({ config }: ICategoriesConfig) => {
+	const { content, totalPages, categoryName } = useCategory()
+
 	return (
 		<div className="h-screen px-8 py-6 w-full">
 			<div className="flex justify-between items-center w-full mb-5">
-				<AutoComplete
-					bordered={false}
-					filterOption={(inputValue, option) =>
-						option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-					}
-					onSelect={(data) => config.onSelect(data)}
-					options={config.categoryName}
-					style={{
-						width: 200,
-						height: "2.5rem",
-						borderRadius: "0.5rem",
-						boxShadow: "0 0.3rem 0.62rem rgba(0,0,0,0.4)",
-						outline: "1px solid #019267",
-					}}
-					placeholder="Buscar por categoria"
-				/>
+				<div className="flex space-x-4">
+					<AutoComplete
+						value={config.selectedCategory}
+						bordered={false}
+						placeholder="Buscar por categoria"
+						options={categoryName}
+						onSelect={(data) => config.onSelect(data)}
+						filterOption={(inputValue, option) =>
+							option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+							-1
+						}
+						style={{
+							width: 200,
+							height: "2.5rem",
+							borderRadius: "0.5rem",
+							boxShadow: "0 0.3rem 0.62rem rgba(0,0,0,0.4)",
+							outline: "1px solid #019267",
+						}}
+					/>
+					<button className="mt-5" onClick={() => config.cleanFilter()}>
+						Limpar filtro
+					</button>
+				</div>
+
 				<Button
 					size="md"
 					color="green"
@@ -52,7 +63,7 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 					</p>
 				) : (
 					<div>
-						{config.content.map((c, index) => (
+						{content.map((c, index) => (
 							<Container
 								key={index}
 								typecontainers="categoryContent"
@@ -67,7 +78,7 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 								</Paragraph>
 
 								<Dropdown
-									menu={{ items: config.actions }}
+									menu={{ items: config.menu(c.id) }}
 									placement="bottom"
 									arrow>
 									<button>
@@ -83,13 +94,13 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 			<div className="float-right">
 				<Pagination
 					responsive
-					disabled={config.content.length == 0}
-					total={config.totalPages * config.itemsPerPage}
+					current={config.page}
+					disabled={content.length == 0}
+					total={totalPages * config.itemsPerPage}
+					showSizeChanger={totalPages >= 0 && false}
 					showTotal={(total) => `Total ${total} items`}
-					defaultPageSize={10}
 					defaultCurrent={1}
-					onChange={(page) => config.setPage(page)}
-					onShowSizeChange={(size) => config.setItemsPerPage(size)}
+					onChange={(page) => config.getCategoryByPage(page)}
 				/>
 			</div>
 		</div>

@@ -11,7 +11,7 @@ import { isAuthenticated } from "@/utils/permissions"
 
 export const AuthContext = createContext({} as IAuth)
 
-function AuthProvider({ children }: IProps) {
+const AuthProvider = ({ children }: IProps) => {
 	const [showRegisterArea, setShowRegisterArea] = useState(false)
 	const [showAcessArea, setAcessArea] = useState(true)
 	const [userId, setUserId] = useState("")

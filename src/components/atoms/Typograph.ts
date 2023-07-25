@@ -28,6 +28,7 @@ export const Paragraph = w.p(`font-bold`, {
 		size: {
 			base: "text-[1rem]",
 			lg: "text-[1.2rem]",
+			xl: "text-[2rem]",
 		},
 	},
 	defaultVariants: {

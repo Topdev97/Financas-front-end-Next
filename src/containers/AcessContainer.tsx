@@ -4,7 +4,7 @@ import Loading from "../components/molecules/Loading"
 import { Messages } from "@/utils/enum"
 import { signin } from "@/api/signin"
 import { useRouter } from "next/navigation"
-import useAuth from "@/hooks/useAuth"
+import { useAuth } from "@/hooks"
 import { validateEmail } from "@/utils/validateEmail"
 
 const AcessContainer = () => {

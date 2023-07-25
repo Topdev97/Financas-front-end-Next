@@ -1,5 +1,4 @@
 import { ReactNode } from "react"
-import type { MenuProps } from "antd"
 
 export interface IUsers {
 	name: string
@@ -111,29 +110,22 @@ export interface ISettingsConfig {
 	config: ISettingsProps
 }
 
-interface ICategoryContent {
-	id: string
-	category: string
-	destinedValue: number
-}
-
 export interface ICategoryName {
 	value: string
 }
 
 export interface ICategoriesProps {
-	totalPages: number
 	itemsPerPage: number
+	page: number
 	response: string
+	selectedCategory: string
 	statusCode: number
-	categoryName: Array<ICategoryName>
 	headers: Array<string>
-	content: Array<ICategoryContent>
-	actions: MenuProps["items"]
+	menu: Function
 	handleCategoryCreation: Function
-	setPage: Function
-	setItemsPerPage: Function
 	onSelect: Function
+	cleanFilter: Function
+	getCategoryByPage: Function
 }
 
 export interface ICategoriesConfig {
@@ -141,15 +133,12 @@ export interface ICategoriesConfig {
 }
 
 export interface ICreateCategoryProps {
-	category: string
-	destinedValue: number
-	typeAction: string
 	showButton: boolean
-	apiResponse: IApiResponse
+
 	closeCreateCategoryModal: Function
 	handleCategory: Function
 	handleDestinedValue: Function
-	createCategory: Function
+	createOrUpdateCategory: Function
 }
 
 export interface ICreateCategoryConfig {
@@ -162,6 +151,12 @@ export interface IAllCategories {
 	destinedValue: number
 }
 
+export interface IUpdateCategory {
+	userId: string
+	name: string
+	value: number | undefined
+}
+
 export interface ResponseMap {
 	[key: number]: JSX.Element
 }
@@ -169,4 +164,36 @@ export interface ResponseMap {
 export interface ICategoriesInfo {
 	id: string
 	name: string
+}
+
+export interface ICategoryProvider {
+	showLoading: boolean
+	typeAction: string
+	totalPages: number
+	response: string
+	statusCode: number
+	showCreateCategoryModal: boolean
+	idCategory: string
+	category: string
+	destinedValue: number
+	page: number
+	itemsPerPage: number
+	apiResponse: IApiResponse
+	categoryName: ICategoryName[]
+	allCategories: ICategoriesInfo[]
+	content: IAllCategories[]
+	showDeleteModal: boolean
+	setShowDeleteModal: Function
+	setShowLoading: Function
+	setTotalPages: Function
+	setResponse: Function
+	setStatusCode: Function
+	setTypeAction: Function
+	getAllCategories: Function
+	setShowCreateCategoryModal: Function
+	setIdCategory: Function
+	setCategory: Function
+	setDestinedValeu: Function
+	parseContent: Function
+	setPage: Function
 }

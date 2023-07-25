@@ -2,68 +2,73 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import CreateCategoryModal from "@/components/organisms/CreateCategoryModal"
 import CategoriesArea from "@/components/organisms/CategoriesArea"
 import Loading from "@/components/molecules/Loading"
-import { Actions, Messages } from "@/utils/enum"
-import {
-	getAllCategoriesApi,
-	getCategoryByidApi,
-	getNameOfAllCategoriesApi,
-	registerCategory,
-} from "@/api/category"
-import useAuth from "@/hooks/useAuth"
-import {
-	IAllCategories,
-	ICategoriesInfo,
-	ICategoryName,
-} from "@/utils/interface"
+import type { MenuProps } from "antd"
+import { Actions } from "@/utils/enum"
+import { getCategoryByidApi } from "@/api/category"
+import { useCategory } from "@/hooks"
 
 const CategoriesContainer = () => {
-	const [showLoading, setShowLoading] = useState(false)
-	const [showButton, setShowButton] = useState(false)
-	const [typeAction, setTypeAction] = useState("")
-	const [category, setCategory] = useState("")
-	const [destinedValue, setDestinedValeu] = useState(0)
-	const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false)
-	const [response, setResponse] = useState("")
-	const [statusCode, setStatusCode] = useState(0)
-	const [content, setContent] = useState<IAllCategories[]>([])
-	const [page, setPage] = useState(1)
-	const [itemsPerPage, setItemsPerPage] = useState(10)
-	const [totalPages, setTotalPages] = useState(0)
-	const [categoryName, setCategoryName] = useState<ICategoryName[]>([])
-	const [allCategories, setAllCategories] = useState<ICategoriesInfo[]>([])
+	const [selectedCategory, setSelectedCategory] = useState("")
 
-	useEffect(() => {
-		getAllCategories()
-	}, [])
-
-	const apiResponse = {
-		statusCode: statusCode,
-		response: response,
-	}
-
-	const { userId } = useAuth()
+	const {
+		statusCode,
+		response,
+		showLoading,
+		getAllCategories,
+		allCategories,
+		page,
+		itemsPerPage,
+		parseContent,
+		setPage,
+		setShowCreateCategoryModal,
+		setTypeAction,
+		setIdCategory,
+		setShowDeleteModal,
+	} = useCategory()
 
 	const headers = ["Categoria", "Valor destinado"]
 
-	const actions = [
-		{
-			key: 1,
-			label: <button onClick={() => handleCategoryUpdate()}>Ajustar</button>,
-		},
-		{ key: 2, label: <button>Deletar</button> },
-	]
+	useEffect(() => {
+		getAllCategories(page, itemsPerPage)
+	}, [])
 
-	const onSelect = async (data: string) => {
-		console.log("ddddd", data)
+	const menu = (id: string): MenuProps["items"] => {
+		const actions = [
+			{
+				key: 1,
+				label: (
+					<button onClick={() => handleCategoryUpdate(id)}>Ajustar</button>
+				),
+			},
+			{
+				key: 2,
+				label: (
+					<button onClick={() => setShowDeleteModal(true)}>Deletar</button>
+				),
+			},
+		]
 
-		const category = allCategories.filter((c) => c.name == data)
+		return actions
+	}
+
+	const cleanFilter = () => {
+		setSelectedCategory("")
+		getAllCategories(page, itemsPerPage)
+	}
+
+	const getCategoryByPage = (value: number) => {
+		setPage(value)
+		getAllCategories(value, itemsPerPage)
+	}
+
+	const onSelect = async (name: string) => {
+		setSelectedCategory(name)
+
+		const category = allCategories.filter((c) => c.name == name)
 
 		const id = category[0].id
-
-		console.log("iddd", id)
 
 		const res: any = await getCategoryByidApi(id)
 
@@ -72,161 +77,34 @@ const CategoriesContainer = () => {
 		}
 	}
 
-	const getNameOfAllCategories = async () => {
-		const res: any = await getNameOfAllCategoriesApi(userId)
-
-		const names = res?.data.map((n: any) => {
-			return { value: n.name }
-		})
-
-		setCategoryName(names)
-
-		setAllCategories(res?.data)
-	}
-
-	const getAllCategories = async () => {
-		setShowLoading(true)
-
-		const res: any = await getAllCategoriesApi(userId, page, itemsPerPage)
-
-		if (res?.status == 200) {
-			parseContent(res?.data.categories)
-			setTotalPages(res?.data.totalPages)
-			getNameOfAllCategories()
-		} else {
-			setStatusCode(res?.status)
-			setResponse(Messages.THERE_ISNT_DATA)
-		}
-
-		setShowLoading(false)
-	}
-
-	const parseContent = (data: any[]) => {
-		const categories = data.map((c) => {
-			return {
-				id: c._id,
-				category: c.name,
-				destinedValue: c.value,
-			}
-		})
-
-		setContent(categories)
-	}
-
-	const createCategory = async () => {
-		setShowLoading(true)
-
-		const res: any = await registerCategory(category, destinedValue, userId)
-
-		handleApiResponse(res?.status)
-
-		setShowLoading(false)
-	}
-
-	const handleCategory = (value: string) => {
-		setResponse("")
-		setStatusCode(0)
-
-		setCategory(value)
-
-		validateDataAndHandleButton(value, destinedValue)
-	}
-
-	const handleDestinedValue = (value: number) => {
-		setResponse("")
-		setStatusCode(0)
-
-		setDestinedValeu(value)
-
-		validateDataAndHandleButton(category, value)
-	}
-
-	const validateDataAndHandleButton = (
-		category: string,
-		destinedValue: number,
-	) => {
-		const isValidCreate =
-			typeAction == Actions.CREATE && destinedValue > 0 && category != ""
-
-		const isValidUpdate =
-			(typeAction == Actions.UPDATE && destinedValue > 0) ||
-			(typeAction == Actions.UPDATE && category != "")
-
-		const showButton = isValidCreate || isValidUpdate
-
-		setShowButton(showButton)
-	}
-
 	const handleCategoryCreation = () => {
 		setShowCreateCategoryModal(true)
 		setTypeAction(Actions.CREATE)
 	}
 
-	const handleCategoryUpdate = () => {
+	const handleCategoryUpdate = (id: string) => {
+		setIdCategory(id)
 		setShowCreateCategoryModal(true)
 		setTypeAction(Actions.UPDATE)
 	}
 
-	const handleApiResponse = (status: number) => {
-		setStatusCode(status)
-
-		if (status == 201) {
-			setResponse(Messages.SUCCESS_IN_CREATING_CATEGORY)
-			setCategory("")
-			setDestinedValeu(0)
-			setShowButton(false)
-			getAllCategories()
-		} else if (status == 409) {
-			setResponse(Messages.EXISTING_CATEGORY)
-		} else {
-			setResponse(Messages.SERVER_ERROR)
-		}
-	}
-
-	const closeCreateCategoryModal = () => {
-		setShowCreateCategoryModal(false)
-		setCategory("")
-		setResponse("")
-		setStatusCode(0)
-		setDestinedValeu(0)
-		setShowButton(false)
-	}
-
 	const categoryConfig = {
 		headers,
-		content,
-		actions,
-		totalPages,
 		response,
 		statusCode,
 		itemsPerPage,
-		categoryName,
+		page,
+		selectedCategory,
+		menu,
+		cleanFilter,
 		handleCategoryCreation,
-		setPage,
-		setItemsPerPage,
 		onSelect,
-	}
-
-	const createCategoryConfig = {
-		typeAction,
-		showButton,
-		category,
-		destinedValue,
-		apiResponse,
-		handleCategory,
-		handleDestinedValue,
-		closeCreateCategoryModal,
-		setShowCreateCategoryModal,
-		createCategory,
+		getCategoryByPage,
 	}
 
 	return (
 		<>
 			{showLoading && <Loading />}
-
-			{showCreateCategoryModal && (
-				<CreateCategoryModal config={createCategoryConfig} />
-			)}
 
 			<CategoriesArea config={categoryConfig} />
 		</>

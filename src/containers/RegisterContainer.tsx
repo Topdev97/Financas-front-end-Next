@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import RegisterArea from "../components/organisms/RegisterArea"
 import { createUser } from "../api/users"
 import Loading from "../components/molecules/Loading"
-import useAuth from "@/hooks/useAuth"
+import { useAuth } from "@/hooks"
 import { Messages } from "@/utils/enum"
 import { validateEmail } from "@/utils/validateEmail"
 

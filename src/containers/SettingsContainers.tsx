@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import { validateEqualPasswords } from "@/utils/validateEqualPasswords"
 import { Messages } from "@/utils/enum"
 import { generateNewPassword } from "@/api/users"
-import useAuth from "@/hooks/useAuth"
+import { useAuth } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
 import { registerSalary, takeSalary } from "@/api/salary"
 import SalaryArea from "@/components/organisms/SalaryArea"
@@ -31,24 +31,30 @@ const SettingsContainer = () => {
 		response: response,
 	}
 
+	const setToInitialState = () => {
+		setResponse("")
+		setStatusCode(0)
+		setSalaryStatusCode(0)
+	}
+
 	const handlePassword1 = (value: string) => {
+		setToInitialState()
+
 		setPassword1(value)
 
-		if (validateEqualPasswords(value, password2)) {
-			setShowButton(true)
-		} else {
-			setShowButton(false)
-		}
+		const validate = validateEqualPasswords(value, password2)
+
+		setShowButton(validate)
 	}
 
 	const handlePassword2 = (value: string) => {
+		setToInitialState()
+
 		setPassword2(value)
 
-		if (validateEqualPasswords(password1, value)) {
-			setShowButton(true)
-		} else {
-			setShowButton(false)
-		}
+		const validate = validateEqualPasswords(password1, value)
+
+		setShowButton(validate)
 	}
 
 	const handleApiResponse = (status: number) => {
@@ -60,9 +66,9 @@ const SettingsContainer = () => {
 			setShowButton(false)
 		} else if (status == 201) {
 			getSalary()
-			setActiveEdit(false)
-			setSalaryStatusCode(status)
 			setSalaryValue("")
+			setSalaryStatusCode(status)
+			setActiveEdit(false)
 			setShowSaveSalaryButton(false)
 			setResponse(Messages.SUCCESS_IN_SAVING_SALARY)
 		} else {
@@ -83,14 +89,11 @@ const SettingsContainer = () => {
 	const handleSalary = (value: string) => {
 		setSalaryValue(value)
 
-		if (value != "") {
-			setShowSaveSalaryButton(true)
-		} else {
-			setShowSaveSalaryButton(false)
-		}
+		setShowSaveSalaryButton(value != "" ? true : false)
 	}
 
 	const handleEdit = () => {
+		setToInitialState()
 		setActiveEdit(!activeEdit)
 	}
 

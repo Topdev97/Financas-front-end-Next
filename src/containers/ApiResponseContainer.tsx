@@ -2,10 +2,12 @@ import { IApiResponseConfig, ResponseMap } from "@/utils/interface"
 import React from "react"
 
 const ApiResponse = ({ config }: IApiResponseConfig) => {
-	const errorResponse = <p className="text-red float-left">{config.response}</p>
+	const errorResponse = (
+		<p style={{ color: "#ff0000", float: "left" }}>{config.response}</p>
+	)
 
 	const sucessResponse = (
-		<p className="text-green-400 float-left">{config.response}</p>
+		<p style={{ color: "#019267", float: "left" }}>{config.response}</p>
 	)
 
 	const setResponse = (status: number): JSX.Element => {
@@ -13,6 +15,7 @@ const ApiResponse = ({ config }: IApiResponseConfig) => {
 			200: sucessResponse,
 			201: sucessResponse,
 			403: errorResponse,
+			404: errorResponse,
 			409: errorResponse,
 			500: errorResponse,
 		}

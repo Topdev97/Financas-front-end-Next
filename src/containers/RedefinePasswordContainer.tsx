@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import RedefinePassword from "@/components/organisms/RedefinePasswordArea"
 import { validateEmail } from "@/utils/validateEmail"
-import useAuth from "@/hooks/useAuth"
+import { useAuth } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
 import { changePassword } from "@/api/users"
 import { Messages } from "@/utils/enum"
