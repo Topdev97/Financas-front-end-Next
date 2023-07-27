@@ -197,3 +197,13 @@ export interface ICategoryProvider {
 	parseContent: Function
 	setPage: Function
 }
+
+interface IDeleteProps {
+	type: string
+	showButton: boolean
+	handleDelete: Function
+}
+
+export interface IDeleteCategoryConfig {
+	config: IDeleteProps
+}

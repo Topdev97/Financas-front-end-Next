@@ -4,13 +4,17 @@ import React from "react"
 import CategoriesContainer from "@/containers/CategoriesContainer"
 import CreateCategoryContainer from "@/containers/CreateOrUpdateCategoryContainer"
 import { useCategory } from "@/hooks"
-import DeleteModal from "@/components/organisms/DeleteModal"
+import DeleteContainer from "@/containers/DeleteContainer"
+import Loading from "@/components/molecules/Loading"
 
 const Categories = () => {
-	const { showCreateCategoryModal, showDeleteModal } = useCategory()
+	const { showCreateCategoryModal, showDeleteModal, showLoading } =
+		useCategory()
 	return (
 		<>
-			{showDeleteModal && <DeleteModal type={"categoria"} />}
+			{showLoading && <Loading />}
+
+			{showDeleteModal && <DeleteContainer />}
 
 			{showCreateCategoryModal && <CreateCategoryContainer />}
 

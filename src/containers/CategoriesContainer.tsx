@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from "react"
 import CategoriesArea from "@/components/organisms/CategoriesArea"
-import Loading from "@/components/molecules/Loading"
 import type { MenuProps } from "antd"
 import { Actions } from "@/utils/enum"
 import { getCategoryByidApi } from "@/api/category"
@@ -15,7 +14,6 @@ const CategoriesContainer = () => {
 	const {
 		statusCode,
 		response,
-		showLoading,
 		getAllCategories,
 		allCategories,
 		page,
@@ -44,13 +42,16 @@ const CategoriesContainer = () => {
 			},
 			{
 				key: 2,
-				label: (
-					<button onClick={() => setShowDeleteModal(true)}>Deletar</button>
-				),
+				label: <button onClick={() => openDeleteModal(id)}>Deletar</button>,
 			},
 		]
 
 		return actions
+	}
+
+	const openDeleteModal = (id: string) => {
+		setIdCategory(id)
+		setShowDeleteModal(true)
 	}
 
 	const cleanFilter = () => {
@@ -104,8 +105,6 @@ const CategoriesContainer = () => {
 
 	return (
 		<>
-			{showLoading && <Loading />}
-
 			<CategoriesArea config={categoryConfig} />
 		</>
 	)

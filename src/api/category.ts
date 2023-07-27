@@ -81,3 +81,13 @@ export const updateCategoryApi = async (
 		return error
 	}
 }
+
+export const deleteCategoryApi = async (id: string) => {
+	try {
+		const res = await useClient().delete(`${Routes.DELETE_CATEGORY}${id}`)
+
+		return res
+	} catch (error) {
+		return error
+	}
+}
