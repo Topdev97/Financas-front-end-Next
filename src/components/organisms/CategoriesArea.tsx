@@ -1,20 +1,21 @@
 import { ICategoriesConfig } from "@/utils/interface"
-import { Button, Container, Paragraph } from "../atoms"
+import { Button, Container, Paragraph, Wrapper } from "../atoms"
 import { AutoComplete } from "antd"
 import { Dropdown } from "antd"
 import Icon from "@mdi/react"
-import { mdiPencilBoxOutline } from "@mdi/js"
+import { mdiPencilBoxOutline, mdiCloseCircle } from "@mdi/js"
 import { Pagination } from "antd"
 import React from "react"
-import { useCategory } from "@/hooks"
+import { useAsync, useCategory } from "@/hooks"
 
 const CategoriesArea = ({ config }: ICategoriesConfig) => {
 	const { content, totalPages, categoryName } = useCategory()
+	const { apiResponse } = useAsync()
 
 	return (
-		<div className="h-screen px-8 py-6 w-full">
-			<div className="flex justify-between items-center w-full mb-5">
-				<div className="flex space-x-4">
+		<Container type="container">
+			<Wrapper type="categoryFilter">
+				<div className="flex space-x-4 relative">
 					<AutoComplete
 						value={config.selectedCategory}
 						bordered={false}
@@ -33,8 +34,14 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 							outline: "1px solid #019267",
 						}}
 					/>
-					<button className="mt-5" onClick={() => config.cleanFilter()}>
-						Limpar filtro
+					<button
+						className={
+							config.selectedCategory
+								? "block absolute top-2 left-36 text-medium_gray"
+								: "hidden"
+						}
+						onClick={() => config.cleanFilter()}>
+						<Icon path={mdiCloseCircle} size={1} />
 					</button>
 				</div>
 
@@ -44,10 +51,10 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 					onClick={() => config.handleCategoryCreation()}>
 					Criar categoria
 				</Button>
-			</div>
+			</Wrapper>
 
-			<Container typecontainers="dataTableContainer">
-				<Container typecontainers="headersContainer">
+			<Wrapper type="dataTable">
+				<Wrapper type="headers">
 					{config.headers.map((items, index) => (
 						<Paragraph key={index} color="white">
 							{items}
@@ -55,18 +62,18 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 					))}
 
 					<Paragraph color="white">Ajustar</Paragraph>
-				</Container>
+				</Wrapper>
 
-				{config.statusCode == 404 ? (
+				{apiResponse.statusCode == 404 ? (
 					<p className="text-center mt-44 text-medium_gray">
-						{config.response}
+						{apiResponse.response}
 					</p>
 				) : (
 					<div>
 						{content.map((c, index) => (
-							<Container
+							<Wrapper
 								key={index}
-								typecontainers="categoryContent"
+								type="categoryContent"
 								className={index % 2 == 0 ? "bg-white_one" : "bg-transparent"}>
 								<Paragraph color="gray">{c.category}</Paragraph>
 
@@ -85,11 +92,11 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 										<Icon path={mdiPencilBoxOutline} size={1} />
 									</button>
 								</Dropdown>
-							</Container>
+							</Wrapper>
 						))}
 					</div>
 				)}
-			</Container>
+			</Wrapper>
 
 			<div className="float-right">
 				<Pagination
@@ -103,7 +110,7 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 					onChange={(page) => config.getCategoryByPage(page)}
 				/>
 			</div>
-		</div>
+		</Container>
 	)
 }
 

@@ -1,43 +1,32 @@
 import React, { useState } from "react"
-import CreateCategoryModal from "@/components/organisms/CreateOrUpdateCategoryModal"
+import CreateCategoryModal from "@/components/organisms/CategoryModal"
 import { Actions, Messages } from "@/utils/enum"
-import { useCategory, useAuth } from "@/hooks"
+import { useCategory, useAuth, useAsync } from "@/hooks"
 import { registerCategory, updateCategoryApi } from "@/api/category"
 
 const CreateCategoryContainer = () => {
 	const [showButton, setShowButton] = useState(false)
-
+	const [category, setCategory] = useState("")
+	const [destinedValue, setDestinedValeu] = useState(0)
 	const { userId } = useAuth()
+	const { execute } = useAsync()
 
 	const {
 		page,
 		itemsPerPage,
-		destinedValue,
-		category,
 		idCategory,
 		getAllCategories,
 		typeAction,
-		setResponse,
-		setStatusCode,
-		setCategory,
-		setDestinedValeu,
-		setShowLoading,
 		setShowCreateCategoryModal,
 	} = useCategory()
 
 	const handleCategory = (value: string) => {
-		setResponse("")
-		setStatusCode(0)
-
 		setCategory(value)
 
 		validateDataAndHandleButton(value, destinedValue)
 	}
 
 	const handleDestinedValue = (value: number) => {
-		setResponse("")
-		setStatusCode(0)
-
 		setDestinedValeu(value)
 
 		validateDataAndHandleButton(category, value)
@@ -46,8 +35,6 @@ const CreateCategoryContainer = () => {
 	const closeCreateCategoryModal = () => {
 		setShowCreateCategoryModal(false)
 		setCategory("")
-		setResponse("")
-		setStatusCode(0)
 		setDestinedValeu(0)
 		setShowButton(false)
 	}
@@ -58,46 +45,35 @@ const CreateCategoryContainer = () => {
 	}
 
 	const createCategory = async () => {
-		setShowLoading(true)
-
-		const res: any = await registerCategory(category, destinedValue, userId)
+		const res: any = await execute(
+			registerCategory(category, destinedValue, userId),
+			Messages.SUCCESS_IN_CREATING_CATEGORY,
+			Messages.EXISTING_CATEGORY,
+		)
 
 		handleApiResponse(res?.status)
-
-		setShowLoading(false)
 	}
 
 	const updateCategory = async () => {
-		setShowLoading(true)
-
-		const res: any = await updateCategoryApi(idCategory, {
-			userId,
-			name: category,
-			value: destinedValue > 0 ? destinedValue : undefined,
-		})
+		const res: any = await execute(
+			updateCategoryApi(idCategory, {
+				userId,
+				name: category,
+				value: destinedValue > 0 ? destinedValue : undefined,
+			}),
+			Messages.SUCESS_IN_UPDATE_CATEGORY,
+			Messages.EXISTING_CATEGORY,
+		)
 
 		handleApiResponse(res?.status)
-
-		setShowLoading(false)
 	}
 
 	const handleApiResponse = (status: number) => {
-		setStatusCode(status)
-
 		if (status == 201) {
-			setResponse(
-				typeAction == Actions.CREATE
-					? Messages.SUCCESS_IN_CREATING_CATEGORY
-					: Messages.SUCESS_IN_UPDATE_CATEGORY,
-			)
 			setCategory("")
 			setDestinedValeu(0)
 			setShowButton(false)
 			getAllCategories(page, itemsPerPage)
-		} else if (status == 409) {
-			setResponse(Messages.EXISTING_CATEGORY)
-		} else {
-			setResponse(Messages.SERVER_ERROR)
 		}
 	}
 
@@ -119,6 +95,10 @@ const CreateCategoryContainer = () => {
 
 	const createCategoryConfig = {
 		showButton,
+		category,
+		destinedValue,
+		setCategory,
+		setDestinedValeu,
 		handleCategory,
 		handleDestinedValue,
 		closeCreateCategoryModal,

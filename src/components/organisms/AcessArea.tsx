@@ -1,6 +1,6 @@
 "use client"
 
-import { Container, H1, Paragraph, Input, Button } from "../atoms"
+import { Container, H1, Paragraph, Input, Button, Wrapper } from "../atoms"
 import React from "react"
 import Icon from "@mdi/react"
 import {
@@ -16,8 +16,8 @@ const AcessArea = ({ config }: ILoginConfig) => {
 	console.log("co", config.apiResponse)
 
 	return (
-		<Container typecontainers="loginContainer">
-			<Container typecontainers="userInputContainer">
+		<Container type="login">
+			<Wrapper type="userInput">
 				<div className="text-center">
 					<H1 className="!text-dark_green"> Entrar </H1>
 
@@ -26,7 +26,7 @@ const AcessArea = ({ config }: ILoginConfig) => {
 					</Paragraph>
 				</div>
 
-				<Container typecontainers="inputContainer">
+				<Wrapper type="input">
 					<Input
 						typeinput="loginInput"
 						type="email"
@@ -85,7 +85,7 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						}>
 						Entrar
 					</Button>
-				</Container>
+				</Wrapper>
 
 				<div className="flex flex-col -mt-8">
 					<button
@@ -100,7 +100,7 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						Esqueceu a senha ?
 					</button>
 				</div>
-			</Container>
+			</Wrapper>
 		</Container>
 	)
 }

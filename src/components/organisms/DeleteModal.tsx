@@ -1,5 +1,5 @@
 import React from "react"
-import { Container, Button, H1, Paragraph } from "../atoms"
+import { Container, Button, H1, Paragraph, Wrapper } from "../atoms"
 import ApiResponse from "@/containers/ApiResponseContainer"
 import { useCategory } from "@/hooks"
 import { IDeleteCategoryConfig } from "@/utils/interface"
@@ -8,11 +8,9 @@ const DeleteModal = ({ config }: IDeleteCategoryConfig) => {
 	const { apiResponse, setShowDeleteModal } = useCategory()
 
 	return (
-		<Container typecontainers="backgroundContainer">
-			<Container typecontainers="modalContainer">
-				<Container
-					typecontainers="actionsModalContainer"
-					className="text-center">
+		<Container type="backgroundModal">
+			<Wrapper type="modal">
+				<Wrapper type="actionsModal" className="text-center">
 					<H1 size="base" color="dark_gray">
 						Deletar {config?.type}
 					</H1>
@@ -42,8 +40,8 @@ const DeleteModal = ({ config }: IDeleteCategoryConfig) => {
 							</Button>
 						</div>
 					</div>
-				</Container>
-			</Container>
+				</Wrapper>
+			</Wrapper>
 		</Container>
 	)
 }

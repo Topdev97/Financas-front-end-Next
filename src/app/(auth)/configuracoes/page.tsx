@@ -14,6 +14,7 @@ const SettingsPage = () => {
 			router.push("/")
 		}
 	})
+
 	return <SettingsContainer />
 }
 

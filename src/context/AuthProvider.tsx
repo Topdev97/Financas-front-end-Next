@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
-import { createContext, useState } from "react"
 import { IAuth, IProps } from "../utils/interface"
-import React, { useEffect } from "react"
+import React, { useEffect, createContext, useState } from "react"
 import { getPayload } from "@/api/signin"
 import { setupClient } from "@/clients/AxiosClient"
 import { setBearerAuthorization, useClient } from "../clients/AxiosClient"

@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import PacmanLoader from "react-spinners/PacmanLoader"
-import { Container } from "../atoms"
+import animation from "@/assets/lottieFiles/animation.json"
+import { Container, Wrapper } from "../atoms"
+import Lottie from "lottie-react"
 
 const Loading = () => {
 	const [message, setMessage] = useState(
@@ -24,13 +25,16 @@ const Loading = () => {
 	}, [])
 
 	return (
-		<Container typecontainers="loadingContainer">
-			<Container typecontainers="modalContainer">
+		<Container type="loading">
+			<Wrapper type="modal">
 				<div className="flex flex-col items-center justify-around">
-					<PacmanLoader size="35" color="#fff" aria-label="OI" />
-					<h1 className="mt-3 text-[1.5rem] text-white">{message}</h1>
+					<Lottie
+						animationData={animation}
+						style={{ width: "30rem", marginTop: "-8rem" }}
+					/>
+					<h1 className="-mt-16 text-[1.5rem] text-white">{message}</h1>
 				</div>
-			</Container>
+			</Wrapper>
 		</Container>
 	)
 }

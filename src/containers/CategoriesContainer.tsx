@@ -6,14 +6,12 @@ import CategoriesArea from "@/components/organisms/CategoriesArea"
 import type { MenuProps } from "antd"
 import { Actions } from "@/utils/enum"
 import { getCategoryByidApi } from "@/api/category"
-import { useCategory } from "@/hooks"
+import { useAsync, useCategory } from "@/hooks"
 
 const CategoriesContainer = () => {
 	const [selectedCategory, setSelectedCategory] = useState("")
 
 	const {
-		statusCode,
-		response,
 		getAllCategories,
 		allCategories,
 		page,
@@ -25,6 +23,8 @@ const CategoriesContainer = () => {
 		setIdCategory,
 		setShowDeleteModal,
 	} = useCategory()
+
+	const { execute } = useAsync()
 
 	const headers = ["Categoria", "Valor destinado"]
 
@@ -71,7 +71,7 @@ const CategoriesContainer = () => {
 
 		const id = category[0].id
 
-		const res: any = await getCategoryByidApi(id)
+		const res: any = await execute(getCategoryByidApi(id))
 
 		if (res?.status == 200) {
 			parseContent([res?.data])
@@ -91,8 +91,6 @@ const CategoriesContainer = () => {
 
 	const categoryConfig = {
 		headers,
-		response,
-		statusCode,
 		itemsPerPage,
 		page,
 		selectedCategory,
@@ -103,11 +101,7 @@ const CategoriesContainer = () => {
 		getCategoryByPage,
 	}
 
-	return (
-		<>
-			<CategoriesArea config={categoryConfig} />
-		</>
-	)
+	return <CategoriesArea config={categoryConfig} />
 }
 
 export default CategoriesContainer

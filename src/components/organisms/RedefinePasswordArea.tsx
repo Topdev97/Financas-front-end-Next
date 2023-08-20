@@ -1,12 +1,12 @@
 import React from "react"
-import { Button, Container, H1, Input, Paragraph } from "../atoms"
+import { Button, Container, H1, Input, Paragraph, Wrapper } from "../atoms"
 import { IRedefinePasswordConfig } from "@/utils/interface"
 import ApiResponse from "@/containers/ApiResponseContainer"
 
 const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 	return (
-		<Container typecontainers="loginContainer">
-			<Container typecontainers="userInputContainer">
+		<Container type="login">
+			<Wrapper type="userInput">
 				<div className="text-center">
 					<H1 className="!text-dark_green"> Nova senha </H1>
 
@@ -15,7 +15,7 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 					</Paragraph>
 				</div>
 
-				<Container typecontainers="inputContainer">
+				<Wrapper type="input">
 					<Input
 						typeinput="input"
 						type="email"
@@ -58,7 +58,7 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 						onClick={() => config.redefinePassword()}>
 						Redefinir
 					</Button>
-				</Container>
+				</Wrapper>
 
 				<div className="-mt-8">
 					<button
@@ -67,7 +67,7 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 						Voltar
 					</button>
 				</div>
-			</Container>
+			</Wrapper>
 		</Container>
 	)
 }

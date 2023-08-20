@@ -18,7 +18,7 @@ export default function Home() {
 	}, [])
 
 	return (
-		<Container typecontainers="Container">
+		<Container type="auth">
 			{showAcessArea && <AcessContainer />}
 
 			{showRegisterArea && <RegisterContainer />}

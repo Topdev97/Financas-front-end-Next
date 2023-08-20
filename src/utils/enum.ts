@@ -15,12 +15,15 @@ export enum Routes {
 	GET_CATEGORY_BY_ID = "/api/categorY_by_id/",
 	UPDATE_CATEGORY = "/api/update_category/",
 	DELETE_CATEGORY = "/api/delete_category/",
+	SAVE_RELEASE = "/api/release/save/",
 }
 
 export enum Messages {
 	SUCCESS_IN_CREATING_USER = "Usuário cadastrado com sucesso",
 	SUCCESS_IN_CREATING_CATEGORY = "Categoria cadastrada com sucesso",
 	SUCESS_IN_UPDATE_CATEGORY = "Categoria atualizada com sucesso",
+	SUCESS_IN_CREATING_RELEASE = "Lançamento efetuado com sucesso",
+	SUCESS_IN_UPDATE_RELEASE = "Lançamento atualizado com sucesso",
 	SUCESS_IN_DELETING_CATEGORY = "Categoria deletada com sucesso",
 	ERROR_DELETING_CATEGORY = "Erro ao deletar a categoria",
 	EXISTING_USER = "Um usuário com esse email já existe em nosso banco",

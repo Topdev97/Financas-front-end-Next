@@ -4,7 +4,7 @@ import React from "react"
 import Link from "next/link"
 import Icon from "@mdi/react"
 import { Tooltip } from "antd"
-import { Container } from "../atoms"
+import { Container, Wrapper } from "../atoms"
 import {
 	mdiOrderBoolDescendingVariant,
 	mdiListBoxOutline,
@@ -28,8 +28,8 @@ const MenuSideBar = () => {
 	]
 
 	return (
-		<Container typecontainers="menuContainer">
-			<Container typecontainers="menuIconContainer">
+		<Container type="menu">
+			<Wrapper type="menuIcon">
 				{menu.map((m, index) => (
 					<Link href={m.path} className="active:scale-90 " key={index}>
 						<Tooltip title={m.name} placement="right">
@@ -37,15 +37,15 @@ const MenuSideBar = () => {
 						</Tooltip>
 					</Link>
 				))}
-			</Container>
+			</Wrapper>
 
-			<Container typecontainers="logoutContainer">
+			<Wrapper type="logout">
 				<Link href={"/"} className="active:scale-90">
 					<Tooltip title="Sair" placement="right">
 						<Icon path={mdiLogout} size={1} className="!text-white" />
 					</Tooltip>
 				</Link>
-			</Container>
+			</Wrapper>
 		</Container>
 	)
 }

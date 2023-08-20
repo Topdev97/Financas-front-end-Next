@@ -1,7 +1,6 @@
 import React from "react"
 import { Button, Input, Paragraph } from "../atoms"
 import { ISettingsConfig } from "@/utils/interface"
-import ApiResponse from "@/containers/ApiResponseContainer"
 
 const ChangePasswordArea = ({ config }: ISettingsConfig) => {
 	return (
@@ -40,10 +39,6 @@ const ChangePasswordArea = ({ config }: ISettingsConfig) => {
 					className={config.showButton ? "bg-light_green" : "bg-medium_gray"}>
 					Salvar
 				</Button>
-			</div>
-
-			<div className="mt-2">
-				<ApiResponse config={config.apiResponse} />
 			</div>
 		</div>
 	)

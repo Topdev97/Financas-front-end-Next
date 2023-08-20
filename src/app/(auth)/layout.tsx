@@ -1,14 +1,12 @@
 /* eslint-disable new-cap */
+"use client"
 import "../globals.css"
 import React from "react"
-import type { Metadata } from "next"
 import MenuSideBar from "@/components/molecules/MenuSideBar"
 import AcessProvider from "@/context/AuthProvider"
 import CategoryProvider from "@/context/CategoryProvider"
-
-export const metadata: Metadata = {
-	title: "Finanças - Home",
-}
+import ReleaseProvider from "@/context/ReleaseProvider"
+import AsyncProvider from "@/context/AsyncProvider"
 
 export default function RootLayout({
 	children,
@@ -17,10 +15,17 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className="flex  h-screen">
-				<MenuSideBar />
+			<body>
+				<div className="w-[4rem]">
+					<MenuSideBar />
+				</div>
+
 				<AcessProvider>
-					<CategoryProvider>{children}</CategoryProvider>
+					<AsyncProvider>
+						<ReleaseProvider>
+							<CategoryProvider>{children}</CategoryProvider>
+						</ReleaseProvider>
+					</AsyncProvider>
 				</AcessProvider>
 			</body>
 		</html>

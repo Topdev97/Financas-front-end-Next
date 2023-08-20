@@ -1,16 +1,17 @@
 import React from "react"
-import { Container, H1, Input, Button } from "../atoms"
+import { Container, H1, Input, Button, Wrapper } from "../atoms"
 import { ICreateCategoryConfig } from "@/utils/interface"
 import ApiResponse from "../../containers/ApiResponseContainer"
-import { useCategory } from "@/hooks"
+import { useAsync, useCategory } from "@/hooks"
 
 const CreateCategoryModal = ({ config }: ICreateCategoryConfig) => {
-	const { typeAction, category, destinedValue, apiResponse } = useCategory()
+	const { typeAction } = useCategory()
+	const { apiResponse } = useAsync()
 
 	return (
-		<Container typecontainers="backgroundContainer">
-			<Container typecontainers="modalContainer">
-				<Container typecontainers="actionsModalContainer">
+		<Container type="backgroundModal">
+			<Wrapper type="modal">
+				<Wrapper type="actionsModal">
 					<H1 color="dark_gray" size="md">
 						{typeAction} categoria
 					</H1>
@@ -20,7 +21,7 @@ const CreateCategoryModal = ({ config }: ICreateCategoryConfig) => {
 							typeinput="input"
 							size="sm"
 							placeholder="Nome:"
-							value={category}
+							value={config.category}
 							onChange={(event: { target: { value: string } }) =>
 								config.handleCategory(event.target.value)
 							}
@@ -31,7 +32,7 @@ const CreateCategoryModal = ({ config }: ICreateCategoryConfig) => {
 							size="sm"
 							placeholder="Valor:"
 							type="number"
-							value={destinedValue == 0 ? "" : destinedValue}
+							value={config.destinedValue == 0 ? "" : config.destinedValue}
 							onChange={(event: { target: { value: string } }) =>
 								config.handleDestinedValue(Number(event.target.value))
 							}
@@ -62,8 +63,8 @@ const CreateCategoryModal = ({ config }: ICreateCategoryConfig) => {
 							</Button>
 						</div>
 					</div>
-				</Container>
-			</Container>
+				</Wrapper>
+			</Wrapper>
 		</Container>
 	)
 }

@@ -24,6 +24,7 @@ export const Paragraph = w.p(`font-bold`, {
 			yellow: "text-yellow",
 			black: "text-black",
 			white: "text-white",
+			light_green: "text-light_green",
 		},
 		size: {
 			base: "text-[1rem]",

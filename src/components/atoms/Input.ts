@@ -17,6 +17,7 @@ export const Input = w.input(
 			size: {
 				xs: "w-[8rem] h-[2rem]",
 				sm: `w-[18rem] h-[2.5rem]`,
+				md: "w-[19rem] h-[2.5rem]",
 				xl: `w-[24rem] h-[3.75rem]`,
 			},
 		},

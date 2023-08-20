@@ -1,5 +1,5 @@
 import React from "react"
-import { Container, H1, Paragraph, Input, Button } from "../atoms"
+import { Container, H1, Paragraph, Input, Button, Wrapper } from "../atoms"
 import { IRegisterConfig } from "../../utils/interface"
 import Icon from "@mdi/react"
 import { mdiEyeOffOutline, mdiEyeOutline } from "@mdi/js"
@@ -7,8 +7,8 @@ import ApiResponse from "@/containers/ApiResponseContainer"
 
 const RegisterArea = ({ config }: IRegisterConfig) => {
 	return (
-		<Container typecontainers="loginContainer">
-			<Container typecontainers="userInputContainer">
+		<Container type="login">
+			<Wrapper type="userInput">
 				<div className="text-center">
 					<H1 className="!text-dark_green"> Cadastre-se </H1>
 
@@ -17,7 +17,7 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 					</Paragraph>
 				</div>
 
-				<Container typecontainers="inputContainer">
+				<Wrapper type="input">
 					<Input
 						typeinput="input"
 						type="text"
@@ -74,7 +74,7 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						className={config.showButton ? "bg-light_green" : "bg-medium_gray"}>
 						Cadastrar
 					</Button>
-				</Container>
+				</Wrapper>
 
 				<div className="-mt-8">
 					<button
@@ -83,7 +83,7 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						Voltar
 					</button>
 				</div>
-			</Container>
+			</Wrapper>
 		</Container>
 	)
 }

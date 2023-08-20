@@ -44,7 +44,7 @@ export interface IRegisterConfig {
 
 export interface IApiResponse {
 	statusCode: number
-	response: string
+	response?: string
 }
 
 export interface IApiResponseConfig {
@@ -92,11 +92,9 @@ export interface ISettingsProps {
 	activeEdit: boolean
 	showButton: boolean
 	showSaveSalaryButton: boolean
-	apiResponse: IApiResponse
 	password1: string
 	password2: string
 	salaryValue: string
-	salaryStatusCode: number
 	handleSalary: Function
 	handleEdit: Function
 	handlePassword1: Function
@@ -117,9 +115,9 @@ export interface ICategoryName {
 export interface ICategoriesProps {
 	itemsPerPage: number
 	page: number
-	response: string
+
 	selectedCategory: string
-	statusCode: number
+
 	headers: Array<string>
 	menu: Function
 	handleCategoryCreation: Function
@@ -134,7 +132,10 @@ export interface ICategoriesConfig {
 
 export interface ICreateCategoryProps {
 	showButton: boolean
-
+	category: string
+	destinedValue: number
+	setCategory: Function
+	setDestinedValeu: Function
 	closeCreateCategoryModal: Function
 	handleCategory: Function
 	handleDestinedValue: Function
@@ -164,38 +165,29 @@ export interface ResponseMap {
 export interface ICategoriesInfo {
 	id: string
 	name: string
+	destinedValue: number
 }
 
 export interface ICategoryProvider {
-	showLoading: boolean
 	typeAction: string
 	totalPages: number
-	response: string
-	statusCode: number
 	showCreateCategoryModal: boolean
 	idCategory: string
-	category: string
-	destinedValue: number
 	page: number
 	itemsPerPage: number
-	apiResponse: IApiResponse
 	categoryName: ICategoryName[]
 	allCategories: ICategoriesInfo[]
 	content: IAllCategories[]
 	showDeleteModal: boolean
 	setShowDeleteModal: Function
-	setShowLoading: Function
 	setTotalPages: Function
-	setResponse: Function
-	setStatusCode: Function
 	setTypeAction: Function
 	getAllCategories: Function
 	setShowCreateCategoryModal: Function
 	setIdCategory: Function
-	setCategory: Function
-	setDestinedValeu: Function
 	parseContent: Function
 	setPage: Function
+	getNameOfAllCategories: Function
 }
 
 interface IDeleteProps {
@@ -206,4 +198,81 @@ interface IDeleteProps {
 
 export interface IDeleteCategoryConfig {
 	config: IDeleteProps
+}
+
+interface IRelease {
+	name: string
+	date: string
+	value: string
+}
+
+interface IReleaseContent {
+	id: string
+	category: string
+	destinedValue: string
+	total: string
+	release: Array<IRelease>
+}
+
+interface IReleasesProps {
+	selectCurrentDate: any
+	isOpen: boolean
+	releaseId: string
+	currentDate: string
+	message: string
+	headers: Array<string>
+	content: Array<IReleaseContent>
+	headerReleasesTable: Array<string>
+	showReleasesTable: Function
+}
+
+export interface IReleasesConfig {
+	config: IReleasesProps
+}
+
+export interface MonthOptions {
+	value: number
+	label: string
+}
+
+export interface IMonths {
+	[key: number]: string
+}
+
+export interface IReleaseContext {
+	showCreateReleaseModal: boolean
+	typeAction: string
+	setTypeAction: Function
+	setShowCreateReleaseModal: Function
+}
+
+interface IReleaseProps {
+	showButton: boolean
+	formData: IPostingFormData
+	setShowButton: Function
+	closeCreateReleaseModal: Function
+	createOrUpdateRelease: Function
+	onSelect: Function
+	onChange: any
+	handleFieldChange: Function
+}
+
+export interface IReleaseConfig {
+	config: IReleaseProps
+}
+
+export interface IPostingFormData {
+	category: string
+	destinedValue?: number
+	date: string
+	name: string
+	value: number
+	idRelease?: string
+}
+
+export interface IAsyncProvider {
+	execute: Function
+	showLoading: boolean
+	apiResponse: IApiResponse
+	setShowLoading: Function
 }
