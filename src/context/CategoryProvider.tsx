@@ -42,15 +42,15 @@ const CategoryProvider = ({ children }: IProps) => {
 		setAllCategories(res?.data)
 	}
 
-	const getAllCategories = async (currentPage: number, value: number) => {
+	const getAllCategories = async (currentPage: number) => {
 		const res: any = await execute(
-			getAllCategoriesApi(userId, currentPage, value),
+			getAllCategoriesApi(userId, currentPage, itemsPerPage),
 			"",
 			Messages.THERE_ISNT_DATA,
 		)
 
 		if (res?.status == 200) {
-			parseContent(res?.data.categories)
+			parseContent(res?.data.items)
 			setTotalPages(res?.data.totalPages)
 			getNameOfAllCategories()
 		}

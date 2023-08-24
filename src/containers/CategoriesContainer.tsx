@@ -15,7 +15,6 @@ const CategoriesContainer = () => {
 		getAllCategories,
 		allCategories,
 		page,
-		itemsPerPage,
 		parseContent,
 		setPage,
 		setShowCreateCategoryModal,
@@ -29,7 +28,7 @@ const CategoriesContainer = () => {
 	const headers = ["Categoria", "Valor destinado"]
 
 	useEffect(() => {
-		getAllCategories(page, itemsPerPage)
+		getAllCategories(page)
 	}, [])
 
 	const menu = (id: string): MenuProps["items"] => {
@@ -56,12 +55,12 @@ const CategoriesContainer = () => {
 
 	const cleanFilter = () => {
 		setSelectedCategory("")
-		getAllCategories(page, itemsPerPage)
+		getAllCategories(page)
 	}
 
 	const getCategoryByPage = (value: number) => {
 		setPage(value)
-		getAllCategories(value, itemsPerPage)
+		getAllCategories(value)
 	}
 
 	const onSelect = async (name: string) => {
@@ -91,8 +90,6 @@ const CategoriesContainer = () => {
 
 	const categoryConfig = {
 		headers,
-		itemsPerPage,
-		page,
 		selectedCategory,
 		menu,
 		cleanFilter,

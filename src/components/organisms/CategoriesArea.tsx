@@ -9,7 +9,7 @@ import React from "react"
 import { useAsync, useCategory } from "@/hooks"
 
 const CategoriesArea = ({ config }: ICategoriesConfig) => {
-	const { content, totalPages, categoryName } = useCategory()
+	const { content, totalPages, categoryName, page } = useCategory()
 	const { apiResponse } = useAsync()
 
 	return (
@@ -101,9 +101,9 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 			<div className="float-right">
 				<Pagination
 					responsive
-					current={config.page}
+					current={page}
 					disabled={content.length == 0}
-					total={totalPages * config.itemsPerPage}
+					total={totalPages * 10}
 					showSizeChanger={totalPages >= 0 && false}
 					showTotal={(total) => `Total ${total} items`}
 					defaultCurrent={1}

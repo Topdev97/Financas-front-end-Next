@@ -4,16 +4,11 @@ import React, { useEffect } from "react"
 import CategoriesContainer from "@/containers/CategoriesContainer"
 import CreateCategoryContainer from "@/containers/CreateOrUpdateCategoryContainer"
 import { useAsync, useCategory } from "@/hooks"
-import DeleteContainer from "@/containers/DeleteContainer"
+import DeleteCategoryContainer from "@/containers/DeleteCategoryContainer"
 import Loading from "@/components/molecules/Loading"
-import type { Metadata } from "next"
 import { hasPermission } from "@/utils/permissions"
 import { useRouter } from "next/navigation"
 import { Permissions } from "@/utils/enum"
-
-export const metadata: Metadata = {
-	title: "Finanças - Categorias",
-}
 
 const Categories = () => {
 	const router = useRouter()
@@ -31,7 +26,7 @@ const Categories = () => {
 		<>
 			{showLoading && <Loading />}
 
-			{showDeleteModal && <DeleteContainer />}
+			{showDeleteModal && <DeleteCategoryContainer />}
 
 			{showCreateCategoryModal && <CreateCategoryContainer />}
 

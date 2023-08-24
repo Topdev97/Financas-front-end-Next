@@ -113,11 +113,7 @@ export interface ICategoryName {
 }
 
 export interface ICategoriesProps {
-	itemsPerPage: number
-	page: number
-
 	selectedCategory: string
-
 	headers: Array<string>
 	menu: Function
 	handleCategoryCreation: Function
@@ -194,6 +190,7 @@ interface IDeleteProps {
 	type: string
 	showButton: boolean
 	handleDelete: Function
+	closeDeleteModal: Function
 }
 
 export interface IDeleteCategoryConfig {
@@ -201,29 +198,28 @@ export interface IDeleteCategoryConfig {
 }
 
 interface IRelease {
+	idRelease: string
 	name: string
-	date: string
-	value: string
+	createdAt: string
+	value: number
+	locale: string
 }
 
-interface IReleaseContent {
-	id: string
+export interface IReleaseContent {
+	_id: string
 	category: string
-	destinedValue: string
-	total: string
+	destinedValue: number
 	release: Array<IRelease>
+	total: number
+	leftover: number
+	locale: string
 }
 
 interface IReleasesProps {
 	selectCurrentDate: any
-	isOpen: boolean
-	releaseId: string
-	currentDate: string
 	message: string
 	headers: Array<string>
-	content: Array<IReleaseContent>
-	headerReleasesTable: Array<string>
-	showReleasesTable: Function
+	openModal: Function
 }
 
 export interface IReleasesConfig {
@@ -242,19 +238,36 @@ export interface IMonths {
 export interface IReleaseContext {
 	showCreateReleaseModal: boolean
 	typeAction: string
+	content: Array<IReleaseContent>
+	totalPages: number
+	page: number
+	itemsPerPage: number
+	currentDate: string
+	showDeleteModal: boolean
+	idRelease: string
+	releaseCategory: string
+	idCategory: string
+	setIdCategory: Function
+	setIdRelease: Function
+	setShowDeleteModal: Function
 	setTypeAction: Function
 	setShowCreateReleaseModal: Function
+	setPage: Function
+	getAllReleases: Function
+	formatMonthYear: Function
+	setCurrentDate: Function
+	setReleaseCategory: Function
 }
 
 interface IReleaseProps {
 	showButton: boolean
 	formData: IPostingFormData
-	setShowButton: Function
 	closeCreateReleaseModal: Function
 	createOrUpdateRelease: Function
 	onSelect: Function
 	onChange: any
 	handleFieldChange: Function
+	cleanFilter: Function
 }
 
 export interface IReleaseConfig {
@@ -268,6 +281,8 @@ export interface IPostingFormData {
 	name: string
 	value: number
 	idRelease?: string
+	createdAt?: string
+	locale: string
 }
 
 export interface IAsyncProvider {
@@ -275,4 +290,21 @@ export interface IAsyncProvider {
 	showLoading: boolean
 	apiResponse: IApiResponse
 	setShowLoading: Function
+	setApiResponse: Function
+}
+
+interface IReleaseTableProps {
+	headerReleasesTable: Array<string>
+	isOpen: boolean
+	releaseIndex: number
+	setColorReleaseTable: Function
+	formatValue: Function
+	showReleasesTable: Function
+	parseDate: Function
+	setBackgroundColor: Function
+	menu: Function
+}
+
+export interface IReleaseTableConfig {
+	config: IReleaseTableProps
 }

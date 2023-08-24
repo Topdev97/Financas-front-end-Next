@@ -1,20 +1,14 @@
 import React from "react"
 import { Container, Button, Paragraph, Wrapper } from "../atoms"
-import { Tooltip, DatePicker } from "antd"
+import { Tooltip, DatePicker, Pagination } from "antd"
 import { IReleasesConfig } from "@/utils/interface"
-import {
-	mdiHelpBoxOutline,
-	mdiUnfoldMoreHorizontal,
-	mdiChevronUp,
-	mdiPencilBoxOutline,
-	mdiChevronDown,
-} from "@mdi/js"
+import { mdiHelpBoxOutline, mdiUnfoldMoreHorizontal } from "@mdi/js"
 import Icon from "@mdi/react"
 import { useRelease } from "@/hooks"
-import { Actions } from "@/utils/enum"
+import ReleaseTableContainer from "@/containers/ReleaseTableContainer"
 
 const ReleasesArea = ({ config }: IReleasesConfig) => {
-	const { setShowCreateReleaseModal, setTypeAction } = useRelease()
+	const { currentDate, page, content, totalPages } = useRelease()
 
 	return (
 		<Container type="container">
@@ -24,7 +18,7 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 						format={"MM/YYYY"}
 						onChange={config.selectCurrentDate}
 						picker="month"
-						placeholder={`Mês e ano selecionados: ${config.currentDate}`}
+						placeholder={`Mês e ano selecionados: ${currentDate}`}
 						style={{
 							width: "16rem",
 							height: "2.5rem",
@@ -46,7 +40,7 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 					size="md"
 					color="green"
 					onClick={() => {
-						setShowCreateReleaseModal(true), setTypeAction(Actions.CREATE)
+						config.openModal()
 					}}>
 					Criar lançamento
 				</Button>
@@ -65,63 +59,20 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 					</Paragraph>
 				</Wrapper>
 
-				{config.content.map((r, index) => (
-					<>
-						<Wrapper
-							key={index}
-							type="releaseContent"
-							className={index % 2 == 0 ? "bg-white_one" : "bg-transparent"}>
-							<Paragraph color="gray">{r.category}</Paragraph>
-							<Paragraph color="gray">{r.destinedValue}</Paragraph>
-							<Paragraph color="gray">{r.total}</Paragraph>
-
-							<button onClick={() => config.showReleasesTable(r.id)}>
-								<Icon
-									path={
-										config.releaseId != r.id ? mdiChevronDown : mdiChevronUp
-									}
-									size={1}
-								/>
-							</button>
-						</Wrapper>
-
-						{config.isOpen && config.releaseId == r.id && (
-							<div
-								className={
-									index % 2 == 0
-										? "bg-gradient-to-b from-white_one to-white"
-										: "bg-gradient-to-t from-white_one to-white"
-								}>
-								<div className="grid grid-cols-[30.5%_34%_32.5%_5%] py-3 px-8">
-									{config.headerReleasesTable.map((items, index) => (
-										<>
-											<Paragraph key={index} color="light_green">
-												{items}
-											</Paragraph>
-										</>
-									))}
-								</div>
-
-								{r.release.map((releases, index) => (
-									<div
-										className="grid grid-cols-[33%_34%_32%_5%] px-10 space-y-2"
-										key={index}>
-										<Paragraph color="gray">{releases.name}</Paragraph>
-										<Paragraph color="gray">{releases.value}</Paragraph>
-										<Paragraph color="gray">{releases.date}</Paragraph>
-										<button>
-											<Icon path={mdiPencilBoxOutline} size={1} />
-										</button>
-									</div>
-								))}
-
-								<hr className=" border-[0.01rem] w-full border-medium_gray mt-3" />
-							</div>
-						)}
-					</>
-				))}
+				<ReleaseTableContainer />
 			</Wrapper>
-			<h1>oi</h1>
+
+			<div className="float-right">
+				<Pagination
+					responsive
+					current={page}
+					disabled={content.length == 0}
+					total={totalPages * 10}
+					showSizeChanger={totalPages >= 0 && false}
+					showTotal={(total) => `Total ${total} items`}
+					defaultCurrent={1}
+				/>
+			</div>
 		</Container>
 	)
 }

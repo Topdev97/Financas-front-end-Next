@@ -1,11 +1,11 @@
 import React from "react"
 import { Container, Button, H1, Paragraph, Wrapper } from "../atoms"
 import ApiResponse from "@/containers/ApiResponseContainer"
-import { useCategory } from "@/hooks"
+import { useAsync } from "@/hooks"
 import { IDeleteCategoryConfig } from "@/utils/interface"
 
 const DeleteModal = ({ config }: IDeleteCategoryConfig) => {
-	const { apiResponse, setShowDeleteModal } = useCategory()
+	const { apiResponse } = useAsync()
 
 	return (
 		<Container type="backgroundModal">
@@ -24,7 +24,7 @@ const DeleteModal = ({ config }: IDeleteCategoryConfig) => {
 								borderColor="gray"
 								size="lg"
 								className="!text-dark_gray"
-								onClick={() => setShowDeleteModal(false)}>
+								onClick={() => config.closeDeleteModal()}>
 								Cancelar
 							</Button>
 

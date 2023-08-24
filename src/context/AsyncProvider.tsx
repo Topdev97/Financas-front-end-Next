@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
-import HandleError from "@/utils/handleError"
 import { IApiResponse, IAsyncProvider, IProps } from "@/utils/interface"
 import React, { createContext, useState } from "react"
 
@@ -24,25 +23,35 @@ const AsyncProvider = ({ children }: IProps) => {
 
 			const res: any = await fn
 
-			if (res?.status > 201) {
-				throw new HandleError(res?.data.message, res?.status)
-			}
-
-			setApiResponse({ statusCode: res.status, response: sucessMsg })
+			handleApiResponse(res?.status, sucessMsg, errorMsg)
 
 			return res
-		} catch (error: any) {
-			if (error instanceof HandleError) {
-				setApiResponse({ statusCode: error.statusCode, response: errorMsg })
-			}
 		} finally {
 			setShowLoading(false)
 		}
 	}
 
+	const handleApiResponse = (
+		status: number,
+		sucessMsg?: string,
+		errorMsg?: string,
+	) => {
+		if (status == 201 || status == 204) {
+			setApiResponse({ statusCode: status, response: sucessMsg })
+		} else if (status > 204) {
+			setApiResponse({ statusCode: status, response: errorMsg })
+		}
+	}
+
 	return (
 		<AsyncContext.Provider
-			value={{ execute, setShowLoading, showLoading, apiResponse }}>
+			value={{
+				execute,
+				setShowLoading,
+				setApiResponse,
+				showLoading,
+				apiResponse,
+			}}>
 			{children}
 		</AsyncContext.Provider>
 	)

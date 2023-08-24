@@ -4,7 +4,9 @@ import ApiResponse from "@/containers/ApiResponseContainer"
 import { useRelease, useCategory, useAsync } from "@/hooks"
 import { AutoComplete, DatePicker } from "antd"
 import { IReleaseConfig } from "@/utils/interface"
-import dayjs from "dayjs"
+import Icon from "@mdi/react"
+import { mdiCloseCircle } from "@mdi/js"
+import { Actions } from "@/utils/enum"
 
 const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 	const { typeAction } = useRelease()
@@ -19,8 +21,9 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 						{typeAction} categoria
 					</H1>
 
-					<div className="flex justify-between flex-wrap h-[7rem] mt-2">
+					<div className="flex justify-between flex-wrap h-[10rem] mt-2 relative">
 						<AutoComplete
+							className={typeAction == Actions.CREATE ? "block" : "hidden"}
 							value={config.formData.category}
 							bordered={false}
 							placeholder="Buscar por categoria"
@@ -40,11 +43,18 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 							}}
 						/>
 
+						<button
+							className={
+								config.formData.category != ""
+									? "block absolute top-2 left-[17rem] text-medium_gray"
+									: "hidden"
+							}
+							onClick={() => config.cleanFilter()}>
+							<Icon path={mdiCloseCircle} size={1} />
+						</button>
+
 						<DatePicker
 							format={"DD/MM/YYYY"}
-							value={
-								config.formData.date == "" ? null : dayjs(config.formData.date)
-							}
 							placeholder="Selecione uma data"
 							onChange={config.onChange}
 							style={{
@@ -57,23 +67,33 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 						/>
 
 						<Input
+							value={config.formData.name}
 							typeinput="input"
 							size="md"
 							placeholder="Lançamento:"
-							value={config.formData.name}
 							onChange={(event: { target: { value: string } }) =>
 								config.handleFieldChange("name", event.target.value)
 							}
 						/>
 
 						<Input
+							value={config.formData.value == 0 ? "" : config.formData.value}
 							typeinput="input"
 							size="sm"
 							placeholder="Valor:"
 							type="number"
-							value={config.formData.value == 0 ? "" : config.formData.value}
 							onChange={(event: { target: { value: string } }) =>
 								config.handleFieldChange("value", Number(event.target.value))
+							}
+						/>
+
+						<Input
+							value={config.formData.locale}
+							typeinput="input"
+							size="md"
+							placeholder="Localização:"
+							onChange={(event: { target: { value: string } }) =>
+								config.handleFieldChange("locale", event.target.value)
 							}
 						/>
 					</div>

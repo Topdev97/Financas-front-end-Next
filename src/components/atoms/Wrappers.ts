@@ -108,13 +108,27 @@ export const Wrapper = w.div("", {
             `,
 			releaseContent: `
                 grid
-                grid-cols-[33%_34%_31.5%_5%]
+                grid-cols-[24%_26%_26%_22.5%_5%]
                 h-12
                 px-9
                 w-full
                 items-center
                 font-[700]
                 text-black
+            `,
+
+			headersReleasesTable: `
+                grid 
+                grid-cols-[23%_26.2%_26%_22%_5%] 
+                py-3 
+                px-8
+            `,
+
+			contentReleaseTable: `
+                grid 
+                grid-cols-[24%_26%_26%_23%_5%] 
+                px-10 
+                space-y-2
             `,
 		},
 	},

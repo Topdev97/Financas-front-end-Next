@@ -7,20 +7,29 @@ import { useAuth, useCategory, useRelease, useAsync } from "@/hooks"
 import { DatePickerProps } from "antd"
 import { IPostingFormData } from "@/utils/interface"
 import { Actions, Messages } from "@/utils/enum"
-import { createReleaseApi } from "@/api/release"
+import { createReleaseApi, updateReleaseApi } from "@/api/release"
 import { v4 as uuidv4 } from "uuid"
 
 const CreateOrUpdateReleaseContainer = () => {
-	const { setShowCreateReleaseModal } = useRelease()
+	const {
+		setShowCreateReleaseModal,
+		getAllReleases,
+		currentDate,
+		typeAction,
+		idRelease,
+		idCategory,
+		releaseCategory,
+	} = useRelease()
 	const { getNameOfAllCategories, allCategories } = useCategory()
 	const { execute } = useAsync()
 	const { userId } = useAuth()
-	const [showButton, setShowButton] = useState(false)
+
 	const [formData, setFormData] = useState<IPostingFormData>({
 		category: "",
 		date: "",
 		name: "",
 		value: 0,
+		locale: "",
 	})
 
 	useEffect(() => {
@@ -29,6 +38,13 @@ const CreateOrUpdateReleaseContainer = () => {
 
 	const closeCreateReleaseModal = () => {
 		setShowCreateReleaseModal(false)
+	}
+
+	const cleanFilter = () => {
+		setFormData((prevData) => ({
+			...prevData,
+			["category"]: "",
+		}))
 	}
 
 	const createOrUpdateRelease = (action: string) => {
@@ -43,17 +59,49 @@ const CreateOrUpdateReleaseContainer = () => {
 
 		const idRelease = uuidv4()
 
-		execute(
-			createReleaseApi(formData, value[0].destinedValue, idRelease, userId),
+		const res: any = await execute(
+			createReleaseApi(
+				formData,
+				value[0].destinedValue,
+				idRelease,
+				userId,
+				currentDate,
+			),
 			Messages.SUCESS_IN_CREATING_RELEASE,
 			Messages.SERVER_ERROR,
 		)
 
-		setFormData({ category: "", date: "", name: "", value: 0 })
+		if (res?.status == 201) {
+			setFormData({ category: "", date: "", name: "", value: 0, locale: "" })
+			getAllReleases()
+		}
 	}
 
-	const updateRelease = () => {
-		console.log("atualizar")
+	const updateRelease = async () => {
+		const res: any = await execute(
+			updateReleaseApi(
+				formData,
+				releaseCategory,
+				idRelease,
+				idCategory,
+				userId,
+			),
+			Messages.SUCESS_IN_UPDATE_RELEASE,
+			Messages.SERVER_ERROR,
+		)
+
+		if (res?.status == 204) {
+			setFormData({ category: "", date: "", name: "", value: 0, locale: "" })
+			getAllReleases()
+		}
+	}
+
+	const onSelect = (data: string) => {
+		handleFieldChange("category", data)
+	}
+
+	const onChange: DatePickerProps["onChange"] = (date: any) => {
+		handleFieldChange("date", date != null ? new Date(date).toISOString() : "")
 	}
 
 	const handleFieldChange = useCallback((fieldName: string, value: string) => {
@@ -63,24 +111,32 @@ const CreateOrUpdateReleaseContainer = () => {
 		}))
 	}, [])
 
-	useMemo(() => {
-		setShowButton(
-			Object.values(formData).every((value) => value !== "" && value != 0),
-		)
+	const validateDataToCreate = () => {
+		return Object.values(formData).every((value) => value !== "" && value != 0)
+	}
+
+	const validateDataToUpdate = () => {
+		const validate = []
+
+		for (const key in formData) {
+			if (formData[key as keyof IPostingFormData] != "") {
+				validate.push(key)
+			}
+		}
+
+		return validate.length > 0 ? true : false
+	}
+
+	const showButton = useMemo(() => {
+		return typeAction == Actions.CREATE
+			? validateDataToCreate()
+			: validateDataToUpdate()
 	}, [formData])
-
-	const onSelect = (data: string) => {
-		handleFieldChange("category", data)
-	}
-
-	const onChange: DatePickerProps["onChange"] = (date: any) => {
-		handleFieldChange("date", new Date(date).toISOString())
-	}
 
 	const config = {
 		showButton,
 		formData,
-		setShowButton,
+		cleanFilter,
 		closeCreateReleaseModal,
 		createOrUpdateRelease,
 		onSelect,

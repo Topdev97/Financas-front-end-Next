@@ -16,6 +16,9 @@ export enum Routes {
 	UPDATE_CATEGORY = "/api/update_category/",
 	DELETE_CATEGORY = "/api/delete_category/",
 	SAVE_RELEASE = "/api/release/save/",
+	GET_RELEASES = "/api/release/",
+	DELETE_RELEASE = "/api/delete_release/",
+	UPDATE_RELEASE = "/api/update_release/",
 }
 
 export enum Messages {
@@ -33,7 +36,7 @@ export enum Messages {
 	UPDATED_PASSWORD = "Senha atualizada com sucesso",
 	EMAIL_NOT_FOUND = "Esse email não existe em nosso banco",
 	SUCCESS_IN_SAVING_SALARY = "Salário salvo com sucesso",
-	THERE_ISNT_DATA = "Não há categorias criadas no momento",
+	THERE_ISNT_DATA = "Não há dados pra essa busca no momento",
 }
 
 export enum Permissions {

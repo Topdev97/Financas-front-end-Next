@@ -19,6 +19,7 @@ const ApiResponse = ({ config }: IApiResponseConfig) => {
 		const response: ResponseMap = {
 			200: sucessResponse,
 			201: sucessResponse,
+			204: sucessResponse,
 			403: errorResponse,
 			404: errorResponse,
 			409: errorResponse,

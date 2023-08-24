@@ -20,13 +20,13 @@ export default function RootLayout({
 					<MenuSideBar />
 				</div>
 
-				<AcessProvider>
-					<AsyncProvider>
+				<AsyncProvider>
+					<AcessProvider>
 						<ReleaseProvider>
 							<CategoryProvider>{children}</CategoryProvider>
 						</ReleaseProvider>
-					</AsyncProvider>
-				</AcessProvider>
+					</AcessProvider>
+				</AsyncProvider>
 			</body>
 		</html>
 	)

@@ -1,64 +1,57 @@
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import ReleasesArea from "@/components/organisms/ReleasesArea"
+import { useRelease, useAuth, useAsync } from "@/hooks"
+import { Actions } from "@/utils/enum"
 
 const ReleasesContainer = () => {
-	const formatMonthYear = (date: Date): string => {
-		const month = date.getMonth() + 1
-		const year = date.getFullYear()
+	const {
+		getAllReleases,
+		page,
+		setCurrentDate,
+		formatMonthYear,
+		setShowCreateReleaseModal,
+		setTypeAction,
+	} = useRelease()
 
-		return `${month.toString().padStart(2, "0")}/${year}`
-	}
+	const { userId } = useAuth()
 
-	const [currentDate, setCurrentDate] = useState(formatMonthYear(new Date()))
-	const [releaseId, setReleaseId] = useState("")
-	const [isOpen, setIsOpen] = useState(false)
+	const { setApiResponse } = useAsync()
+
+	useEffect(() => {
+		getAllReleases(page)
+	}, [userId, getAllReleases])
 
 	const message =
 		"Você pode selecionar os lançamentos a partir de uma data específica"
 
-	const headers = ["Categoria", "Valor destinado", "Total de gastos"]
-
-	const headerReleasesTable = [
-		"Lançamento",
-		"Valor pagamento",
-		"Data pagamento",
-		"Ajustar",
+	const headers = [
+		"Categoria",
+		"Valor destinado",
+		"Total de gastos",
+		"Sobrando",
 	]
 
-	const content = [
-		{
-			id: "1",
-			category: "mercado",
-			destinedValue: "10",
-			total: "10",
-			release: [{ name: "tenda", date: "10/10/2023", value: "10" }],
-		},
-	]
-
-	const selectCurrentDate = (date: any) => {
-		setCurrentDate(formatMonthYear(date))
+	const openModal = () => {
+		setShowCreateReleaseModal(true)
+		setTypeAction(Actions.CREATE)
+		setApiResponse({
+			statusCode: 0,
+			response: "",
+		})
 	}
 
-	const showReleasesTable = (id: string) => {
-		if (releaseId != id) {
-			setIsOpen(true)
-			setReleaseId(id)
-		} else {
-			setIsOpen(false)
-			setReleaseId("")
-		}
+	const selectCurrentDate = (date: any) => {
+		const selectedDate = date ? date.$d : new Date()
+
+		setCurrentDate(formatMonthYear(selectedDate))
+		getAllReleases(page, selectedDate)
 	}
 
 	const config = {
 		selectCurrentDate,
-		showReleasesTable,
-		isOpen,
-		releaseId,
-		currentDate,
+		openModal,
 		message,
 		headers,
-		content,
-		headerReleasesTable,
 	}
 
 	return <ReleasesArea config={config} />
