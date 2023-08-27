@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { validateEqualPasswords } from "@/utils/validateEqualPasswords"
 import { Messages } from "@/utils/enum"
 import { generateNewPassword } from "@/api/users"
-import { useAsync, useAuth } from "@/hooks"
+import { useAsync, useAuth, useRelease } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
-import { registerSalary, takeSalary } from "@/api/salary"
+import { registerSalary } from "@/api/salary"
 import SalaryArea from "@/components/organisms/SalaryArea"
 import ChangePasswordArea from "@/components/organisms/ChangePasswordArea"
 import { Container } from "@/components/atoms"
@@ -17,13 +17,9 @@ const SettingsContainer = () => {
 	const [showSaveSalaryButton, setShowSaveSalaryButton] = useState(false)
 	const [password1, setPassword1] = useState("")
 	const [password2, setPassword2] = useState("")
-	const [salaryValue, setSalaryValue] = useState("")
 	const { userId } = useAuth()
-	const { execute, showLoading, apiResponse, setShowLoading } = useAsync()
-
-	useEffect(() => {
-		getSalary()
-	}, [])
+	const { execute, showLoading, apiResponse } = useAsync()
+	const { salaryValue, setSalaryValue, getSalary } = useRelease()
 
 	const handlePassword1 = (value: string) => {
 		setPassword1(value)
@@ -83,24 +79,12 @@ const SettingsContainer = () => {
 		handleApiResponse(res?.status)
 	}
 
-	const getSalary = async () => {
-		setShowLoading(true)
-
-		const res: any = await takeSalary(userId)
-
-		if (res?.data) setSalaryValue(res?.data.value)
-
-		setShowLoading(false)
-	}
-
 	const config = {
 		activeEdit,
 		showButton,
 		password1,
 		password2,
-		salaryValue,
 		showSaveSalaryButton,
-		setSalaryValue,
 		saveSalary,
 		handleEdit,
 		handlePassword1,

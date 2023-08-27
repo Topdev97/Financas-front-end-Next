@@ -2,6 +2,7 @@
 "use client"
 
 import { getAllReleasesApi } from "@/api/release"
+import { takeSalary } from "@/api/salary"
 import { useAsync, useAuth } from "@/hooks"
 import { Messages } from "@/utils/enum"
 import { IProps, IReleaseContent, IReleaseContext } from "@/utils/interface"
@@ -20,6 +21,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 	const [idRelease, setIdRelease] = useState("")
 	const [idCategory, setIdCategory] = useState("")
 	const [releaseCategory, setReleaseCategory] = useState("")
+	const [salaryValue, setSalaryValue] = useState("")
 
 	const { execute } = useAsync()
 	const { userId } = useAuth()
@@ -32,6 +34,12 @@ const ReleaseProvider = ({ children }: IProps) => {
 	}
 
 	const [currentDate, setCurrentDate] = useState(formatMonthYear(new Date()))
+
+	const getSalary = async () => {
+		const res: any = await execute(takeSalary(userId))
+
+		if (res?.data) setSalaryValue(res?.data.value)
+	}
 
 	const getAllReleases = async (currentPage: number, date?: Date) => {
 		const selectedDate = date ? formatMonthYear(date) : currentDate
@@ -99,6 +107,9 @@ const ReleaseProvider = ({ children }: IProps) => {
 				idRelease,
 				releaseCategory,
 				idCategory,
+				salaryValue,
+				getSalary,
+				setSalaryValue,
 				setIdCategory,
 				setReleaseCategory,
 				setIdRelease,

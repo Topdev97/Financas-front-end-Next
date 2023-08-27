@@ -9,6 +9,9 @@ import { setupClient } from "@/clients/AxiosClient"
 import { setBearerAuthorization, useClient } from "../clients/AxiosClient"
 import { isAuthenticated } from "@/utils/permissions"
 import { useAsync } from "@/hooks"
+import { useRouter } from "next/navigation"
+import notification from "antd/es/notification"
+import { FrownOutlined } from "@ant-design/icons"
 
 export const AuthContext = createContext({} as IAuth)
 
@@ -20,6 +23,7 @@ const AuthProvider = ({ children }: IProps) => {
 		useState(false)
 
 	const { execute } = useAsync()
+	const router = useRouter()
 
 	const clientConfig = () => {
 		setupClient(process.env.NEXT_PUBLIC_BACK)
@@ -29,7 +33,18 @@ const AuthProvider = ({ children }: IProps) => {
 	const getUserId = async () => {
 		const payload = await execute(getPayload())
 
-		setUserId(payload?.data.userId)
+		if (payload?.status == 200) {
+			setUserId(payload?.data.userId)
+		} else {
+			setTimeout(() => {
+				router.push("/")
+			}, 2000)
+			notification.open({
+				message: "Sessão encerrada",
+				description: "Sua sessão expirou, por favor, logue novamente",
+				icon: <FrownOutlined style={{ color: "#FF0F00" }} />,
+			})
+		}
 	}
 
 	useEffect(() => {

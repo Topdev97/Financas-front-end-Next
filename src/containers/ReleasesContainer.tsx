@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react"
 import ReleasesArea from "@/components/organisms/ReleasesArea"
 import { useRelease, useAuth, useAsync } from "@/hooks"
@@ -11,6 +12,10 @@ const ReleasesContainer = () => {
 		formatMonthYear,
 		setShowCreateReleaseModal,
 		setTypeAction,
+		setPage,
+		content,
+		salaryValue,
+		getSalary,
 	} = useRelease()
 
 	const { userId } = useAuth()
@@ -19,7 +24,8 @@ const ReleasesContainer = () => {
 
 	useEffect(() => {
 		getAllReleases(page)
-	}, [userId, getAllReleases])
+		getSalary()
+	}, [userId])
 
 	const message =
 		"Você pode selecionar os lançamentos a partir de uma data específica"
@@ -47,9 +53,41 @@ const ReleasesContainer = () => {
 		getAllReleases(page, selectedDate)
 	}
 
+	const getReleaseByPage = (value: number) => {
+		setPage(value)
+		getAllReleases(value)
+	}
+
+	const totalAmountAllocated = () => {
+		return content
+			.reduce(
+				(accumulator, currentValue) => accumulator + currentValue.destinedValue,
+				0,
+			)
+			.toLocaleString("pt-BR", {
+				style: "currency",
+				currency: "BRL",
+			})
+	}
+
+	const salaryMinusExpenses = () => {
+		const exprenses = content.reduce(
+			(accumulator, currentValue) => accumulator + currentValue.destinedValue,
+			0,
+		)
+
+		return (Number(salaryValue) - exprenses).toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		})
+	}
+
 	const config = {
 		selectCurrentDate,
 		openModal,
+		getReleaseByPage,
+		totalAmountAllocated,
+		salaryMinusExpenses,
 		message,
 		headers,
 	}

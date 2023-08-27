@@ -1,8 +1,10 @@
 import { ISettingsConfig } from "@/utils/interface"
 import React from "react"
 import { Button, Input, Paragraph } from "../atoms"
+import { useRelease } from "@/hooks"
 
 const SalaryArea = ({ config }: ISettingsConfig) => {
+	const { salaryValue } = useRelease()
 	return (
 		<>
 			<Paragraph size="lg" color="gray">
@@ -14,7 +16,7 @@ const SalaryArea = ({ config }: ISettingsConfig) => {
 					<div className="flex space-x-2">
 						<Paragraph color="black">Valor:</Paragraph>
 						<Paragraph color="black">
-							{Number(config.salaryValue).toLocaleString("pt-BR", {
+							{Number(salaryValue).toLocaleString("pt-BR", {
 								style: "currency",
 								currency: "BRL",
 							})}
@@ -31,7 +33,7 @@ const SalaryArea = ({ config }: ISettingsConfig) => {
 						size="xs"
 						type="number"
 						placeholder="Valor:"
-						value={config.salaryValue}
+						value={salaryValue}
 						onChange={(event: { target: { value: string } }) =>
 							config.handleSalary(event.target.value)
 						}

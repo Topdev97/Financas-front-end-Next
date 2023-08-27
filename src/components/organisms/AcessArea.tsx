@@ -13,8 +13,6 @@ import { ILoginConfig } from "../../utils/interface"
 import ApiResponse from "@/containers/ApiResponseContainer"
 
 const AcessArea = ({ config }: ILoginConfig) => {
-	console.log("co", config.apiResponse)
-
 	return (
 		<Container type="login">
 			<Wrapper type="userInput">

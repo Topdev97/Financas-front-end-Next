@@ -57,49 +57,55 @@ const ReleaseTable = ({ config }: IReleaseTableConfig) => {
 					<hr
 						className={
 							config.releaseIndex != index && config.isOpen
-								? " border-[0.01rem] w-full border-medium_gray opacity-50"
+								? " border-[0.01rem] w-full border-medium_gray opacity-50 over"
 								: "hidden"
 						}
 					/>
 
 					{config.isOpen && config.releaseIndex == index && (
 						<div className={config.setBackgroundColor(index)}>
-							<Wrapper type="headersReleasesTable">
-								{config.headerReleasesTable.map((items, index) => (
-									<>
-										<Paragraph key={index} color="light_green">
-											{items}
-										</Paragraph>
-									</>
-								))}
-							</Wrapper>
-
-							{r.release.map((releases, index) => (
-								<Wrapper type="contentReleaseTable" key={index}>
-									<Paragraph color="gray">{releases.name}</Paragraph>
-
-									<Paragraph color="gray">
-										{config.formatValue(releases.value)}
-									</Paragraph>
-
-									<Paragraph color="gray">
-										{config.parseDate(releases.createdAt)}
-									</Paragraph>
-
-									<Paragraph color="gray">{releases.locale}</Paragraph>
-
-									<Dropdown
-										menu={{
-											items: config.menu(releases.idRelease, r.category, r._id),
-										}}
-										placement="bottom"
-										arrow>
-										<button>
-											<Icon path={mdiPencilBoxOutline} size={1} />
-										</button>
-									</Dropdown>
+							<div className="md:overflow-y-auto">
+								<Wrapper type="headersReleasesTable">
+									{config.headerReleasesTable.map((items, index) => (
+										<>
+											<Paragraph key={index} color="light_green">
+												{items}
+											</Paragraph>
+										</>
+									))}
 								</Wrapper>
-							))}
+
+								{r.release.map((releases, index) => (
+									<Wrapper type="contentReleaseTable" key={index}>
+										<Paragraph color="gray">{releases.name}</Paragraph>
+
+										<Paragraph color="gray">
+											{config.formatValue(releases.value)}
+										</Paragraph>
+
+										<Paragraph color="gray">
+											{config.parseDate(releases.createdAt)}
+										</Paragraph>
+
+										<Paragraph color="gray">{releases.locale}</Paragraph>
+
+										<Dropdown
+											menu={{
+												items: config.menu(
+													releases.idRelease,
+													r.category,
+													r._id,
+												),
+											}}
+											placement="bottom"
+											arrow>
+											<button>
+												<Icon path={mdiPencilBoxOutline} size={1} />
+											</button>
+										</Dropdown>
+									</Wrapper>
+								))}
+							</div>
 
 							<hr className="border-[0.01rem] w-full border-medium_gray mt-3 opacity-50" />
 						</div>

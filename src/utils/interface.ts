@@ -94,13 +94,11 @@ export interface ISettingsProps {
 	showSaveSalaryButton: boolean
 	password1: string
 	password2: string
-	salaryValue: string
 	handleSalary: Function
 	handleEdit: Function
 	handlePassword1: Function
 	handlePassword2: Function
 	redefinePassword: Function
-	setSalaryValue: Function
 	saveSalary: Function
 }
 
@@ -220,6 +218,9 @@ interface IReleasesProps {
 	message: string
 	headers: Array<string>
 	openModal: Function
+	getReleaseByPage: Function
+	totalAmountAllocated: Function
+	salaryMinusExpenses: Function
 }
 
 export interface IReleasesConfig {
@@ -247,6 +248,8 @@ export interface IReleaseContext {
 	idRelease: string
 	releaseCategory: string
 	idCategory: string
+	salaryValue: string
+	setSalaryValue: Function
 	setIdCategory: Function
 	setIdRelease: Function
 	setShowDeleteModal: Function
@@ -257,6 +260,7 @@ export interface IReleaseContext {
 	formatMonthYear: Function
 	setCurrentDate: Function
 	setReleaseCategory: Function
+	getSalary: Function
 }
 
 interface IReleaseProps {

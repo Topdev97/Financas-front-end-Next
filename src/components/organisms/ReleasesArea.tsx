@@ -8,7 +8,7 @@ import { useRelease } from "@/hooks"
 import ReleaseTableContainer from "@/containers/ReleaseTableContainer"
 
 const ReleasesArea = ({ config }: IReleasesConfig) => {
-	const { currentDate, page, content, totalPages } = useRelease()
+	const { currentDate, page, content, totalPages, salaryValue } = useRelease()
 
 	return (
 		<Container type="container">
@@ -62,6 +62,22 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 				<ReleaseTableContainer />
 			</Wrapper>
 
+			<div className="float-left">
+				<Paragraph color="gray">
+					Salário:{" "}
+					{Number(salaryValue).toLocaleString("pt-BR", {
+						style: "currency",
+						currency: "BRL",
+					})}
+				</Paragraph>
+				<Paragraph color="gray">
+					Total de gastos: {config.totalAmountAllocated()}
+				</Paragraph>
+				<Paragraph color="gray">
+					Sobrando: {config.salaryMinusExpenses()}
+				</Paragraph>
+			</div>
+
 			<div className="float-right">
 				<Pagination
 					responsive
@@ -71,6 +87,7 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 					showSizeChanger={totalPages >= 0 && false}
 					showTotal={(total) => `Total ${total} items`}
 					defaultCurrent={1}
+					onChange={(page) => config.getReleaseByPage(page)}
 				/>
 			</div>
 		</Container>

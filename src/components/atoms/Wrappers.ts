@@ -109,6 +109,7 @@ export const Wrapper = w.div("", {
 			releaseContent: `
                 grid
                 grid-cols-[24%_26%_26%_22.5%_5%]
+                md:grid-cols-[24%_26%_26%_20.2%_5%]
                 h-12
                 px-9
                 w-full
@@ -119,14 +120,17 @@ export const Wrapper = w.div("", {
 
 			headersReleasesTable: `
                 grid 
-                grid-cols-[23%_26.2%_26%_22%_5%] 
+                grid-cols-[23%_26.2%_26%_22%_12%] 
+                md:grid-cols-[23%_26.2%_26%_20%_12%] 
                 py-3 
                 px-8
+                lg:pr-10
             `,
 
 			contentReleaseTable: `
                 grid 
-                grid-cols-[24%_26%_26%_23%_5%] 
+                grid-cols-[24%_26%_26%_23%_8%] 
+                md:grid-cols-[24%_26%_26%_20.8%_8%] 
                 px-10 
                 space-y-2
             `,
