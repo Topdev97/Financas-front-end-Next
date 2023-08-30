@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
 "use client"
 import "../globals.css"
-import React from "react"
+import React, { useEffect } from "react"
 import MenuSideBar from "@/components/molecules/MenuSideBar"
 import AcessProvider from "@/context/AuthProvider"
 import CategoryProvider from "@/context/CategoryProvider"
@@ -16,10 +16,12 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode
 }) {
-	if (!hasPermission([Permissions.USER])) {
-		removeItems()
-		location.href = "/"
-	}
+	useEffect(() => {
+		if (!hasPermission([Permissions.USER])) {
+			removeItems()
+			location.href = "/"
+		}
+	})
 
 	return (
 		<html lang="en">

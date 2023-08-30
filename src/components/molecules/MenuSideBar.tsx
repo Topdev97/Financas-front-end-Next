@@ -11,8 +11,12 @@ import {
 	mdiCogOutline,
 	mdiLogout,
 } from "@mdi/js"
+import { useRouter } from "next/navigation"
+import { removeItems } from "@/utils/permissions"
 
 const MenuSideBar = () => {
+	const router = useRouter()
+
 	const menu = [
 		{ name: "Lançamentos", path: "/lancamentos", icon: mdiListBoxOutline },
 		{
@@ -40,11 +44,15 @@ const MenuSideBar = () => {
 			</Wrapper>
 
 			<Wrapper type="logout">
-				<Link href={"/"} className="active:scale-90">
+				<button
+					onClick={() => {
+						router.push("/"), removeItems()
+					}}
+					className="active:scale-90">
 					<Tooltip title="Sair" placement="right">
 						<Icon path={mdiLogout} size={1} className="!text-white" />
 					</Tooltip>
-				</Link>
+				</button>
 			</Wrapper>
 		</Container>
 	)
