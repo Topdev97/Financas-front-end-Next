@@ -1,8 +1,11 @@
 import React from "react"
 import { Button, Input, Paragraph } from "../atoms"
 import { ISettingsConfig } from "@/utils/interface"
+import { useValidation } from "@/hooks"
 
 const ChangePasswordArea = ({ config }: ISettingsConfig) => {
+	const { handleFieldChange } = useValidation()
+
 	return (
 		<div className="mt-10">
 			<Paragraph size="lg" color="gray">
@@ -14,20 +17,28 @@ const ChangePasswordArea = ({ config }: ISettingsConfig) => {
 					typeinput="input"
 					size="sm"
 					type="text"
-					value={config.password1}
+					value={config.formData.password1}
 					placeholder="Nova senha:"
 					onChange={(event: { target: { value: string } }) =>
-						config.handlePassword1(event.target.value.trim())
+						handleFieldChange(
+							"password1",
+							event.target.value.trim(),
+							config.setFormData,
+						)
 					}
 				/>
 				<Input
 					typeinput="input"
 					size="sm"
 					type="text"
-					value={config.password2}
+					value={config.formData.password2}
 					placeholder="Repetir nova senha:"
 					onChange={(event: { target: { value: string } }) =>
-						config.handlePassword2(event.target.value.trim())
+						handleFieldChange(
+							"password2",
+							event.target.value.trim(),
+							config.setFormData,
+						)
 					}
 				/>
 

@@ -13,6 +13,7 @@ export const ReleaseContext = createContext({} as IReleaseContext)
 const ReleaseProvider = ({ children }: IProps) => {
 	const [showCreateReleaseModal, setShowCreateReleaseModal] = useState(false)
 	const [showDeleteModal, setShowDeleteModal] = useState(false)
+	const [showInfoModal, setShowInfoModal] = useState(false)
 	const [content, setContent] = useState<IReleaseContent[]>([])
 	const [typeAction, setTypeAction] = useState("")
 	const [totalPages, setTotalPages] = useState(0)
@@ -39,6 +40,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 		const res: any = await execute(takeSalary(userId))
 
 		if (res?.data) setSalaryValue(res?.data.value)
+		else setShowInfoModal(true)
 	}
 
 	const getAllReleases = async (currentPage: number, date?: Date) => {
@@ -57,6 +59,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 		if (response?.status == 200) {
 			parseContent(response?.data.items)
 			setTotalPages(response?.data.totalPages)
+			getSalary()
 		} else {
 			setContent([])
 			setTotalPages(0)
@@ -108,6 +111,8 @@ const ReleaseProvider = ({ children }: IProps) => {
 				releaseCategory,
 				idCategory,
 				salaryValue,
+				showInfoModal,
+				setShowInfoModal,
 				getSalary,
 				setSalaryValue,
 				setIdCategory,

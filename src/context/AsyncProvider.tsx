@@ -13,6 +13,13 @@ const AsyncProvider = ({ children }: IProps) => {
 		response: "",
 	})
 
+	const clearApiResponse = () => {
+		setApiResponse({
+			statusCode: 0,
+			response: "",
+		})
+	}
+
 	const execute = async (
 		fn: Function,
 		sucessMsg?: string,
@@ -46,11 +53,12 @@ const AsyncProvider = ({ children }: IProps) => {
 	return (
 		<AsyncContext.Provider
 			value={{
+				showLoading,
+				apiResponse,
 				execute,
 				setShowLoading,
 				setApiResponse,
-				showLoading,
-				apiResponse,
+				clearApiResponse,
 			}}>
 			{children}
 		</AsyncContext.Provider>

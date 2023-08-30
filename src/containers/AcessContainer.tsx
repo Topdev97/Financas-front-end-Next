@@ -1,29 +1,27 @@
-import React, { useState } from "react"
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useMemo, useState } from "react"
 import AcessArea from "../components/organisms/AcessArea"
-import Loading from "../components/molecules/Loading"
 import { Messages } from "@/utils/enum"
 import { signin } from "@/api/signin"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/hooks"
-import { validateEmail } from "@/utils/validateEmail"
+import { useAsync, useAuth, useValidation } from "@/hooks"
 
 const AcessContainer = () => {
-	const [showLoading, setShowLoading] = useState(false)
-	const [showButton, setShowButton] = useState(false)
-	const [email, setEmail] = useState("")
-	const [password, setPassword] = useState("")
 	const [eyesIcon, setEyesIcon] = useState(false)
 	const [type, setType] = useState("password")
-	const [response, setResponse] = useState("")
-	const [statusCode, setStatusCode] = useState(0)
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+	})
+
+	const { validateEmail } = useValidation()
+
 	const router = useRouter()
+
 	const { setShowRegisterArea, setAcessArea, setShowRedefinePasswordArea } =
 		useAuth()
 
-	const apiResponse = {
-		statusCode: statusCode,
-		response: response,
-	}
+	const { execute, clearApiResponse } = useAsync()
 
 	const showPassword = () => {
 		setEyesIcon(!eyesIcon)
@@ -35,84 +33,50 @@ const AcessContainer = () => {
 		}
 	}
 
-	const handleEmail = (value: string) => {
-		setEmail(value)
-
-		if (password && validateEmail(value)) {
-			setShowButton(true)
-		} else {
-			setShowButton(false)
-		}
-	}
-
-	const handlePassword = (value: string) => {
-		setPassword(value)
-
-		if (value != "" && validateEmail(email)) {
-			setShowButton(true)
-		} else {
-			setShowButton(false)
-		}
-	}
-
-	const handleApiResponse = (status: number) => {
-		setStatusCode(status)
-
-		if (status == 200) {
-			router.push("/lancamentos")
-		} else if (status == 403) {
-			setResponse(Messages.INCORRECT_EMAIL_OR_PASSWORD)
-		} else {
-			setResponse(Messages.SERVER_ERROR)
-		}
-	}
+	const showButton = useMemo(() => {
+		return Object.values(formData).every(
+			(value) => value != "" && validateEmail(formData.email),
+		)
+	}, [formData])
 
 	const login = async (user: any) => {
-		setShowLoading(true)
-		setResponse("")
+		const res: any = await execute(
+			signin(user),
+			"",
+			Messages.INCORRECT_EMAIL_OR_PASSWORD,
+		)
 
-		const res: any = await signin(user)
-
-		if (res.res?.status) {
-			handleApiResponse(res.res?.status)
-		} else {
-			handleApiResponse(res?.status)
-		}
-
-		setShowLoading(false)
+		if (res?.status == 200) router.push("/lancamentos")
 	}
 
 	const openRegisterArea = () => {
 		setShowRegisterArea(true)
 		setAcessArea(false)
 		setShowRedefinePasswordArea(false)
+		clearApiResponse()
 	}
 
 	const openRedefinePasswordArea = () => {
 		setShowRegisterArea(false)
 		setAcessArea(false)
 		setShowRedefinePasswordArea(true)
+		clearApiResponse()
 	}
 
 	const config = {
 		eyesIcon,
 		type,
 		showButton,
-		email,
-		password,
-		apiResponse,
+		formData,
 		showPassword,
-		handleEmail,
-		handlePassword,
 		login,
 		openRegisterArea,
 		openRedefinePasswordArea,
+		setFormData,
 	}
 
 	return (
 		<>
-			{showLoading && <Loading />}
-
 			<AcessArea config={config} />
 		</>
 	)

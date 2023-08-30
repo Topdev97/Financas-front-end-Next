@@ -7,12 +7,20 @@ import AcessProvider from "@/context/AuthProvider"
 import CategoryProvider from "@/context/CategoryProvider"
 import ReleaseProvider from "@/context/ReleaseProvider"
 import AsyncProvider from "@/context/AsyncProvider"
+import ValidationProvider from "@/context/ValidationProvider"
+import { hasPermission, removeItems } from "@/utils/permissions"
+import { Permissions } from "@/utils/enum"
 
 export default function RootLayout({
 	children,
 }: {
 	children: React.ReactNode
 }) {
+	if (!hasPermission([Permissions.USER])) {
+		removeItems()
+		location.href = "/"
+	}
+
 	return (
 		<html lang="en">
 			<body>
@@ -20,13 +28,15 @@ export default function RootLayout({
 					<MenuSideBar />
 				</div>
 
-				<AsyncProvider>
-					<AcessProvider>
-						<ReleaseProvider>
-							<CategoryProvider>{children}</CategoryProvider>
-						</ReleaseProvider>
-					</AcessProvider>
-				</AsyncProvider>
+				<ValidationProvider>
+					<AsyncProvider>
+						<AcessProvider>
+							<ReleaseProvider>
+								<CategoryProvider>{children}</CategoryProvider>
+							</ReleaseProvider>
+						</AcessProvider>
+					</AsyncProvider>
+				</ValidationProvider>
 			</body>
 		</html>
 	)

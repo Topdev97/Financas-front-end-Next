@@ -8,7 +8,7 @@ export const getNewToken = async (userId: string) => {
 	try {
 		const config: any = {
 			method: "POST",
-			url: `${process.env.VUE_APP_BACK}${Routes.REFRESH_TOKEN}`,
+			url: `${process.env.NEXT_PUBLIC_BACK}${Routes.REFRESH_TOKEN}`,
 			headers: { Authorization: `Bearer ${getRefreshToken()}` },
 			data: { userId },
 		}

@@ -16,7 +16,7 @@ const ReleaseTableContainer = () => {
 		setIdCategory,
 	} = useRelease()
 
-	const { setApiResponse } = useAsync()
+	const { clearApiResponse } = useAsync()
 
 	const headerReleasesTable = [
 		"Lançamento",
@@ -60,10 +60,7 @@ const ReleaseTableContainer = () => {
 		setIdRelease(idRelease)
 		setReleaseCategory(category)
 		setShowDeleteModal(true)
-		setApiResponse({
-			statusCode: 0,
-			response: "",
-		})
+		clearApiResponse()
 	}
 
 	const handleReleaseUpdate = (
@@ -76,11 +73,9 @@ const ReleaseTableContainer = () => {
 		setReleaseCategory(category)
 		setShowCreateReleaseModal(true)
 		setTypeAction(Actions.UPDATE)
-		setApiResponse({
-			statusCode: 0,
-			response: "",
-		})
+		clearApiResponse()
 	}
+
 	const showReleasesTable = (index: number) => {
 		if (releaseIndex != index) {
 			setIsOpen(true)

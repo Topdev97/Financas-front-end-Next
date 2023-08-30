@@ -1,9 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import React, { useState, useEffect, useCallback, useMemo } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import CreateOrUpdateReleaseModal from "@/components/organisms/ReleaseModal"
-import { useAuth, useCategory, useRelease, useAsync } from "@/hooks"
+import {
+	useAuth,
+	useCategory,
+	useRelease,
+	useAsync,
+	useValidation,
+} from "@/hooks"
 import { DatePickerProps } from "antd"
 import { IPostingFormData } from "@/utils/interface"
 import { Actions, Messages } from "@/utils/enum"
@@ -22,6 +28,7 @@ const CreateOrUpdateReleaseContainer = () => {
 	} = useRelease()
 	const { getNameOfAllCategories, allCategories } = useCategory()
 	const { execute } = useAsync()
+	const { handleFieldChange } = useValidation()
 	const { userId } = useAuth()
 
 	const [formData, setFormData] = useState<IPostingFormData>({
@@ -97,19 +104,16 @@ const CreateOrUpdateReleaseContainer = () => {
 	}
 
 	const onSelect = (data: string) => {
-		handleFieldChange("category", data)
+		handleFieldChange("category", data, setFormData)
 	}
 
 	const onChange: DatePickerProps["onChange"] = (date: any) => {
-		handleFieldChange("date", date != null ? new Date(date).toISOString() : "")
+		handleFieldChange(
+			"date",
+			date != null ? new Date(date).toISOString() : "",
+			setFormData,
+		)
 	}
-
-	const handleFieldChange = useCallback((fieldName: string, value: string) => {
-		setFormData((prevData) => ({
-			...prevData,
-			[fieldName]: value,
-		}))
-	}, [])
 
 	const validateDataToCreate = () => {
 		return Object.values(formData).every((value) => value !== "" && value != 0)
@@ -141,7 +145,7 @@ const CreateOrUpdateReleaseContainer = () => {
 		createOrUpdateRelease,
 		onSelect,
 		onChange,
-		handleFieldChange,
+		setFormData,
 	}
 
 	return <CreateOrUpdateReleaseModal config={config} />

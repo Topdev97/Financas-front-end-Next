@@ -15,16 +15,14 @@ const ReleasesContainer = () => {
 		setPage,
 		content,
 		salaryValue,
-		getSalary,
 	} = useRelease()
 
 	const { userId } = useAuth()
 
-	const { setApiResponse } = useAsync()
+	const { clearApiResponse } = useAsync()
 
 	useEffect(() => {
 		getAllReleases(page)
-		getSalary()
 	}, [userId])
 
 	const message =
@@ -40,10 +38,7 @@ const ReleasesContainer = () => {
 	const openModal = () => {
 		setShowCreateReleaseModal(true)
 		setTypeAction(Actions.CREATE)
-		setApiResponse({
-			statusCode: 0,
-			response: "",
-		})
+		clearApiResponse()
 	}
 
 	const selectCurrentDate = (date: any) => {

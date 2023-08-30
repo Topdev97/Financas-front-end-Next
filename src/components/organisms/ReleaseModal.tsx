@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Container, H1, Input, Wrapper } from "../atoms"
 import ApiResponse from "@/containers/ApiResponseContainer"
-import { useRelease, useCategory, useAsync } from "@/hooks"
+import { useRelease, useCategory, useAsync, useValidation } from "@/hooks"
 import { AutoComplete, DatePicker } from "antd"
 import { IReleaseConfig } from "@/utils/interface"
 import Icon from "@mdi/react"
@@ -12,6 +12,7 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 	const { typeAction } = useRelease()
 	const { categoryName } = useCategory()
 	const { apiResponse } = useAsync()
+	const { handleFieldChange } = useValidation()
 
 	return (
 		<Container type="backgroundModal">
@@ -72,7 +73,11 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 							size="md"
 							placeholder="Lançamento:"
 							onChange={(event: { target: { value: string } }) =>
-								config.handleFieldChange("name", event.target.value)
+								handleFieldChange(
+									"name",
+									event.target.value,
+									config.setFormData,
+								)
 							}
 						/>
 
@@ -83,7 +88,11 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 							placeholder="Valor:"
 							type="number"
 							onChange={(event: { target: { value: string } }) =>
-								config.handleFieldChange("value", Number(event.target.value))
+								handleFieldChange(
+									"value",
+									Number(event.target.value),
+									config.setFormData,
+								)
 							}
 						/>
 
@@ -93,7 +102,11 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 							size="md"
 							placeholder="Localização:"
 							onChange={(event: { target: { value: string } }) =>
-								config.handleFieldChange("locale", event.target.value)
+								handleFieldChange(
+									"locale",
+									event.target.value,
+									config.setFormData,
+								)
 							}
 						/>
 					</div>

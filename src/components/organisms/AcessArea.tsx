@@ -11,8 +11,12 @@ import {
 } from "@mdi/js"
 import { ILoginConfig } from "../../utils/interface"
 import ApiResponse from "@/containers/ApiResponseContainer"
+import { useAsync, useValidation } from "@/hooks"
 
 const AcessArea = ({ config }: ILoginConfig) => {
+	const { apiResponse } = useAsync()
+	const { handleFieldChange } = useValidation()
+
 	return (
 		<Container type="login">
 			<Wrapper type="userInput">
@@ -29,9 +33,9 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						typeinput="loginInput"
 						type="email"
 						size="xl"
-						value={config.email}
+						value={config.formData.email}
 						onChange={(event: { target: { value: string } }) => {
-							config.handleEmail(event.target.value)
+							handleFieldChange("email", event.target.value, config.setFormData)
 						}}
 					/>
 
@@ -46,9 +50,13 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						type={config.type}
 						id="pass"
 						size="xl"
-						value={config.password}
+						value={config.formData.password}
 						onChange={(event: { target: { value: string } }) => {
-							config.handlePassword(event.target.value)
+							handleFieldChange(
+								"password",
+								event.target.value,
+								config.setFormData,
+							)
 						}}
 					/>
 
@@ -68,7 +76,7 @@ const AcessArea = ({ config }: ILoginConfig) => {
 					</button>
 
 					<div className="absolute top-[12.5rem]">
-						<ApiResponse config={config.apiResponse} />
+						<ApiResponse config={apiResponse} />
 					</div>
 
 					<Button
@@ -77,8 +85,8 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						className={config.showButton ? "bg-light_green" : "bg-medium_gray"}
 						onClick={() =>
 							config.login({
-								email: config.email.trim(),
-								password: config.password.trim(),
+								email: config.formData.email.trim(),
+								password: config.formData.password.trim(),
 							})
 						}>
 						Entrar

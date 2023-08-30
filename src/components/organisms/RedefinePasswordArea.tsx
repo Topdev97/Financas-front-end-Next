@@ -2,8 +2,12 @@ import React from "react"
 import { Button, Container, H1, Input, Paragraph, Wrapper } from "../atoms"
 import { IRedefinePasswordConfig } from "@/utils/interface"
 import ApiResponse from "@/containers/ApiResponseContainer"
+import { useAsync, useValidation } from "@/hooks"
 
 const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
+	const { apiResponse } = useAsync()
+	const { handleFieldChange } = useValidation()
+
 	return (
 		<Container type="login">
 			<Wrapper type="userInput">
@@ -21,9 +25,13 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 						type="email"
 						placeholder="Email:"
 						size="xl"
-						value={config.email}
+						value={config.formData.email}
 						onChange={(event: { target: { value: string } }) =>
-							config.handleEmail(event.target.value.trim())
+							handleFieldChange(
+								"email",
+								event.target.value.trim(),
+								config.setFormData,
+							)
 						}
 					/>
 
@@ -32,9 +40,13 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 						type="text"
 						placeholder="Senha:"
 						size="xl"
-						value={config.password1}
+						value={config.formData.password1}
 						onChange={(event: { target: { value: string } }) =>
-							config.handlePassword1(event.target.value.trim())
+							handleFieldChange(
+								"password1",
+								event.target.value.trim(),
+								config.setFormData,
+							)
 						}
 					/>
 
@@ -43,13 +55,17 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 						type="text"
 						placeholder="Senha:"
 						size="xl"
-						value={config.password2}
+						value={config.formData.password2}
 						onChange={(event: { target: { value: string } }) =>
-							config.handlePassword2(event.target.value.trim())
+							handleFieldChange(
+								"password2",
+								event.target.value.trim(),
+								config.setFormData,
+							)
 						}
 					/>
 
-					<ApiResponse config={config.apiResponse} />
+					<ApiResponse config={apiResponse} />
 
 					<Button
 						size="xl"

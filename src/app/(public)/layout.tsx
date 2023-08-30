@@ -2,6 +2,8 @@
 import "../globals.css"
 import React from "react"
 import AcessProvider from "@/context/AuthProvider"
+import AsyncProvider from "@/context/AsyncProvider"
+import ValidationProvider from "@/context/ValidationProvider"
 
 export default function RootLayout({
 	children,
@@ -11,7 +13,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<AcessProvider>{children}</AcessProvider>
+				<ValidationProvider>
+					<AsyncProvider>
+						<AcessProvider>{children}</AcessProvider>
+					</AsyncProvider>
+				</ValidationProvider>
 			</body>
 		</html>
 	)

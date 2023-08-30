@@ -19,22 +19,9 @@ export const signin = async (user: any) => {
 			return res
 		}
 
-		const token = res.data.token
-		const refreshToken = res.data.refreshToken
+		await setTokenAndPermission(res)
 
-		setBearerAuthorization(useClient(), token)
-
-		const payload: any = await getPayload()
-
-		const userId = payload.data.userId
-
-		const roles = payload.data.permission
-
-		setIsAuthenticated(token, refreshToken)
-
-		setPermission(roles)
-
-		return { res, userId }
+		return res
 	} catch (error) {
 		return error
 	}
@@ -46,6 +33,21 @@ export const getPayload = async () => {
 
 		return res
 	} catch (error: any) {
-		return error.response.status
+		return error
 	}
+}
+
+const setTokenAndPermission = async (res: any) => {
+	const token = res.data.token
+	const refreshToken = res.data.refreshToken
+
+	setBearerAuthorization(useClient(), token)
+
+	const payload: any = await getPayload()
+
+	const roles = payload.data.permission
+
+	setIsAuthenticated(token, refreshToken)
+
+	setPermission(roles)
 }

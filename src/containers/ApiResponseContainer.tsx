@@ -30,8 +30,6 @@ const ApiResponse = ({ config }: IApiResponseConfig) => {
 	}
 
 	const ApiResponseComponent = ({ status }: { status: number }) => {
-		console.log("ss", status)
-
 		return <>{setResponse(status)}</>
 	}
 

@@ -7,6 +7,8 @@ export interface IUsers {
 }
 
 export interface IAuth {
+	clientConfig: Function
+	getUserId: Function
 	setUserId: Function
 	setShowRegisterArea: Function
 	setAcessArea: Function
@@ -24,18 +26,12 @@ export interface IProps {
 export interface IRegisterProps {
 	createUsers: Function
 	closeRegisterArea: Function
-	handleName: Function
-	handleEmail: Function
-	handlePassword: Function
 	showPassword: Function
+	setFormData: Function
+	formData: IUsers
 	showButton: boolean
-	name: string
-	email: string
-	password: string
-	statusCode: number
 	eyesIcon: boolean
 	type: string
-	apiResponse: IApiResponse
 }
 
 export interface IRegisterConfig {
@@ -53,17 +49,17 @@ export interface IApiResponseConfig {
 
 export interface ILoginProps {
 	showPassword: Function
-	handleEmail: Function
-	handlePassword: Function
+	setFormData: Function
 	openRegisterArea: Function
 	openRedefinePasswordArea: Function
 	login: Function
 	eyesIcon: boolean
 	showButton: boolean
-	email: string
-	password: string
 	type: string
-	apiResponse: IApiResponse
+	formData: {
+		email: string
+		password: string
+	}
 }
 
 export interface ILoginConfig {
@@ -71,17 +67,15 @@ export interface ILoginConfig {
 }
 
 export interface IRedefinePasswordProps {
-	handleEmail: Function
-	handlePassword1: Function
-	handlePassword2: Function
+	formData: {
+		email: string
+		password1: string
+		password2: string
+	}
+	setFormData: Function
 	closeRedefinePasswordArea: Function
 	redefinePassword: Function
 	showButton: boolean
-	email: string
-	password1: string
-	password2: string
-	apiResponse: IApiResponse
-	statusCode: number
 }
 
 export interface IRedefinePasswordConfig {
@@ -91,13 +85,14 @@ export interface IRedefinePasswordConfig {
 export interface ISettingsProps {
 	activeEdit: boolean
 	showButton: boolean
+	formData: {
+		password1: string
+		password2: string
+	}
 	showSaveSalaryButton: boolean
-	password1: string
-	password2: string
+	setFormData: Function
 	handleSalary: Function
 	handleEdit: Function
-	handlePassword1: Function
-	handlePassword2: Function
 	redefinePassword: Function
 	saveSalary: Function
 }
@@ -198,7 +193,7 @@ export interface IDeleteCategoryConfig {
 interface IRelease {
 	idRelease: string
 	name: string
-	createdAt: string
+	date: string
 	value: number
 	locale: string
 }
@@ -238,6 +233,7 @@ export interface IMonths {
 
 export interface IReleaseContext {
 	showCreateReleaseModal: boolean
+	showInfoModal: boolean
 	typeAction: string
 	content: Array<IReleaseContent>
 	totalPages: number
@@ -249,6 +245,7 @@ export interface IReleaseContext {
 	releaseCategory: string
 	idCategory: string
 	salaryValue: string
+	setShowInfoModal: Function
 	setSalaryValue: Function
 	setIdCategory: Function
 	setIdRelease: Function
@@ -266,11 +263,11 @@ export interface IReleaseContext {
 interface IReleaseProps {
 	showButton: boolean
 	formData: IPostingFormData
+	setFormData: Function
 	closeCreateReleaseModal: Function
 	createOrUpdateRelease: Function
 	onSelect: Function
 	onChange: any
-	handleFieldChange: Function
 	cleanFilter: Function
 }
 
@@ -295,6 +292,7 @@ export interface IAsyncProvider {
 	apiResponse: IApiResponse
 	setShowLoading: Function
 	setApiResponse: Function
+	clearApiResponse: Function
 }
 
 interface IReleaseTableProps {
@@ -311,4 +309,10 @@ interface IReleaseTableProps {
 
 export interface IReleaseTableConfig {
 	config: IReleaseTableProps
+}
+
+export interface IValidationContext {
+	validateEmail: Function
+	validateEqualPasswords: Function
+	handleFieldChange: Function
 }

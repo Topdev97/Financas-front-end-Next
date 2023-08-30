@@ -4,8 +4,12 @@ import { IRegisterConfig } from "../../utils/interface"
 import Icon from "@mdi/react"
 import { mdiEyeOffOutline, mdiEyeOutline } from "@mdi/js"
 import ApiResponse from "@/containers/ApiResponseContainer"
+import { useAsync, useValidation } from "@/hooks"
 
 const RegisterArea = ({ config }: IRegisterConfig) => {
+	const { apiResponse } = useAsync()
+	const { handleFieldChange } = useValidation()
+
 	return (
 		<Container type="login">
 			<Wrapper type="userInput">
@@ -23,9 +27,13 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						type="text"
 						placeholder="Nome:"
 						size="xl"
-						value={config.name}
+						value={config.formData.name}
 						onChange={(event: { target: { value: string } }) =>
-							config.handleName(event.target.value.trim())
+							handleFieldChange(
+								"name",
+								event.target.value.trim(),
+								config.setFormData,
+							)
 						}
 					/>
 
@@ -34,9 +42,13 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						type="email"
 						placeholder="Email:"
 						size="xl"
-						value={config.email}
+						value={config.formData.email}
 						onChange={(event: { target: { value: string } }) =>
-							config.handleEmail(event.target.value.trim())
+							handleFieldChange(
+								"email",
+								event.target.value.trim(),
+								config.setFormData,
+							)
 						}
 					/>
 
@@ -46,15 +58,19 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						placeholder="Senha:"
 						id="password"
 						size="xl"
-						value={config.password}
+						value={config.formData.password}
 						onChange={(event: { target: { value: string } }) =>
-							config.handlePassword(event.target.value.trim())
+							handleFieldChange(
+								"password",
+								event.target.value.trim(),
+								config.setFormData,
+							)
 						}
 					/>
 
 					<button
 						className={
-							config.statusCode == 0
+							apiResponse.statusCode == 0
 								? "absolute top-[11.8rem] left-[21rem] text-gray3 transform"
 								: "absolute top-[10.5rem] left-[21rem] text-gray3 transform"
 						}
@@ -65,7 +81,7 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						/>
 					</button>
 
-					<ApiResponse config={config.apiResponse} />
+					<ApiResponse config={apiResponse} />
 
 					<Button
 						size="xl"

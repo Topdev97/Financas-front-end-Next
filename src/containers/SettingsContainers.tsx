@@ -1,41 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react"
-import { validateEqualPasswords } from "@/utils/validateEqualPasswords"
+import React, { useMemo, useState, useEffect } from "react"
 import { Messages } from "@/utils/enum"
 import { generateNewPassword } from "@/api/users"
-import { useAsync, useAuth, useRelease } from "@/hooks"
+import { useAsync, useAuth, useRelease, useValidation } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
 import { registerSalary } from "@/api/salary"
 import SalaryArea from "@/components/organisms/SalaryArea"
 import ChangePasswordArea from "@/components/organisms/ChangePasswordArea"
 import { Container } from "@/components/atoms"
 import ApiResponse from "./ApiResponseContainer"
+import { hasPermission, removeItems } from "@/utils/permissions"
+import { useRouter } from "next/navigation"
+import { Permissions } from "@/utils/enum"
 
 const SettingsContainer = () => {
 	const [activeEdit, setActiveEdit] = useState(false)
-	const [showButton, setShowButton] = useState(false)
+
 	const [showSaveSalaryButton, setShowSaveSalaryButton] = useState(false)
-	const [password1, setPassword1] = useState("")
-	const [password2, setPassword2] = useState("")
+
 	const { userId } = useAuth()
-	const { execute, showLoading, apiResponse } = useAsync()
+	const { validateEqualPasswords } = useValidation()
+	const { execute, showLoading, apiResponse, clearApiResponse } = useAsync()
 	const { salaryValue, setSalaryValue, getSalary } = useRelease()
+	const [formData, setFormData] = useState({
+		password1: "",
+		password2: "",
+	})
 
-	const handlePassword1 = (value: string) => {
-		setPassword1(value)
+	const router = useRouter()
 
-		const validate = validateEqualPasswords(value, password2)
+	useEffect(() => {
+		if (!hasPermission([Permissions.USER])) {
+			removeItems()
+			router.push("/")
+		}
 
-		setShowButton(validate)
-	}
+		clearApiResponse()
+		getSalary()
+	}, [userId])
 
-	const handlePassword2 = (value: string) => {
-		setPassword2(value)
-
-		const validate = validateEqualPasswords(password1, value)
-
-		setShowButton(validate)
-	}
+	const showButton = useMemo(() => {
+		return validateEqualPasswords(formData.password1, formData.password2)
+	}, [formData])
 
 	const handleSalary = (value: string) => {
 		setSalaryValue(value)
@@ -47,11 +53,7 @@ const SettingsContainer = () => {
 	}
 
 	const handleApiResponse = (status: number) => {
-		if (status == 200) {
-			setPassword1("")
-			setPassword2("")
-			setShowButton(false)
-		} else if (status == 201) {
+		if (status == 201) {
 			getSalary()
 			setSalaryValue("")
 			setActiveEdit(false)
@@ -61,7 +63,7 @@ const SettingsContainer = () => {
 
 	const redefinePassword = async () => {
 		const res: any = await execute(
-			generateNewPassword(password2, userId),
+			generateNewPassword(formData.password2, userId),
 			Messages.UPDATED_PASSWORD,
 			Messages.SERVER_ERROR,
 		)
@@ -82,13 +84,11 @@ const SettingsContainer = () => {
 	const config = {
 		activeEdit,
 		showButton,
-		password1,
-		password2,
 		showSaveSalaryButton,
+		formData,
+		setFormData,
 		saveSalary,
 		handleEdit,
-		handlePassword1,
-		handlePassword2,
 		redefinePassword,
 		handleSalary,
 	}

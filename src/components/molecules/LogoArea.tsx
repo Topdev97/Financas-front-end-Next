@@ -11,7 +11,7 @@ const LogoArea = () => {
 				style={{ width: "30rem", marginTop: "-8rem" }}
 			/>
 
-			<div className="text-center absolute top-[32rem]">
+			<div className="text-center absolute top-[36rem]">
 				<H1 className="">SaveMoney</H1>
 
 				<Paragraph>A maneira inteligente de adminstrar seu dinheiro</Paragraph>

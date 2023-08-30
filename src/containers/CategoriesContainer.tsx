@@ -6,11 +6,11 @@ import CategoriesArea from "@/components/organisms/CategoriesArea"
 import type { MenuProps } from "antd"
 import { Actions } from "@/utils/enum"
 import { getCategoryByidApi } from "@/api/category"
-import { useAsync, useCategory } from "@/hooks"
+import { useAsync, useCategory, useAuth } from "@/hooks"
 
 const CategoriesContainer = () => {
 	const [selectedCategory, setSelectedCategory] = useState("")
-
+	const { userId } = useAuth()
 	const {
 		getAllCategories,
 		allCategories,
@@ -23,13 +23,13 @@ const CategoriesContainer = () => {
 		setShowDeleteModal,
 	} = useCategory()
 
-	const { execute } = useAsync()
+	const { execute, clearApiResponse } = useAsync()
 
 	const headers = ["Categoria", "Valor destinado"]
 
 	useEffect(() => {
 		getAllCategories(page)
-	}, [])
+	}, [userId])
 
 	const menu = (id: string): MenuProps["items"] => {
 		const actions = [
@@ -51,6 +51,7 @@ const CategoriesContainer = () => {
 	const openDeleteModal = (id: string) => {
 		setIdCategory(id)
 		setShowDeleteModal(true)
+		clearApiResponse()
 	}
 
 	const cleanFilter = () => {
@@ -80,12 +81,14 @@ const CategoriesContainer = () => {
 	const handleCategoryCreation = () => {
 		setShowCreateCategoryModal(true)
 		setTypeAction(Actions.CREATE)
+		clearApiResponse()
 	}
 
 	const handleCategoryUpdate = (id: string) => {
 		setIdCategory(id)
 		setShowCreateCategoryModal(true)
 		setTypeAction(Actions.UPDATE)
+		clearApiResponse()
 	}
 
 	const categoryConfig = {

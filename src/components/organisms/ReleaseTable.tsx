@@ -84,7 +84,7 @@ const ReleaseTable = ({ config }: IReleaseTableConfig) => {
 										</Paragraph>
 
 										<Paragraph color="gray">
-											{config.parseDate(releases.createdAt)}
+											{config.parseDate(releases.date)}
 										</Paragraph>
 
 										<Paragraph color="gray">{releases.locale}</Paragraph>
