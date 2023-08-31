@@ -1,5 +1,4 @@
 import { getNewToken } from "@/api/refreshToken"
-
 import { removeItems } from "@/utils/permissions"
 import { notification } from "antd"
 import { Routes } from "@/utils/enum"
@@ -18,9 +17,9 @@ export const handleResponse = async (
 	if (response.status === 401) {
 		const userId = getUserId(response)
 
-		const token = await getNewToken(userId!)
+		if (userId) {
+			const token = await getNewToken(userId)
 
-		if (token) {
 			const instance = axios.create()
 
 			response.config.headers["Authorization"] = `Bearer ${token}`

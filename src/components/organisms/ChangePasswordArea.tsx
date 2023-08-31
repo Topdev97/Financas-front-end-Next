@@ -27,6 +27,7 @@ const ChangePasswordArea = ({ config }: ISettingsConfig) => {
 						)
 					}
 				/>
+
 				<Input
 					typeinput="input"
 					size="sm"

@@ -21,15 +21,13 @@ export const Wrapper = w.div("", {
 				space-y-5 
 				items-center 
 				h-[8rem] 
-				mt-5
-					
+				mt-5	
 			`,
 			logout: `
                 h-28 
                 flex 
                 justify-center 
                 items-center
-        
             `,
 			userInput: `
                 w-[35%]
@@ -125,6 +123,7 @@ export const Wrapper = w.div("", {
                 py-3 
                 px-8
                 lg:pr-10
+                relative
             `,
 
 			contentReleaseTable: `

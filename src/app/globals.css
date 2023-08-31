@@ -121,3 +121,24 @@ a {
 ::-webkit-scrollbar-thumb:hover {
 	background: #00c897;
 }
+
+.overflow {
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 0.1rem;
+}
+
+.overflow:hover {
+	background: #fff;
+	height: 2rem;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	border-radius: 0.25rem;
+	z-index: 10;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #000;
+}

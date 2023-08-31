@@ -27,6 +27,7 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 							outline: "1px solid #019267",
 						}}
 					/>
+
 					<Tooltip title={config.message} placement="right">
 						<Icon
 							path={mdiHelpBoxOutline}
@@ -70,9 +71,11 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 						currency: "BRL",
 					})}
 				</Paragraph>
+
 				<Paragraph color="gray">
 					Total de gastos: {config.totalAmountAllocated()}
 				</Paragraph>
+
 				<Paragraph color="gray">
 					Sobrando: {config.salaryMinusExpenses()}
 				</Paragraph>

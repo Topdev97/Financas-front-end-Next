@@ -26,7 +26,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<div className="w-[4rem]">
+				<div className="w-[4rem] sm:hidden">
 					<MenuSideBar />
 				</div>
 

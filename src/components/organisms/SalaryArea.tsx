@@ -15,6 +15,7 @@ const SalaryArea = ({ config }: ISettingsConfig) => {
 				<div className="flex space-x-5 mt-2 items-center">
 					<div className="flex space-x-2">
 						<Paragraph color="black">Valor:</Paragraph>
+
 						<Paragraph color="black">
 							{Number(salaryValue).toLocaleString("pt-BR", {
 								style: "currency",
@@ -22,6 +23,7 @@ const SalaryArea = ({ config }: ISettingsConfig) => {
 							})}
 						</Paragraph>
 					</div>
+
 					<Button size="sm" color="green" onClick={() => config.handleEdit()}>
 						Editar
 					</Button>

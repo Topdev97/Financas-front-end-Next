@@ -14,6 +14,7 @@ const DeleteModal = ({ config }: IDeleteCategoryConfig) => {
 					<H1 size="base" color="dark_gray">
 						Deletar {config?.type}
 					</H1>
+
 					<Paragraph color="gray">Deseja mesmo deletar?</Paragraph>
 
 					<div className="mt-7 flex flex-col items-center">

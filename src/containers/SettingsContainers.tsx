@@ -9,9 +9,6 @@ import SalaryArea from "@/components/organisms/SalaryArea"
 import ChangePasswordArea from "@/components/organisms/ChangePasswordArea"
 import { Container } from "@/components/atoms"
 import ApiResponse from "./ApiResponseContainer"
-import { hasPermission, removeItems } from "@/utils/permissions"
-import { useRouter } from "next/navigation"
-import { Permissions } from "@/utils/enum"
 
 const SettingsContainer = () => {
 	const [activeEdit, setActiveEdit] = useState(false)
@@ -27,15 +24,9 @@ const SettingsContainer = () => {
 		password2: "",
 	})
 
-	const router = useRouter()
-
 	useEffect(() => {
-		if (!hasPermission([Permissions.USER])) {
-			removeItems()
-			router.push("/")
-		}
-
 		clearApiResponse()
+
 		getSalary()
 	}, [userId])
 
