@@ -23,7 +23,23 @@ export const Container = w.div(``, {
 				rounded-bl-[50rem]
 				pl-32
 				text-white
+				md:pl-10
+				
             `,
+			logoMobile: `
+				bg-gradient-to-r
+				from-dark_green
+				to-light_green
+				flex flex-col
+				justify-center
+				items-center
+				w-screen
+				h-screen
+				md:hidden
+				lg:hidden
+				xl:hidden
+				px-20
+			`,
 			login: `
 				bg-white_two
 				flex 

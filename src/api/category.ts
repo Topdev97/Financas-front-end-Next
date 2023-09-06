@@ -35,6 +35,8 @@ export const getAllCategoriesApi = async (
 
 		const res = await useClient().post(`${Routes.GET_CATEGORIES}${id}`, data)
 
+		console.log("res", res)
+
 		return res
 	} catch (error) {
 		return error

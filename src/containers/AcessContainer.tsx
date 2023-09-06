@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import AcessArea from "../components/organisms/AcessArea"
 import { Messages } from "@/utils/enum"
 import { signin } from "@/api/signin"
 import { useRouter } from "next/navigation"
 import { useAsync, useAuth, useValidation } from "@/hooks"
+import AcessAreaMobile from "@/components/molecules/AcessAreaMobile"
 
 const AcessContainer = () => {
 	const [eyesIcon, setEyesIcon] = useState(false)
@@ -13,6 +14,14 @@ const AcessContainer = () => {
 		email: "",
 		password: "",
 	})
+
+	const [showLogo, setShowLogo] = useState(true)
+
+	useEffect(() => {
+		setTimeout(() => {
+			setShowLogo(false)
+		}, 6000)
+	}, [])
 
 	const { validateEmail } = useValidation()
 
@@ -75,11 +84,7 @@ const AcessContainer = () => {
 		setFormData,
 	}
 
-	return (
-		<>
-			<AcessArea config={config} />
-		</>
-	)
+	return <>{showLogo ? <AcessAreaMobile /> : <AcessArea config={config} />}</>
 }
 
 export default AcessContainer

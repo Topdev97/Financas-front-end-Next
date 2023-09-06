@@ -9,6 +9,7 @@ export const Button = w.button(
     items-center 
     font-[700]
 	text-white
+	login
 `,
 	{
 		variants: {

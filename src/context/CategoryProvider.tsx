@@ -49,7 +49,7 @@ const CategoryProvider = ({ children }: IProps) => {
 			Messages.THERE_ISNT_DATA,
 		)
 
-		if (res?.status == 200) {
+		if (res?.status == 201) {
 			parseContent(res?.data.items)
 			setTotalPages(res?.data.totalPages)
 			getNameOfAllCategories()
@@ -57,15 +57,15 @@ const CategoryProvider = ({ children }: IProps) => {
 	}
 
 	const parseContent = (data: any[]) => {
-		const categories = data.map((c) => {
-			return {
-				id: c._id,
-				category: c.name,
-				destinedValue: c.value,
-			}
-		})
-
-		setContent(categories)
+		setContent(
+			data.map((c) => {
+				return {
+					id: c._id,
+					category: c.name,
+					destinedValue: c.value,
+				}
+			}),
+		)
 	}
 
 	return (

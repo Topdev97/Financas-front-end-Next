@@ -35,13 +35,20 @@ export const Wrapper = w.div("", {
                 left-24
                 absolute
                 rounded-lg
-                ml-10 flex
+                ml-10 
+                flex
                 flex-col
                 justify-evenly
                 items-center
                 glass-effect
-                sm:z-10
                 userInput
+                z-10
+                sm:w-[80%]
+                sm:left-0
+                sm:ml-16
+                md:w-[45%]
+                md:-ml-8
+                px-2
             `,
 			input: `
                 flex

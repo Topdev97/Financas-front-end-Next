@@ -21,9 +21,9 @@ const AcessArea = ({ config }: ILoginConfig) => {
 		<Container type="login">
 			<Wrapper type="userInput">
 				<div className="text-center">
-					<H1 className="!text-dark_green"> Entrar </H1>
+					<H1 className="!text-dark_green sm:!text-white"> Entrar </H1>
 
-					<Paragraph className="!text-medium_gray">
+					<Paragraph className="!text-medium_gray sm:!text-black">
 						Após o login você terá acesso as funcionalidades
 					</Paragraph>
 				</div>
@@ -67,7 +67,7 @@ const AcessArea = ({ config }: ILoginConfig) => {
 					/>
 
 					<button
-						className="absolute top-[9.2rem] left-[21rem] text-gray3 transform"
+						className="absolute top-[9.2rem] xl:left-[21rem] text-gray3 transform left-[17rem]"
 						onClick={() => config.showPassword()}>
 						<Icon
 							path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
@@ -95,13 +95,13 @@ const AcessArea = ({ config }: ILoginConfig) => {
 
 				<div className="flex flex-col -mt-8">
 					<button
-						className="font-bold text-light_green"
+						className="font-bold text-light_green "
 						onClick={() => config.openRegisterArea()}>
 						Criar conta gratis
 					</button>
 
 					<button
-						className="font-bold text-medium_gray"
+						className="font-bold text-medium_gray sm:!text-black"
 						onClick={() => config.openRedefinePasswordArea()}>
 						Esqueceu a senha ?
 					</button>

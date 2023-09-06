@@ -11,8 +11,8 @@ export const Input = w.input(
 	{
 		variants: {
 			typeinput: {
-				loginInput: `px-14 inputLogin`,
-				input: ` px-4 inputLogin`,
+				loginInput: `px-14 login`,
+				input: ` px-4 login`,
 			},
 			size: {
 				xs: "w-[8rem] h-[2rem]",
