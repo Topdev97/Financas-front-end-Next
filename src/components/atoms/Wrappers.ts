@@ -56,7 +56,7 @@ export const Wrapper = w.div("", {
                 z-10
                 sm:w-[80%]
                 sm:left-0
-                sm:ml-12
+                sm:ml-10
                 md:w-[45%]
                 md:-ml-8
                 px-5
