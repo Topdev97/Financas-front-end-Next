@@ -29,7 +29,7 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 						}}
 					/>
 
-					<Tooltip title={config.message} placement="right">
+					<Tooltip title={config.message} placement="bottom">
 						<Icon
 							path={mdiHelpBoxOutline}
 							size={1}

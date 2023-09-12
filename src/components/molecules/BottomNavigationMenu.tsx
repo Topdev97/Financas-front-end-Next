@@ -32,7 +32,7 @@ const BottonNavigationMenu = () => {
 	]
 
 	return (
-		<Container type="bottonMenu">
+		<Container type="bottomMenu">
 			<Wrapper type="menuIcon">
 				{menu.map((m, index) => (
 					<Link href={m.path} className="active:scale-90 " key={index}>
