@@ -68,7 +68,7 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						/>
 
 						<button
-							className="absolute top-0 right-0 w-[12%] h-full text-gray3 transform "
+							className="absolute top-0 right-0 w-[18%] h-full text-gray3 transform "
 							onClick={() => config.showPassword()}>
 							<Icon
 								path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
