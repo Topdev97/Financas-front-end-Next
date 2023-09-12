@@ -72,8 +72,8 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						<button
 							className={
 								apiResponse.statusCode == 0
-									? "absolute top-0 right-0 w-[12%] h-full  text-gray3 transform"
-									: "absolute top-[10.5rem] xl:left-[25rem] left-[17rem] text-gray3 transform"
+									? "absolute top-0 right-0 w-[18%] h-full text-gray3 transform"
+									: "absolute top-0 right-0 w-[18%] h-full text-gray3 transform"
 							}
 							onClick={() => config.showPassword()}>
 							<Icon
