@@ -25,11 +25,11 @@ export const Wrapper = w.div("", {
 				mt-5
                 sm:flex-row
                 sm:justify-evenly
-                sm:mt-3
-                sm:h-0
+                sm:mt-0
+                sm:h-10
                 sm:space-y-0
-                md:mt-3
-                md:h-0
+                md:mt-0
+                md:h-10
                 md:space-y-0
                 md:flex-row
                 md:justify-evenly
@@ -56,7 +56,7 @@ export const Wrapper = w.div("", {
                 z-10
                 sm:w-[80%]
                 sm:left-0
-                sm:ml-16
+                sm:ml-12
                 md:w-[45%]
                 md:-ml-8
                 px-5
@@ -95,6 +95,7 @@ export const Wrapper = w.div("", {
 			categoryContent: `
                 grid
                 grid-cols-[48%_49%_5%]
+                sm:grid-cols-[38%_49%_5%]
                 h-12
                 px-9
                 w-full
@@ -158,7 +159,6 @@ export const Wrapper = w.div("", {
                 sm:flex
                 sm:flex-col
                 sm:mb-5
-
                 md:flex
                 md:flex-col
                 md:mb-5

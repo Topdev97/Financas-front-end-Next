@@ -73,7 +73,7 @@ export const Container = w.div(``, {
 				z-10
 				shadow-[0_0.3rem_0.62rem_rgba(0,0,0,0.4)]
 			`,
-			bottonMenu: `
+			bottomMenu: `
 				bg-gradient-to-t 
                 from-dark_green 
                 to-light_green  

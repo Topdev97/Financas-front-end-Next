@@ -17,7 +17,7 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 	return (
 		<Container type="backgroundModal">
 			<Wrapper type="modal">
-				<Wrapper type="actionsModal" className="sm:h-[25rem]">
+				<Wrapper type="actionsModal" className="sm:h-[26rem]">
 					<H1 color="dark_gray" size="md">
 						{typeAction} categoria
 					</H1>
@@ -49,7 +49,7 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 						<button
 							className={
 								config.formData.category != ""
-									? "block absolute top-2 left-[17rem] text-medium_gray"
+									? "block absolute top-0 right-0 w-[10%] text-medium_gray"
 									: "hidden"
 							}
 							onClick={() => config.cleanFilter()}>
