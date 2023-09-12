@@ -14,12 +14,13 @@ export default function Home() {
 	const { showRegisterArea, showAcessArea, showRedefinePasswordArea } =
 		useAuth()
 
-	const screenWidth = window.innerWidth
-	const [showAnimation, setShowAnimation] = useState(
-		screenWidth <= 767 ? true : false,
-	)
+	const [showAnimation, setShowAnimation] = useState(false)
 
 	useEffect(() => {
+		const screenWidth = window.innerWidth
+
+		if (screenWidth <= 767) setShowAnimation(true)
+
 		setTimeout(() => {
 			setShowAnimation(false)
 		}, 6000)
