@@ -52,34 +52,36 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 						}
 					/>
 
-					<Input
-						typeinput="input"
-						type={config.type}
-						placeholder="Senha:"
-						id="password"
-						size="xl"
-						value={config.formData.password}
-						onChange={(event: { target: { value: string } }) =>
-							handleFieldChange(
-								"password",
-								event.target.value.trim(),
-								config.setFormData,
-							)
-						}
-					/>
-
-					<button
-						className={
-							apiResponse.statusCode == 0
-								? "absolute top-[11.8rem] left-[21rem] text-gray3 transform"
-								: "absolute top-[10.5rem] left-[21rem] text-gray3 transform"
-						}
-						onClick={() => config.showPassword()}>
-						<Icon
-							path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
-							size={1}
+					<div className="w-full relative ml-2">
+						{" "}
+						<Input
+							typeinput="input"
+							type={config.type}
+							placeholder="Senha:"
+							id="password"
+							size="xl"
+							value={config.formData.password}
+							onChange={(event: { target: { value: string } }) =>
+								handleFieldChange(
+									"password",
+									event.target.value.trim(),
+									config.setFormData,
+								)
+							}
 						/>
-					</button>
+						<button
+							className={
+								apiResponse.statusCode == 0
+									? "absolute top-0 right-0 w-[12%] h-full  text-gray3 transform"
+									: "absolute top-[10.5rem] xl:left-[25rem] left-[17rem] text-gray3 transform"
+							}
+							onClick={() => config.showPassword()}>
+							<Icon
+								path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
+								size={1}
+							/>
+						</button>
+					</div>
 
 					<ApiResponse config={apiResponse} />
 

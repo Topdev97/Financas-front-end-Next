@@ -15,6 +15,7 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 			<div className="flex justify-between items-center w-full mb-5">
 				<div className="flex space-x-4 items-end">
 					<DatePicker
+						className="inputs"
 						format={"MM/YYYY"}
 						onChange={config.selectCurrentDate}
 						picker="month"
@@ -48,7 +49,7 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 			</div>
 
 			<Wrapper type="dataTable">
-				<Wrapper type="headers">
+				<Wrapper type="headers" className="sm:hidden md:hidden">
 					{config.headers.map((items, index) => (
 						<Paragraph key={index} color="white">
 							{items}
@@ -63,35 +64,37 @@ const ReleasesArea = ({ config }: IReleasesConfig) => {
 				<ReleaseTableContainer />
 			</Wrapper>
 
-			<div className="float-left">
-				<Paragraph color="gray">
-					Salário:{" "}
-					{Number(salaryValue).toLocaleString("pt-BR", {
-						style: "currency",
-						currency: "BRL",
-					})}
-				</Paragraph>
+			<div className="flex flex-wrap justify-between pb-20">
+				<div>
+					<Paragraph color="gray">
+						Salário:{" "}
+						{Number(salaryValue).toLocaleString("pt-BR", {
+							style: "currency",
+							currency: "BRL",
+						})}
+					</Paragraph>
 
-				<Paragraph color="gray">
-					Total de gastos: {config.totalAmountAllocated()}
-				</Paragraph>
+					<Paragraph color="gray">
+						Total de gastos: {config.totalAmountAllocated()}
+					</Paragraph>
 
-				<Paragraph color="gray">
-					Sobrando: {config.salaryMinusExpenses()}
-				</Paragraph>
-			</div>
+					<Paragraph color="gray">
+						Sobrando: {config.salaryMinusExpenses()}
+					</Paragraph>
+				</div>
 
-			<div className="float-right">
-				<Pagination
-					responsive
-					current={page}
-					disabled={content.length == 0}
-					total={totalPages * 10}
-					showSizeChanger={totalPages >= 0 && false}
-					showTotal={(total) => `Total ${total} items`}
-					defaultCurrent={1}
-					onChange={(page) => config.getReleaseByPage(page)}
-				/>
+				<div className="sm:mt-2">
+					<Pagination
+						responsive
+						current={page}
+						disabled={content.length == 0}
+						total={totalPages * 10}
+						showSizeChanger={totalPages >= 0 && false}
+						showTotal={(total) => `Total ${total} items`}
+						defaultCurrent={1}
+						onChange={(page) => config.getReleaseByPage(page)}
+					/>
+				</div>
 			</div>
 		</Container>
 	)

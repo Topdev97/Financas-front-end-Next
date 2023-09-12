@@ -10,7 +10,7 @@ import AsyncProvider from "@/context/AsyncProvider"
 import ValidationProvider from "@/context/ValidationProvider"
 import { hasPermission, removeItems } from "@/utils/permissions"
 import { Permissions } from "@/utils/enum"
-
+import BottonNavigationMenu from "@/components/molecules/BottomNavigationMenu"
 export default function RootLayout({
 	children,
 }: {
@@ -26,8 +26,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<div className="w-[4rem] sm:hidden">
+				<div className="w-[4rem] sm:hidden md:hidden">
 					<MenuSideBar />
+				</div>
+
+				<div className="sm:block md:block hidden">
+					<BottonNavigationMenu />
 				</div>
 
 				<ValidationProvider>

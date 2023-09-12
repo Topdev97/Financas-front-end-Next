@@ -4,13 +4,12 @@ import { Routes } from "../utils/enum"
 import { getRefreshToken, setIsAuthenticated } from "../utils/permissions"
 import axios from "axios"
 
-export const getNewToken = async (userId: string) => {
+export const getNewToken = async () => {
 	try {
 		const config: any = {
 			method: "POST",
 			url: `${process.env.NEXT_PUBLIC_BACK}${Routes.REFRESH_TOKEN}`,
 			headers: { Authorization: `Bearer ${getRefreshToken()}` },
-			data: { userId },
 		}
 
 		const res = await axios(config)

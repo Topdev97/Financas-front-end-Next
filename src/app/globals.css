@@ -14,6 +14,13 @@ body {
 	position: relative;
 }
 
+@media (max-width: 1023px) {
+	body {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -102,5 +109,15 @@ a {
 @media (max-width: 1279px) {
 	.login {
 		width: calc(100% - 10px);
+	}
+
+	.inputs {
+		width: calc(100% - 10px) !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.modal {
+		width: calc(100% - 20px);
 	}
 }

@@ -1,8 +1,6 @@
 import { getNewToken } from "@/api/refreshToken"
 import { removeItems } from "@/utils/permissions"
 import { notification } from "antd"
-import { Routes } from "@/utils/enum"
-
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios"
 
 export const handleRequest = async (
@@ -15,11 +13,9 @@ export const handleResponse = async (
 	response: AxiosResponse,
 ): Promise<AxiosResponse<any, any>> => {
 	if (response.status === 401) {
-		const userId = getUserId(response)
+		const token = await getNewToken()
 
-		if (userId) {
-			const token = await getNewToken(userId)
-
+		if (token) {
 			const instance = axios.create()
 
 			response.config.headers["Authorization"] = `Bearer ${token}`
@@ -54,16 +50,4 @@ export const interceptors = {
 	handleRequest,
 	handleResponse,
 	handleError,
-}
-
-const getUserId = (response: AxiosResponse) => {
-	const regex = /\/(\w+)$/
-
-	if (response.config.url != Routes.PAYLOAD) {
-		const match = response.config.url!.match(regex)
-
-		if (match) {
-			return match[1]
-		}
-	}
 }

@@ -17,6 +17,7 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 			<Wrapper type="categoryFilter">
 				<div className="flex space-x-4 relative">
 					<AutoComplete
+						className="inputs"
 						value={config.selectedCategory}
 						bordered={false}
 						placeholder="Buscar por categoria"
@@ -56,7 +57,7 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 			<Wrapper type="dataTable">
 				<Wrapper type="headers">
 					{config.headers.map((items, index) => (
-						<Paragraph key={index} color="white">
+						<Paragraph key={index} color="white" className="sm:mr-7">
 							{items}
 						</Paragraph>
 					))}

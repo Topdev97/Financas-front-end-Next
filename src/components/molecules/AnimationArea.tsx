@@ -3,7 +3,7 @@ import { Container, H1, Paragraph } from "../atoms"
 import Lottie from "lottie-react"
 import animation from "../../assets/lottieFiles/animation2.json"
 
-const AcessAreaMobile = () => {
+const AnimationArea = () => {
 	return (
 		<>
 			<Container type="logoMobile">
@@ -21,4 +21,4 @@ const AcessAreaMobile = () => {
 	)
 }
 
-export default AcessAreaMobile
+export default AnimationArea

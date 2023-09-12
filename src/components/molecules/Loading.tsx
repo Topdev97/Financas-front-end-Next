@@ -32,7 +32,9 @@ const Loading = () => {
 						animationData={animation}
 						style={{ width: "30rem", marginTop: "-8rem" }}
 					/>
-					<h1 className="-mt-16 text-[1.5rem] text-white">{message}</h1>
+					<h1 className="-mt-16 text-[1.5rem] text-white text-center">
+						{message}
+					</h1>
 				</div>
 			</Wrapper>
 		</Container>

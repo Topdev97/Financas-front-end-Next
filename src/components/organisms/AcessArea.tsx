@@ -45,35 +45,37 @@ const AcessArea = ({ config }: ILoginConfig) => {
 						className="absolute top-[3.2rem] left-[1rem] text-gray3 transform"
 					/>
 
-					<Input
-						typeinput="loginInput"
-						type={config.type}
-						id="pass"
-						size="xl"
-						value={config.formData.password}
-						onChange={(event: { target: { value: string } }) => {
-							handleFieldChange(
-								"password",
-								event.target.value,
-								config.setFormData,
-							)
-						}}
-					/>
-
-					<Icon
-						path={mdiLockOutline}
-						size={1}
-						className="absolute top-[9.2rem] left-[1rem] text-gray3 transform"
-					/>
-
-					<button
-						className="absolute top-[9.2rem] xl:left-[21rem] text-gray3 transform left-[17rem]"
-						onClick={() => config.showPassword()}>
-						<Icon
-							path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
-							size={1}
+					<div className="w-full relative ml-2">
+						<Input
+							typeinput="loginInput"
+							type={config.type}
+							id="pass"
+							size="xl"
+							value={config.formData.password}
+							onChange={(event: { target: { value: string } }) => {
+								handleFieldChange(
+									"password",
+									event.target.value,
+									config.setFormData,
+								)
+							}}
 						/>
-					</button>
+
+						<Icon
+							path={mdiLockOutline}
+							size={1}
+							className="absolute top-5 left-3 w-[10%] h-full text-gray3 transform"
+						/>
+
+						<button
+							className="absolute top-0 right-0 w-[12%] h-full text-gray3 transform "
+							onClick={() => config.showPassword()}>
+							<Icon
+								path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
+								size={1}
+							/>
+						</button>
+					</div>
 
 					<div className="absolute top-[12.5rem]">
 						<ApiResponse config={apiResponse} />

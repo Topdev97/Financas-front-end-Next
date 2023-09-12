@@ -47,6 +47,7 @@ export const Container = w.div(``, {
 				justify-center
 				items-center
 				rounded-br-[10rem]
+				
             `,
 			loading: `	
 				w-full
@@ -71,6 +72,17 @@ export const Container = w.div(``, {
 				fixed
 				z-10
 				shadow-[0_0.3rem_0.62rem_rgba(0,0,0,0.4)]
+			`,
+			bottonMenu: `
+				bg-gradient-to-t 
+                from-dark_green 
+                to-light_green  
+				fixed
+				bottom-0 
+				w-screen 
+				z-10 
+				h-10 
+				py-2"
 			`,
 			container: `
 				h-screen 

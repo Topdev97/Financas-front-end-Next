@@ -4,6 +4,7 @@ export const Wrapper = w.div("", {
 	variants: {
 		type: {
 			modal: `
+                sm:px-5
                 w-full
                 h-full
                 absolute
@@ -21,7 +22,17 @@ export const Wrapper = w.div("", {
 				space-y-5 
 				items-center 
 				h-[8rem] 
-				mt-5	
+				mt-5
+                sm:flex-row
+                sm:justify-evenly
+                sm:mt-3
+                sm:h-0
+                sm:space-y-0
+                md:mt-3
+                md:h-0
+                md:space-y-0
+                md:flex-row
+                md:justify-evenly
 			`,
 			logout: `
                 h-28 
@@ -48,7 +59,7 @@ export const Wrapper = w.div("", {
                 sm:ml-16
                 md:w-[45%]
                 md:-ml-8
-                px-2
+                px-5
             `,
 			input: `
                 flex
@@ -58,6 +69,9 @@ export const Wrapper = w.div("", {
                 h-[20rem]
                 mt-[-2rem] 
                 relative
+                sm:w-full
+                md:w-full
+                lg:w-full
             `,
 			categoryFilter: `
                 flex 
@@ -70,6 +84,8 @@ export const Wrapper = w.div("", {
                 w-[100%]
                 min-h-[35rem]
                 pt-12
+                sm:pt-0
+                md:pt-0
                 mb-8
                 medium_gray
                 glass-effect
@@ -101,20 +117,24 @@ export const Wrapper = w.div("", {
                 top-0
             `,
 			actionsModal: `
+                modal
                 bg-white 
                 flex 
                 flex-col 
                 py-5
                 px-5
                 min-h-[15rem] 
+                sm:mx-5
                 w-[40rem] 
                 text-black 
                 rounded-md
+               
             `,
 			releaseContent: `
                 grid
-                grid-cols-[24%_26%_26%_22.5%_5%]
-                md:grid-cols-[24%_26%_26%_20.2%_5%]
+                xl:grid-cols-[24%_26%_26%_22.5%_5%]
+                lg:grid-cols-[24%_26%_26%_22.5%_5%]
+                grid-cols-[1fr_5%]
                 h-12
                 px-9
                 w-full
@@ -126,7 +146,6 @@ export const Wrapper = w.div("", {
 			headersReleasesTable: `
                 grid 
                 grid-cols-[23%_26.2%_26%_22%_12%] 
-                md:grid-cols-[23%_26.2%_26%_20%_12%] 
                 py-3 
                 px-8
                 lg:pr-10
@@ -136,7 +155,13 @@ export const Wrapper = w.div("", {
 			contentReleaseTable: `
                 grid 
                 grid-cols-[24%_26%_26%_23%_8%] 
-                md:grid-cols-[24%_26%_26%_20.8%_8%] 
+                sm:flex
+                sm:flex-col
+                sm:mb-5
+
+                md:flex
+                md:flex-col
+                md:mb-5
                 px-10 
                 space-y-2
             `,

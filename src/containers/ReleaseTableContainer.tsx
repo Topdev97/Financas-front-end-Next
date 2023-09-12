@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import ReleaseTable from "@/components/organisms/ReleaseTable"
+import ReleaseCard from "@/components/organisms/ReleaseCard"
 import { MenuProps } from "antd"
 import { useAsync, useRelease } from "@/hooks"
 import { Actions } from "@/utils/enum"
@@ -121,7 +122,12 @@ const ReleaseTableContainer = () => {
 		parseDate,
 	}
 
-	return <ReleaseTable config={config} />
+	return (
+		<>
+			<ReleaseCard config={config} />
+			<ReleaseTable config={config} />
+		</>
+	)
 }
 
 export default ReleaseTableContainer

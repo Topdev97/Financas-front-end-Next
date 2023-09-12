@@ -2,16 +2,15 @@ import React from "react"
 import { Paragraph, Wrapper } from "../atoms"
 import Icon from "@mdi/react"
 import { mdiChevronDown, mdiChevronUp, mdiPencilBoxOutline } from "@mdi/js"
-import { useAsync, useRelease } from "@/hooks"
+import { useRelease } from "@/hooks"
 import { IReleaseTableConfig } from "@/utils/interface"
 import { Dropdown } from "antd"
 
 const ReleaseTable = ({ config }: IReleaseTableConfig) => {
 	const { content } = useRelease()
-	const { apiResponse } = useAsync()
 
 	return (
-		<>
+		<div className="sm:hidden md:hidden">
 			{content.map((r, index) => (
 				<>
 					<Wrapper
@@ -57,7 +56,7 @@ const ReleaseTable = ({ config }: IReleaseTableConfig) => {
 					<hr
 						className={
 							config.releaseIndex != index && config.isOpen
-								? " border-[0.01rem] w-full border-medium_gray opacity-50 over"
+								? " border-[0.01rem] w-full border-medium_gray opacity-50"
 								: "hidden"
 						}
 					/>
@@ -116,10 +115,10 @@ const ReleaseTable = ({ config }: IReleaseTableConfig) => {
 
 			{content.length == 0 && (
 				<Paragraph color="gray" className="text-center mt-44">
-					{apiResponse.response}
+					Não há dados para essa busca no momento
 				</Paragraph>
 			)}
-		</>
+		</div>
 	)
 }
 

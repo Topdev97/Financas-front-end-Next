@@ -17,14 +17,16 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 	return (
 		<Container type="backgroundModal">
 			<Wrapper type="modal">
-				<Wrapper type="actionsModal">
+				<Wrapper type="actionsModal" className="sm:h-[25rem]">
 					<H1 color="dark_gray" size="md">
 						{typeAction} categoria
 					</H1>
 
-					<div className="flex justify-between flex-wrap h-[10rem] mt-2 relative">
+					<div className="flex justify-between flex-wrap h-[10rem] mt-2 relative xl:space-y-0 space-y-2">
 						<AutoComplete
-							className={typeAction == Actions.CREATE ? "block" : "hidden"}
+							className={
+								typeAction == Actions.CREATE ? "block inputs" : "hidden"
+							}
 							value={config.formData.category}
 							bordered={false}
 							placeholder="Buscar por categoria"
@@ -55,6 +57,7 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 						</button>
 
 						<DatePicker
+							className="inputs"
 							format={"DD/MM/YYYY"}
 							placeholder="Selecione uma data"
 							onChange={config.onChange}
@@ -111,7 +114,7 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 						/>
 					</div>
 
-					<div className="mt-10">
+					<div className="xl:mt-10 mt-24">
 						<ApiResponse config={apiResponse} />
 
 						<div className="flex space-x-4 float-right">

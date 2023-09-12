@@ -9,7 +9,6 @@ export const Button = w.button(
     items-center 
     font-[700]
 	text-white
-	login
 `,
 	{
 		variants: {
@@ -27,7 +26,7 @@ export const Button = w.button(
 				base: "h-[2rem] w-[5rem]",
 				md: "h-[2.5rem] w-[10rem]",
 				lg: "h-[2.5rem] w-[5rem]",
-				xl: "w-[24rem] h-[3.75rem]",
+				xl: "w-full h-[3.75rem]",
 			},
 		},
 		defaultVariants: {

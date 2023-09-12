@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Container } from "../../components/atoms"
 import AcessContainer from "../../containers/AcessContainer"
 import RedefinePasswordContainer from "@/containers/RedefinePasswordContainer"
@@ -8,10 +8,22 @@ import LogoArea from "../../components/molecules/LogoArea"
 import RegisterContainer from "../../containers/RegisterContainer"
 import { useAsync, useAuth } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
+import AnimationArea from "@/components/molecules/animationArea"
 
 export default function Home() {
 	const { showRegisterArea, showAcessArea, showRedefinePasswordArea } =
 		useAuth()
+
+	const screenWidth = window.innerWidth
+	const [showAnimation, setShowAnimation] = useState(
+		screenWidth <= 767 ? true : false,
+	)
+
+	useEffect(() => {
+		setTimeout(() => {
+			setShowAnimation(false)
+		}, 6000)
+	}, [])
 
 	const { showLoading } = useAsync()
 
@@ -19,13 +31,19 @@ export default function Home() {
 		<Container type="auth">
 			{showLoading && <Loading />}
 
-			{showAcessArea && <AcessContainer />}
+			{showAnimation ? (
+				<AnimationArea />
+			) : (
+				<>
+					{showAcessArea && <AcessContainer />}
 
-			{showRegisterArea && <RegisterContainer />}
+					{showRegisterArea && <RegisterContainer />}
 
-			{showRedefinePasswordArea && <RedefinePasswordContainer />}
+					{showRedefinePasswordArea && <RedefinePasswordContainer />}
 
-			<LogoArea />
+					<LogoArea />
+				</>
+			)}
 		</Container>
 	)
 }
