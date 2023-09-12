@@ -9,8 +9,7 @@
 </div>
 
 <p align="center">
-Esse projeto tem como objetivo demonstrar os meus conhecimentos como desenvolvedor web, a forma como organizo e como estruturo o meu código. Aqui você pode observar algumas abordagens interessantes como a separação do código logíco do código ui, a utulização do Atomic design para uma melhor e mais efetiva organização do código ui e a conteinerização do código lógico. 
-Outros pontos interessantes de se observar nesse projeto é a criação do Axios client personalizado e a estruturação dos providers.
+Este projeto tem como objetivo demonstrar os meus conhecimentos como desenvolvedor web, a forma como organizo e estruturo o meu código. Aqui, você pode observar algumas abordagens interessantes, como a separação do código lógico do código de UI, a utilização do Atomic design para uma melhor e mais efetiva organização do código de UI e a containerização do código lógico. Outros pontos interessantes a se observar neste projeto são a criação do cliente Axios personalizado e a estruturação dos provedores
 </p>
 
 <p align="center">
