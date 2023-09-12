@@ -1,0 +1,73 @@
+{
+	"name": "financas-frontend",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"prepare": "husky install",
+		"lint-staged": "lint-staged",
+		"prettier": "npx prettier --write .",
+		"commit": "cz"
+	},
+	"dependencies": {
+		"@ant-design/icons": "^5.1.4",
+		"@mdi/js": "^7.2.96",
+		"@mdi/react": "^1.6.1",
+		"@types/node": "20.4.2",
+		"@types/react": "18.2.15",
+		"@types/react-dom": "18.2.7",
+		"antd": "^5.7.0",
+		"autoprefixer": "10.4.14",
+		"axios": "^1.4.0",
+		"date-fns": "^2.30.0",
+		"dayjs": "^1.11.9",
+		"eslint": "^8.0.1",
+		"eslint-config-next": "13.4.10",
+		"lottie-react": "^2.4.0",
+		"next": "13.4.10",
+		"postcss": "8.4.26",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-spinners": "^0.13.8",
+		"tailwindcss": "3.3.3",
+		"typescript": "*",
+		"uuid": "^9.0.0",
+		"windstitch": "^0.3.0"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.6.6",
+		"@commitlint/config-conventional": "^17.6.6",
+		"@types/uuid": "^9.0.2",
+		"@typescript-eslint/eslint-plugin": "^5.50.0",
+		"@typescript-eslint/parser": "^5.25.0",
+		"babel-eslint": "^10.1.0",
+		"cz-customizable": "^7.0.0",
+		"eslint": "^8.15.0",
+		"eslint-config-google": "^0.14.0",
+		"eslint-config-next": "12.1.6",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-prettier": "^5.0.0",
+		"eslint-plugin-react": "^7.30.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.3",
+		"prettier": "^3.0.0"
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-customizable"
+		}
+	},
+	"lint-staged": {
+		"**/*.{js,jsx,ts,tsx}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"**/*.{css,scss,json}": [
+			"prettier --write"
+		]
+	}
+}
