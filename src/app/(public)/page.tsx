@@ -8,7 +8,7 @@ import LogoArea from "../../components/molecules/LogoArea"
 import RegisterContainer from "../../containers/RegisterContainer"
 import { useAsync, useAuth } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
-import AnimationArea from "@/components/molecules/animationArea"
+import AnimationArea from "@/components/molecules/AnimationArea"
 
 export default function Home() {
 	const { showRegisterArea, showAcessArea, showRedefinePasswordArea } =
