@@ -5,7 +5,7 @@
 import { IAuth, IProps } from "../utils/interface"
 import React, { useEffect, createContext, useState } from "react"
 import { getPayload } from "@/api/signin"
-import { setupClient } from "@/clients/AxiosClient"
+import { setupClient, useAuthClient } from "@/clients/AxiosClient"
 import { setBearerAuthorization, useClient } from "../clients/AxiosClient"
 import { isAuthenticated } from "@/utils/permissions"
 import { useAsync } from "@/hooks"
@@ -22,16 +22,23 @@ const AuthProvider = ({ children }: IProps) => {
 	const { execute } = useAsync()
 
 	const clientConfig = () => {
-		setupClient(process.env.NEXT_PUBLIC_BACK)
+		console.log("auth", isAuthenticated())
+
+		setupClient(process.env.NEXT_PUBLIC_BACK, process.env.NEXT_PUBLIC_AUTH)
 		setBearerAuthorization(useClient(), isAuthenticated())
+		setBearerAuthorization(useAuthClient(), isAuthenticated())
 	}
 
 	const getUserId = async () => {
+		console.log("auth", isAuthenticated())
+		console.log("authclient", useAuthClient())
 		const payload = await execute(getPayload())
 
 		if (payload?.status == 200) {
 			setUserId(payload?.data.userId)
 		}
+
+		console.log("cu")
 	}
 
 	useEffect(() => {

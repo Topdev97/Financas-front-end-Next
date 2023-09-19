@@ -22,7 +22,7 @@ export enum Routes {
 }
 
 export enum Messages {
-	SUCCESS_IN_CREATING_USER = "Usuário cadastrado com sucesso",
+	SUCCESS_IN_CREATING_USER = "Cadastrado com sucesso, você receberá um email em instantes",
 	SUCCESS_IN_CREATING_CATEGORY = "Categoria cadastrada com sucesso",
 	SUCESS_IN_UPDATE_CATEGORY = "Categoria atualizada com sucesso",
 	SUCESS_IN_CREATING_RELEASE = "Lançamento efetuado com sucesso",

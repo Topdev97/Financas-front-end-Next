@@ -13,6 +13,8 @@ const Releases = () => {
 		useRelease()
 	const { showLoading } = useAsync()
 
+	console.log("s", showInfoModal)
+
 	return (
 		<>
 			{showLoading && <Loading />}

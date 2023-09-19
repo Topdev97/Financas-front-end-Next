@@ -26,6 +26,16 @@ const ValidationProvider = ({ children }: IProps) => {
 		return false
 	}
 
+	const validateEqualEmails = (email1: string, email2: string): boolean => {
+		if (email1 != "" && email2 != "") {
+			if (email1 === email2) {
+				return true
+			}
+		}
+
+		return false
+	}
+
 	const handleFieldChange = useCallback(
 		(fieldName: string, value: string, setFormData: Function) => {
 			setFormData((prevData: any) => ({
@@ -42,6 +52,7 @@ const ValidationProvider = ({ children }: IProps) => {
 				validateEmail,
 				validateEqualPasswords,
 				handleFieldChange,
+				validateEqualEmails,
 			}}>
 			{children}
 		</ValidationContext.Provider>

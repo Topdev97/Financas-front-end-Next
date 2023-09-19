@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import {
 	setBearerAuthorization,
-	useClient,
+	useAuthClient,
 	setBasicAuthorization,
 } from "@/clients/AxiosClient"
 import { Routes } from "@/utils/enum"
@@ -11,9 +11,9 @@ export const signin = async (user: any) => {
 	try {
 		const encode = btoa(`${user.email}:${user.password}`)
 
-		setBasicAuthorization(useClient(), encode)
+		setBasicAuthorization(useAuthClient(), encode)
 
-		const res = await useClient().post(Routes.LOGIN)
+		const res = await useAuthClient().post(Routes.LOGIN)
 
 		if (res?.status == 403) {
 			return res
@@ -29,7 +29,7 @@ export const signin = async (user: any) => {
 
 export const getPayload = async () => {
 	try {
-		const res = await useClient().get(Routes.PAYLOAD)
+		const res = await useAuthClient().get(Routes.PAYLOAD)
 
 		return res
 	} catch (error: any) {
@@ -37,15 +37,16 @@ export const getPayload = async () => {
 	}
 }
 
-const setTokenAndPermission = async (res: any) => {
+const setTokenAndPermission = (res: any) => {
 	const token = res.data.token
+
 	const refreshToken = res.data.refreshToken
 
-	setBearerAuthorization(useClient(), token)
+	const roles = res.data.permission
 
-	const payload: any = await getPayload()
+	console.log("per", res)
 
-	const roles = payload.data.permission
+	setBearerAuthorization(useAuthClient(), token)
 
 	setIsAuthenticated(token, refreshToken)
 

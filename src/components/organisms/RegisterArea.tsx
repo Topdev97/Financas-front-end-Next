@@ -1,8 +1,6 @@
 import React from "react"
 import { Container, H1, Paragraph, Input, Button, Wrapper } from "../atoms"
 import { IRegisterConfig } from "../../utils/interface"
-import Icon from "@mdi/react"
-import { mdiEyeOffOutline, mdiEyeOutline } from "@mdi/js"
 import ApiResponse from "@/containers/ApiResponseContainer"
 import { useAsync, useValidation } from "@/hooks"
 
@@ -53,34 +51,20 @@ const RegisterArea = ({ config }: IRegisterConfig) => {
 					/>
 
 					<div className="w-full relative ml-2">
-						{" "}
 						<Input
 							typeinput="input"
-							type={config.type}
-							placeholder="Senha:"
-							id="password"
+							type="email"
+							placeholder="Repetir Email:"
 							size="xl"
-							value={config.formData.password}
+							value={config.formData.email2}
 							onChange={(event: { target: { value: string } }) =>
 								handleFieldChange(
-									"password",
+									"email2",
 									event.target.value.trim(),
 									config.setFormData,
 								)
 							}
 						/>
-						<button
-							className={
-								apiResponse.statusCode == 0
-									? "absolute top-0 right-0 w-[18%] h-full text-gray3 transform"
-									: "absolute top-0 right-0 w-[18%] h-full text-gray3 transform"
-							}
-							onClick={() => config.showPassword()}>
-							<Icon
-								path={config.eyesIcon ? mdiEyeOutline : mdiEyeOffOutline}
-								size={1}
-							/>
-						</button>
 					</div>
 
 					<ApiResponse config={apiResponse} />

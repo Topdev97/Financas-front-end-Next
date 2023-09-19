@@ -10,17 +10,21 @@ const RegisterContainer = () => {
 	const [type, setType] = useState("password")
 	const [formData, setFormData] = useState({
 		email: "",
-		password: "",
+		email2: "",
 		name: "",
 	})
 
 	const { setAcessArea, setShowRegisterArea } = useAuth()
-	const { validateEmail } = useValidation()
+	const { validateEmail, validateEqualEmails } = useValidation()
 	const { execute, clearApiResponse } = useAsync()
 
 	const showButton = useMemo(() => {
 		return Object.values(formData).every(
-			(value) => value != "" && validateEmail(formData.email),
+			(value) =>
+				value != "" &&
+				validateEmail(formData.email) &&
+				validateEmail(formData.email2) &&
+				validateEqualEmails(formData.email, formData.email2),
 		)
 	}, [formData])
 

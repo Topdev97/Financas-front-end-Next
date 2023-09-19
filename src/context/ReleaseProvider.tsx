@@ -39,6 +39,8 @@ const ReleaseProvider = ({ children }: IProps) => {
 	const getSalary = async () => {
 		const res: any = await execute(takeSalary(userId))
 
+		console.log("salary", res)
+
 		if (res?.data) setSalaryValue(res?.data.value)
 		else setShowInfoModal(true)
 	}

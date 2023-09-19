@@ -3,7 +3,7 @@ import { ReactNode } from "react"
 export interface IUsers {
 	name: string
 	email: string
-	password: string
+	email2: string
 }
 
 export interface IAuth {
@@ -315,4 +315,5 @@ export interface IValidationContext {
 	validateEmail: Function
 	validateEqualPasswords: Function
 	handleFieldChange: Function
+	validateEqualEmails: Function
 }
