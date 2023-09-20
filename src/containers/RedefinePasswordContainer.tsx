@@ -2,25 +2,20 @@
 import React, { useMemo, useState } from "react"
 import RedefinePassword from "@/components/organisms/RedefinePasswordArea"
 import { useAsync, useAuth, useValidation } from "@/hooks"
-import { changePassword } from "@/api/users"
+import { generateNewPassword } from "@/api/users"
 import { Messages } from "@/utils/enum"
 
 const RedefinePasswordContainer = () => {
 	const [formData, setFormData] = useState({
 		email: "",
-		password1: "",
-		password2: "",
 	})
 
 	const { execute, clearApiResponse } = useAsync()
-	const { validateEmail, validateEqualPasswords } = useValidation()
+	const { validateEmail } = useValidation()
 
 	const showButton = useMemo(() => {
 		return Object.values(formData).every(
-			(values) =>
-				values != "" &&
-				validateEmail(formData.email) &&
-				validateEqualPasswords(formData.password1, formData.password2),
+			(values) => values != "" && validateEmail(formData.email),
 		)
 	}, [formData])
 
@@ -36,9 +31,9 @@ const RedefinePasswordContainer = () => {
 
 	const redefinePassword = () => {
 		execute(
-			changePassword(formData.email, formData.password2),
-			Messages.UPDATED_PASSWORD,
-			Messages.EMAIL_NOT_FOUND,
+			generateNewPassword(formData.email),
+			Messages.CHANGE_PASSWORD,
+			Messages.SERVER_ERROR,
 		)
 	}
 

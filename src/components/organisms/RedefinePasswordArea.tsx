@@ -10,7 +10,7 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 
 	return (
 		<Container type="login">
-			<Wrapper type="userInput">
+			<Wrapper type="userInput" className="!h-[28rem]">
 				<div className="text-center">
 					<H1 className="!text-dark_green"> Nova senha </H1>
 
@@ -19,7 +19,7 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 					</Paragraph>
 				</div>
 
-				<Wrapper type="input">
+				<Wrapper type="input" className="!h-[18rem]">
 					<Input
 						typeinput="input"
 						type="email"
@@ -29,36 +29,6 @@ const RedefinePassword = ({ config }: IRedefinePasswordConfig) => {
 						onChange={(event: { target: { value: string } }) =>
 							handleFieldChange(
 								"email",
-								event.target.value.trim(),
-								config.setFormData,
-							)
-						}
-					/>
-
-					<Input
-						typeinput="input"
-						type="text"
-						placeholder="Senha:"
-						size="xl"
-						value={config.formData.password1}
-						onChange={(event: { target: { value: string } }) =>
-							handleFieldChange(
-								"password1",
-								event.target.value.trim(),
-								config.setFormData,
-							)
-						}
-					/>
-
-					<Input
-						typeinput="input"
-						type="text"
-						placeholder="Senha:"
-						size="xl"
-						value={config.formData.password2}
-						onChange={(event: { target: { value: string } }) =>
-							handleFieldChange(
-								"password2",
 								event.target.value.trim(),
 								config.setFormData,
 							)

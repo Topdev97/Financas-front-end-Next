@@ -12,7 +12,7 @@ const LogoArea = () => {
 				className="sm:hidden"
 			/>
 
-			<div className="text-center absolute xl:top-[36rem] sm:hidden top-[30rem]">
+			<div className="text-center absolute xl:top-[36rem] sm:hidden top-[25rem]">
 				<H1 className="">SaveMoney</H1>
 
 				<Paragraph>A maneira inteligente de adminstrar seu dinheiro</Paragraph>
