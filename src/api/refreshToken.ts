@@ -1,5 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { setBearerAuthorization, useClient } from "../clients/AxiosClient"
+import {
+	setBearerAuthorization,
+	useAuthClient,
+	useClient,
+} from "../clients/AxiosClient"
 import { Routes } from "../utils/enum"
 import { getRefreshToken, setIsAuthenticated } from "../utils/permissions"
 import axios from "axios"
@@ -19,6 +23,7 @@ export const getNewToken = async () => {
 			const refreshToken = res.data.refreshToken
 
 			setBearerAuthorization(useClient(), token)
+			setBearerAuthorization(useAuthClient(), token)
 
 			setIsAuthenticated(token, refreshToken)
 

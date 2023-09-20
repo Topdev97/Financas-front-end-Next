@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useMemo, useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Messages } from "@/utils/enum"
 import { generateNewPassword } from "@/api/users"
-import { useAsync, useAuth, useRelease, useValidation } from "@/hooks"
+import { useAsync, useAuth, useRelease } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
 import { registerSalary } from "@/api/salary"
 import SalaryArea from "@/components/organisms/SalaryArea"
@@ -15,24 +15,15 @@ const SettingsContainer = () => {
 
 	const [showSaveSalaryButton, setShowSaveSalaryButton] = useState(false)
 
-	const { userId } = useAuth()
-	const { validateEqualPasswords } = useValidation()
+	const { userId, email } = useAuth()
 	const { execute, showLoading, apiResponse, clearApiResponse } = useAsync()
 	const { salaryValue, setSalaryValue, getSalary } = useRelease()
-	const [formData, setFormData] = useState({
-		password1: "",
-		password2: "",
-	})
 
 	useEffect(() => {
 		clearApiResponse()
 
 		getSalary()
 	}, [userId])
-
-	const showButton = useMemo(() => {
-		return validateEqualPasswords(formData.password1, formData.password2)
-	}, [formData])
 
 	const handleSalary = (value: string) => {
 		setSalaryValue(value)
@@ -54,8 +45,8 @@ const SettingsContainer = () => {
 
 	const redefinePassword = async () => {
 		const res: any = await execute(
-			generateNewPassword(formData.password2, userId),
-			Messages.UPDATED_PASSWORD,
+			generateNewPassword(email, userId),
+			Messages.CHANGE_PASSWORD,
 			Messages.SERVER_ERROR,
 		)
 
@@ -74,10 +65,7 @@ const SettingsContainer = () => {
 
 	const config = {
 		activeEdit,
-		showButton,
 		showSaveSalaryButton,
-		formData,
-		setFormData,
 		saveSalary,
 		handleEdit,
 		redefinePassword,

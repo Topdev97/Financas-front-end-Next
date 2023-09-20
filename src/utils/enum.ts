@@ -6,7 +6,7 @@ export enum Routes {
 	SAVE_USER = "/api/user/save",
 	REDEFINE_PASSWORD = "/api/redefine_password",
 	REFRESH_TOKEN = "/api/refresh_token",
-	NEW_PASSWORD = "/api/new_password/",
+	CHANGE_PASSWORD = "/api/change_password/",
 	SAVE_SALARY = "/api/salary/save/",
 	GET_SALARY = "/api/salary/",
 	SAVE_CATEGORY = "/api/category/save/",
@@ -34,6 +34,7 @@ export enum Messages {
 	SERVER_ERROR = "Houve um erro de servidor, tente novamente!",
 	INCORRECT_EMAIL_OR_PASSWORD = "Email ou senha incorretos",
 	UPDATED_PASSWORD = "Senha atualizada com sucesso",
+	CHANGE_PASSWORD = "Você receberá um email para redefinir a senha",
 	EMAIL_NOT_FOUND = "Esse email não existe em nosso banco",
 	SUCCESS_IN_SAVING_SALARY = "Salário salvo com sucesso",
 	THERE_ISNT_DATA = "Não há dados pra essa busca no momento",
@@ -46,4 +47,8 @@ export enum Permissions {
 export enum Actions {
 	CREATE = "Criar",
 	UPDATE = "Atualizar",
+}
+
+export enum Service {
+	SAVEMONEY = "SaveMoney",
 }

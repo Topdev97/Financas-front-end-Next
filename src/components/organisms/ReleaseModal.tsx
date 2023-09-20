@@ -19,7 +19,7 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 			<Wrapper type="modal">
 				<Wrapper type="actionsModal" className="sm:h-[26rem]">
 					<H1 color="dark_gray" size="md">
-						{typeAction} categoria
+						{typeAction} lançamento
 					</H1>
 
 					<div className="flex justify-between flex-wrap h-[10rem] mt-2 relative xl:space-y-0 space-y-2">
@@ -134,7 +134,7 @@ const CreateOrUpdateReleaseModal = ({ config }: IReleaseConfig) => {
 								className={
 									config.showButton ? "bg-light_green" : "bg-medium_gray"
 								}>
-								Criar
+								{typeAction}
 							</Button>
 						</div>
 					</div>

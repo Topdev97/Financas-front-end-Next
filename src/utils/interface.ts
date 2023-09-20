@@ -17,6 +17,7 @@ export interface IAuth {
 	showRegisterArea: boolean
 	showAcessArea: boolean
 	userId: string
+	email: string
 }
 
 export interface IProps {
@@ -84,13 +85,7 @@ export interface IRedefinePasswordConfig {
 
 export interface ISettingsProps {
 	activeEdit: boolean
-	showButton: boolean
-	formData: {
-		password1: string
-		password2: string
-	}
 	showSaveSalaryButton: boolean
-	setFormData: Function
 	handleSalary: Function
 	handleEdit: Function
 	redefinePassword: Function

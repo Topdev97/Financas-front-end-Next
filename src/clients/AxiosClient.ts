@@ -33,6 +33,16 @@ export const setupClient = (
 		interceptors.handleResponse,
 		interceptors.handleError,
 	)
+
+	authClient.interceptors.request.use(
+		interceptors.handleRequest,
+		interceptors.handleError,
+	)
+
+	authClient.interceptors.response.use(
+		interceptors.handleResponse,
+		interceptors.handleError,
+	)
 }
 
 export const setBearerAuthorization = (

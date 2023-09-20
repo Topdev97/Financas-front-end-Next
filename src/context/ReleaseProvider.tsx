@@ -41,7 +41,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 
 		console.log("salary", res)
 
-		if (res?.data) setSalaryValue(res?.data.value)
+		if (res?.data != null) setSalaryValue(res?.data.value)
 		else setShowInfoModal(true)
 	}
 
