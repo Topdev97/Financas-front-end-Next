@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useClient } from "@/clients/AxiosClient"
-import { Routes } from "@/utils/enum"
+import { useAuthClient } from "@/clients/AxiosClient"
+import { Permissions, Routes, Service } from "@/utils/enum"
 import { IUsers } from "..//utils/interface"
 
 export const createUser = async (user: IUsers) => {
@@ -8,10 +8,11 @@ export const createUser = async (user: IUsers) => {
 		const data = {
 			name: user.name,
 			email: user.email,
-			password: user.password,
+			service: Service.SAVEMONEY,
+			role: [Permissions.USER],
 		}
 
-		const res = await useClient().post(Routes.SAVE_USER, data)
+		const res = await useAuthClient().post(Routes.SAVE_USER, data)
 
 		return res
 	} catch (error) {
@@ -26,7 +27,7 @@ export const changePassword = async (email: string, password: string) => {
 			password,
 		}
 
-		const res = await useClient().put(Routes.REDEFINE_PASSWORD, data)
+		const res = await useAuthClient().put(Routes.REDEFINE_PASSWORD, data)
 
 		return res
 	} catch (error) {
@@ -34,13 +35,17 @@ export const changePassword = async (email: string, password: string) => {
 	}
 }
 
-export const generateNewPassword = async (password: string, id: string) => {
+export const generateNewPassword = async (email: string, id: string) => {
 	try {
 		const data: any = {
-			password,
+			email,
+			service: Service.SAVEMONEY,
 		}
 
-		const res = await useClient().put(`${Routes.NEW_PASSWORD}${id}`, data)
+		const res = await useAuthClient().put(
+			`${Routes.CHANGE_PASSWORD}${id}`,
+			data,
+		)
 
 		return res
 	} catch (error) {

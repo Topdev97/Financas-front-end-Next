@@ -3,7 +3,7 @@ import { ReactNode } from "react"
 export interface IUsers {
 	name: string
 	email: string
-	password: string
+	email2: string
 }
 
 export interface IAuth {
@@ -17,6 +17,7 @@ export interface IAuth {
 	showRegisterArea: boolean
 	showAcessArea: boolean
 	userId: string
+	email: string
 }
 
 export interface IProps {
@@ -84,13 +85,7 @@ export interface IRedefinePasswordConfig {
 
 export interface ISettingsProps {
 	activeEdit: boolean
-	showButton: boolean
-	formData: {
-		password1: string
-		password2: string
-	}
 	showSaveSalaryButton: boolean
-	setFormData: Function
 	handleSalary: Function
 	handleEdit: Function
 	redefinePassword: Function
@@ -315,4 +310,5 @@ export interface IValidationContext {
 	validateEmail: Function
 	validateEqualPasswords: Function
 	handleFieldChange: Function
+	validateEqualEmails: Function
 }

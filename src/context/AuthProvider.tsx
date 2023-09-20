@@ -5,7 +5,7 @@
 import { IAuth, IProps } from "../utils/interface"
 import React, { useEffect, createContext, useState } from "react"
 import { getPayload } from "@/api/signin"
-import { setupClient } from "@/clients/AxiosClient"
+import { setupClient, useAuthClient } from "@/clients/AxiosClient"
 import { setBearerAuthorization, useClient } from "../clients/AxiosClient"
 import { isAuthenticated } from "@/utils/permissions"
 import { useAsync } from "@/hooks"
@@ -16,21 +16,26 @@ const AuthProvider = ({ children }: IProps) => {
 	const [showRegisterArea, setShowRegisterArea] = useState(false)
 	const [showAcessArea, setAcessArea] = useState(true)
 	const [userId, setUserId] = useState("")
+	const [email, setEmail] = useState("")
 	const [showRedefinePasswordArea, setShowRedefinePasswordArea] =
 		useState(false)
 
 	const { execute } = useAsync()
 
 	const clientConfig = () => {
-		setupClient(process.env.NEXT_PUBLIC_BACK)
+		setupClient(process.env.NEXT_PUBLIC_BACK, process.env.NEXT_PUBLIC_AUTH)
 		setBearerAuthorization(useClient(), isAuthenticated())
+		setBearerAuthorization(useAuthClient(), isAuthenticated())
 	}
 
 	const getUserId = async () => {
 		const payload = await execute(getPayload())
 
+		console.log(payload)
+
 		if (payload?.status == 200) {
 			setUserId(payload?.data.userId)
+			setEmail(payload?.data.email)
 		}
 	}
 
@@ -46,13 +51,14 @@ const AuthProvider = ({ children }: IProps) => {
 				setShowRegisterArea,
 				setAcessArea,
 				clientConfig,
-				showRedefinePasswordArea,
+				setUserId,
+				getUserId,
 				setShowRedefinePasswordArea,
+				showRedefinePasswordArea,
 				showRegisterArea,
 				showAcessArea,
 				userId,
-				setUserId,
-				getUserId,
+				email,
 			}}>
 			{children}
 		</AuthContext.Provider>

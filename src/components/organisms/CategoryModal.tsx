@@ -59,7 +59,7 @@ const CreateCategoryModal = ({ config }: ICreateCategoryConfig) => {
 								className={
 									config.showButton ? "bg-light_green" : "bg-medium_gray"
 								}>
-								Criar
+								{typeAction}
 							</Button>
 						</div>
 					</div>

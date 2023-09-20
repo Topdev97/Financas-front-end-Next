@@ -1,5 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { setBearerAuthorization, useClient } from "../clients/AxiosClient"
+import {
+	setBearerAuthorization,
+	useAuthClient,
+	useClient,
+} from "../clients/AxiosClient"
 import { Routes } from "../utils/enum"
 import { getRefreshToken, setIsAuthenticated } from "../utils/permissions"
 import axios from "axios"
@@ -8,7 +12,7 @@ export const getNewToken = async () => {
 	try {
 		const config: any = {
 			method: "POST",
-			url: `${process.env.NEXT_PUBLIC_BACK}${Routes.REFRESH_TOKEN}`,
+			url: `${process.env.NEXT_PUBLIC_AUTH}${Routes.REFRESH_TOKEN}`,
 			headers: { Authorization: `Bearer ${getRefreshToken()}` },
 		}
 
@@ -19,6 +23,7 @@ export const getNewToken = async () => {
 			const refreshToken = res.data.refreshToken
 
 			setBearerAuthorization(useClient(), token)
+			setBearerAuthorization(useAuthClient(), token)
 
 			setIsAuthenticated(token, refreshToken)
 
