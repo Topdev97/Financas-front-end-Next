@@ -35,7 +35,7 @@ export const changePassword = async (email: string, password: string) => {
 	}
 }
 
-export const generateNewPassword = async (email: string, id: string) => {
+export const generateNewPassword = async (email: string, id?: string) => {
 	try {
 		const data: any = {
 			email,

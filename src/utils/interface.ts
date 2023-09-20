@@ -70,8 +70,6 @@ export interface ILoginConfig {
 export interface IRedefinePasswordProps {
 	formData: {
 		email: string
-		password1: string
-		password2: string
 	}
 	setFormData: Function
 	closeRedefinePasswordArea: Function
